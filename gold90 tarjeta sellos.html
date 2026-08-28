@@ -221,6 +221,53 @@
     text-align:center; color:#6f6f72; font-size:11px; margin-top:34px; letter-spacing:.04em;
   }
 </style>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBbbwhrV6iNXjyP4KvCbztnKTZTW_d4tWo",
+    authDomain: "gold90-sellos.firebaseapp.com",
+    projectId: "gold90-sellos",
+    storageBucket: "gold90-sellos.firebasestorage.app",
+    messagingSenderId: "49217631397",
+    appId: "1:49217631397:web:1ac477c5ecbd9a70b6494c"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const _db = firebase.firestore();
+
+  // Compatibilidad: imita la misma API que usaba window.storage,
+  // pero ahora guardando de verdad en Firebase (funciona fuera de Claude.ai)
+  function _safeDocId(key){
+    // Firestore no permite "/" en los IDs de documento; los demás caracteres están bien
+    return key.replace(/\//g, '_SLASH_');
+  }
+  window.storage = {
+    async get(key, shared){
+      try{
+        const snap = await _db.collection('gold90_sellos').doc(_safeDocId(key)).get();
+        if(!snap.exists) return null;
+        return { key, value: snap.data().value, shared: !!shared };
+      }catch(e){ return null; }
+    },
+    async set(key, value, shared){
+      await _db.collection('gold90_sellos').doc(_safeDocId(key)).set({ value: value });
+      return { key, value, shared: !!shared };
+    },
+    async delete(key, shared){
+      await _db.collection('gold90_sellos').doc(_safeDocId(key)).delete();
+      return { key, deleted: true, shared: !!shared };
+    },
+    async list(prefix, shared){
+      const snap = await _db.collection('gold90_sellos').get();
+      const keys = [];
+      snap.forEach(doc => {
+        const realKey = doc.id.replace(/_SLASH_/g, '/');
+        if(!prefix || realKey.startsWith(prefix)) keys.push(realKey);
+      });
+      return { keys, prefix, shared: !!shared };
+    }
+  };
+</script>
 </head>
 <body>
 
@@ -280,7 +327,7 @@
     <input class="field" id="staff-pin" type="password" placeholder="••••" inputmode="numeric" maxlength="4">
     <div class="err" id="pin-err"></div>
     <button class="btn btn-gold" onclick="checkPin()">Entrar 🚪</button>
-    <p class="hint">PIN por defecto: 9090. Puedes pedirle a Claude que lo cambie en el código cuando quieras.</p>
+    <p class="hint">Ingresa el PIN de staff para continuar.</p>
   </section>
 
   <!-- STAFF: panel -->
@@ -328,7 +375,7 @@
 
 <script>
 const TOTAL_STAMPS = 10;
-const STAFF_PIN = "9090";
+const STAFF_PIN = "2106";
 let staffUnlocked = false;
 let currentStaffPhone = null;
 
