@@ -40,9 +40,10 @@ export default function ProductDetail({ id }: { id: string }) {
               <Img src={base + p.fotos[photo]} alt={p.nombre} kind={kindOf(p)} eager className="h-full w-full" />
             </div>
           </div>
+          {p.colores?.[photo] && <p className="mt-3 text-sm">Color: <strong className="font-medium">{p.colores[photo]}</strong></p>}
           <div className="mt-3 flex gap-2">
             {p.fotos.map((f, k) => (
-              <button key={f} aria-label={`Ver foto ${k + 1}`} onClick={() => setPhoto(k)} className={`h-20 w-16 overflow-hidden rounded-lg border-2 ${k === photo ? 'border-gold' : 'border-transparent'}`}>
+              <button key={f} aria-label={p.colores?.[k] ? `Ver color ${p.colores[k]}` : `Ver foto ${k + 1}`} onClick={() => setPhoto(k)} className={`h-20 w-16 overflow-hidden rounded-lg border-2 ${k === photo ? 'border-gold' : 'border-transparent'}`}>
                 <Img src={base + f} alt={p.nombre} kind={kindOf(p)} className="h-full w-full" />
               </button>
             ))}

@@ -17,8 +17,6 @@ export default function ProductCard({ p, compact = false }: { p: Product; compac
     <article className="card group flex flex-col rounded-[5px] bg-pearl/80">
       <div
         className="relative aspect-[4/5] overflow-hidden rounded-[5px] bg-pearl"
-        onMouseEnter={() => p.fotos.length > 1 && setI(1)}
-        onMouseLeave={() => setI(0)}
         onTouchStart={(e) => setX0(e.touches[0].clientX)}
         onTouchEnd={(e) => { if (x0 !== null && Math.abs(e.changedTouches[0].clientX - x0) > 40) go(e.changedTouches[0].clientX < x0 ? 1 : -1); setX0(null) }}
       >
@@ -33,6 +31,11 @@ export default function ProductCard({ p, compact = false }: { p: Product; compac
             <button aria-label="Foto anterior" onClick={() => go(-1)} className="absolute left-1 top-1/2 hidden rounded-full bg-white/80 p-1 group-hover:block"><ChevronLeft size={16} /></button>
             <button aria-label="Foto siguiente" onClick={() => go(1)} className="absolute right-1 top-1/2 hidden rounded-full bg-white/80 p-1 group-hover:block"><ChevronRight size={16} /></button>
           </>
+        )}
+        {p.fotos.length > 1 && (
+          <div className="absolute inset-x-0 bottom-2 flex justify-center gap-1.5" aria-hidden>
+            {p.fotos.map((_, k) => <span key={k} className={`h-1.5 rounded-full transition-all ${k === i ? 'w-4 bg-ink' : 'w-1.5 bg-ink/30'}`} />)}
+          </div>
         )}
       </div>
       <div className="flex flex-1 flex-col items-start gap-2 px-0 pb-2 pt-4 text-left">

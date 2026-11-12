@@ -9,6 +9,7 @@ export interface Product {
   fotos: string[]
   tallas: number[]
   nuevo?: boolean
+  colores?: string[] // un color por foto, en el mismo orden
   agotado?: boolean
 }
 
@@ -34,7 +35,7 @@ const RAW: [Category, string, string, Group[]][] = [
   ['Tenis', 'Tenis', '', [[160000, ['Aura beige', 'Aura negro', 'Aura azul', 'Versilia beige', 'Versilia miel', 'Versilia negro', 'Luxe verde', 'Luxe lumina', 'Lumina 3 colores', 'Lumina miel', 'Luxe animal print', 'Luxo 3 colores', 'Luxor blanco', 'Eva negro', 'Sincor capuchino', 'Yute miel']], [140000, ['Aurora blanco']]]],
 ]
 
-export const products: Product[] = RAW.flatMap(([categoria, subcategoria, prefijo, groups]) =>
+const GENERADOS: Product[] = RAW.flatMap(([categoria, subcategoria, prefijo, groups]) =>
   groups.flatMap(([precio, names]) =>
     names.map((n): Product => {
       const nombre = prefijo + n
@@ -49,9 +50,25 @@ export const products: Product[] = RAW.flatMap(([categoria, subcategoria, prefij
   ),
 )
 
+// Modelos con fotos reales: la primera foto es la principal y las demás se ven al deslizar.
+const CON_FOTOS: Product[] = [
+  {
+    id: 'plataformas-yute-duna',
+    nombre: 'Plataformas yute duna',
+    categoria: 'Sandalias',
+    subcategoria: 'Plataformas',
+    precio: 150000,
+    fotos: [1, 2, 3].map((i) => `img/plataformas/plataformas-yute-duna-${i}.jpg`),
+    colores: ['Beige', 'Blanco', 'Negro'],
+    tallas: SIZES,
+  },
+]
+
+export const products: Product[] = [...CON_FOTOS, ...GENERADOS]
+
 export const categories: Record<Category, string[]> = {
   Tenis: ['Tenis', 'Tenis Samba', 'Tenis Lumina'],
-  Sandalias: ['Sandalias', 'Sandalias deportivas', 'Sandalias punta fina'],
+  Sandalias: ['Sandalias', 'Plataformas', 'Sandalias deportivas', 'Sandalias punta fina'],
   Mocasines: ['Mocasines', 'Mocasines planos', 'Mocasines charol'],
   Bolsos: ['Bolsos grandes', 'Bolsos pequeños'],
   Correas: ['Correas'],
