@@ -143,6 +143,26 @@ const CON_FOTOS: Product[] = [
     tallas: SIZES,
   },
   {
+    id: 'mocasines-140',
+    nombre: 'Mocasines',
+    categoria: 'Mocasines',
+    subcategoria: 'Mocasines',
+    precio: 140000,
+    fotos: [1, 2, 3, 4, 5, 6, 7].map((i) => `img/mocasines-140/mocasines-140-${i}.jpg`),
+    colores: ['Negro con herraje (lado)', 'Negro con herraje (par)', 'Negro con animal print', 'Azul marino (lado)', 'Azul marino (par)', 'Negro panal', 'Negro sin cordones'],
+    tallas: SIZES,
+  },
+  {
+    id: 'zapatos-espuma-eva',
+    nombre: 'Zapatos espuma livianos suela Eva',
+    categoria: 'Mocasines',
+    subcategoria: 'Zapatos livianos',
+    precio: 160000,
+    fotos: ['img/zapatos-espuma-eva/zapatos-espuma-eva-1.jpg'],
+    colores: ['Negro'],
+    tallas: SIZES,
+  },
+  {
     id: 'sandalias-deportivas',
     nombre: 'Sandalias deportivas',
     categoria: 'Sandalias',
@@ -159,7 +179,7 @@ export const products: Product[] = [...CON_FOTOS, ...GENERADOS]
 export const categories: Record<Category, string[]> = {
   Tenis: ['Tenis', 'Tenis Samba', 'Tenis Lumina'],
   Sandalias: ['Sandalias', 'Plataformas', 'Sandalias deportivas', 'Sandalias punta fina'],
-  Mocasines: ['Mocasines', 'Mocasines planos', 'Mocasines charol'],
+  Mocasines: ['Mocasines', 'Mocasines planos', 'Mocasines charol', 'Zapatos livianos'],
   Bolsos: ['Bolsos grandes', 'Bolsos pequeños'],
   Correas: ['Correas'],
 }
