@@ -16,6 +16,7 @@ import ProductGrid from './components/ProductGrid'
 import WhatsAppFloat from './components/WhatsAppFloat'
 import { categories, estilos, products, type Category, type Estilo } from './data/products'
 import Estilos from './components/Estilos'
+import Clientas from './components/Clientas'
 import { useStore, useRoute } from './store'
 
 
@@ -47,6 +48,7 @@ function Page({ route }: { route: string }) {
       <ProductCarousel kicker="Las favoritas" title="Más vendidos" items={popular} outline />
       <ProductCarousel kicker="Complementa tu look" title="Bolsos y accesorios" items={[...byCat('Bolsos'), ...byCat('Correas')].slice(0, 10)} outline to="#/c/Bolsos" />
       <SocialStrip />
+      <Clientas />
       <BenefitsBar />
     </>
   )
