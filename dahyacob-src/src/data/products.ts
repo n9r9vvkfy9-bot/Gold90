@@ -1,5 +1,7 @@
 export type Category = 'Tenis' | 'Sandalias' | 'Mocasines' | 'Bolsos' | 'Correas'
 
+export type Estilo = 'formal' | 'diario' | 'comodo'
+
 export interface Product {
   id: string
   nombre: string
@@ -10,6 +12,7 @@ export interface Product {
   tallas: number[]
   nuevo?: boolean
   colores?: string[] // un color por foto, en el mismo orden
+  estilos?: Estilo[]
   agotado?: boolean
 }
 
@@ -384,7 +387,41 @@ const CON_FOTOS: Product[] = [
   },
 ]
 
-export const products: Product[] = [...CON_FOTOS, ...GENERADOS]
+// Clasificación por tipo de uso (propuesta: se puede ajustar). Los bolsos y correas no llevan estilo.
+const ESTILOS: Record<string, Estilo[]> = {
+  'plataformas-yute-duna': ['diario', 'comodo'],
+  'sandalias-senda': ['diario'],
+  'mocasines-charol': ['formal'],
+  'mocasines-antonella': ['formal'],
+  'mocasines-valeria': ['diario', 'comodo'],
+  'mocasines-140': ['diario'],
+  'mocasines-150': ['formal', 'diario'],
+  'mocasines-145a': ['formal'],
+  'mocasines-145b': ['diario', 'comodo'],
+  'mocasines-isabella': ['formal'],
+  'mocasines-130': ['diario'],
+  'mocasines-aurelia': ['formal'],
+  'mocasines-atenea': ['formal'],
+  'mocasines-gaby': ['diario', 'comodo'],
+  'zapatos-espuma-eva': ['comodo', 'diario'],
+  'sandalias-punta-fina': ['formal'],
+  'sandalias-deportivas': ['comodo', 'diario'],
+  'sandalias-deportivas-155b': ['comodo', 'diario'],
+}
+const TENIS: Estilo[] = ['diario', 'comodo']
+
+// Solo se muestran modelos con foto real (se descartan los de relleno con ilustración).
+export const products: Product[] = CON_FOTOS.map((p) => ({
+  ...p,
+  estilos: ESTILOS[p.id] ?? (p.categoria === 'Tenis' ? TENIS : undefined),
+}))
+void GENERADOS
+
+export const estilos: Record<Estilo, { titulo: string; texto: string }> = {
+  formal: { titulo: 'Formales', texto: 'Para la oficina, las reuniones y las ocasiones especiales.' },
+  diario: { titulo: 'De diario', texto: 'Los que combinan con todo y se usan cada día.' },
+  comodo: { titulo: 'Cómodos', texto: 'Livianos y suaves para pasar el día de pie.' },
+}
 
 export const categories: Record<Category, string[]> = {
   Tenis: ['Tenis', 'Tenis Samba', 'Tenis Lumina'],
