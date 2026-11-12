@@ -9,7 +9,7 @@ export default function TiendaFisica() {
   const [noPhoto, setNoPhoto] = useState(false)
   const wa = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('¡Hola Dahyacob! Quiero visitar la tienda. ¿Dónde queda y cuál es el horario?')}`
   return (
-    <section id="tienda-fisica" aria-labelledby="tf-t" className="bg-rose/60 py-16 lg:py-24">
+    <section id="tienda-fisica" aria-labelledby="tf-t" className="border-t border-ink/10 bg-white py-20 lg:py-28">
       <div className="mx-auto grid max-w-[1224px] items-center gap-10 px-5 lg:grid-cols-2 lg:gap-16 lg:px-0">
         <Reveal className="order-2 lg:order-1">
           <p className="font-script text-4xl text-gold">Visítanos</p>
@@ -26,9 +26,9 @@ export default function TiendaFisica() {
           <p className="mt-8 font-script text-3xl text-gold">¿Prefieres comprar desde casa? Mira lo nuevo ↓</p>
         </Reveal>
         <Reveal className="order-1 lg:order-2">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-t-full border border-white/80 shadow-2xl">
+          <div className="aspect-[4/3] w-full overflow-hidden rounded-[5px] bg-[#f1eeee] shadow-md">
             {noPhoto ? (
-              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-pearl to-rose p-8 text-center font-script text-3xl text-gold">Aquí va la foto de la tienda</div>
+              <div className="flex h-full w-full items-center justify-center p-8 text-center font-script text-3xl text-gold">Aquí va la foto de la tienda</div>
             ) : (
               <img src={`${base}img/tienda-1.jpg`} alt="Tienda física de Dahyacob" loading="lazy" onError={() => setNoPhoto(true)} className="h-full w-full object-cover" />
             )}
