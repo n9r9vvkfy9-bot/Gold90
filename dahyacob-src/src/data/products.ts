@@ -82,6 +82,36 @@ const CON_FOTOS: Product[] = [
     colores: ['Rojo', 'Blanco', 'Negro'],
     tallas: SIZES,
   },
+  {
+    id: 'mocasines-antonella',
+    nombre: 'Mocasines Antonella',
+    categoria: 'Mocasines',
+    subcategoria: 'Mocasines',
+    precio: 150000,
+    fotos: [1, 2, 3].map((i) => `img/mocasines-antonella/mocasines-antonella-${i}.jpg`),
+    colores: ['Plata y dorado', 'Verde azulado', 'Rosa y crema'],
+    tallas: SIZES,
+  },
+  {
+    id: 'tenis-deportivos',
+    nombre: 'Tenis deportivos',
+    categoria: 'Tenis',
+    subcategoria: 'Tenis',
+    precio: 150000,
+    fotos: [1, 2, 3, 4, 5, 6].map((i) => `img/tenis-deportivos/tenis-deportivos-${i}.jpg`),
+    colores: ['Crema y dorado', 'Camel', 'Camel', 'Negro', 'Crema', 'Blanco'],
+    tallas: SIZES,
+  },
+  {
+    id: 'tenis-lumina',
+    nombre: 'Tenis Lumina',
+    categoria: 'Tenis',
+    subcategoria: 'Tenis Lumina',
+    precio: 150000,
+    fotos: [1, 2, 3, 4].map((i) => `img/tenis-lumina-nuevo/tenis-lumina-nuevo-${i}.jpg`),
+    colores: ['Verde', 'Café y mostaza', 'Azul', 'Negro y café'],
+    tallas: SIZES,
+  },
 ]
 
 export const products: Product[] = [...CON_FOTOS, ...GENERADOS]
