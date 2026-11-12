@@ -57,3 +57,13 @@ body { margin: 0; background: var(--pearl); color: var(--ink); font-family: Mont
 .card { transition: transform 300ms, box-shadow 300ms; }
 .card:hover { transform: translateY(-6px); box-shadow: 0 18px 30px -12px rgba(201,162,74,.45); }
 .marble { background: radial-gradient(circle at 20% 20%, #fff 0, transparent 40%), radial-gradient(circle at 80% 70%, #f6c9d8 0, transparent 45%), linear-gradient(135deg, #fff8f9, #f9dde6); }
+
+/* revelado de fotos y destellos */
+.wipe { clip-path: inset(0 100% 0 0); transition: clip-path 1000ms cubic-bezier(.2,.7,.2,1); }
+.reveal.in .wipe { clip-path: inset(0 0 0 0); }
+.slowzoom { animation: slowzoom 18s ease-in-out infinite alternate; }
+@keyframes slowzoom { to { transform: scale(1.08); } }
+.sheen { position: relative; overflow: hidden; }
+.sheen::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.55) 50%, transparent 60%); transform: translateX(-120%); animation: sheen 5s ease-in-out infinite; pointer-events: none; }
+@keyframes sheen { 60%, 100% { transform: translateX(120%); } }
+@media (prefers-reduced-motion: reduce) { .wipe { clip-path: none; } .sheen::after { display: none; } }

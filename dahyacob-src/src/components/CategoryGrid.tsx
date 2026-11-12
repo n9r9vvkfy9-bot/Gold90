@@ -1,12 +1,13 @@
 import { products } from '../data/products'
-import Art, { kindOf } from './Art'
+import Img from './Img'
+import { kindOf } from './Art'
 import Reveal from './Reveal'
 
 const TILES = [
-  { t: 'Tenis', to: '#/c/Tenis', cat: 'Tenis' },
-  { t: 'Sandalias', to: '#/c/Sandalias', cat: 'Sandalias' },
-  { t: 'Mocasines', to: '#/c/Mocasines', cat: 'Mocasines' },
-  { t: 'Bolsos y correas', to: '#/c/Bolsos', cat: 'Bolsos' },
+  { t: 'Tenis', to: '#/c/Tenis', cat: 'Tenis', img: 'cat-tenis.jpg' },
+  { t: 'Sandalias', to: '#/c/Sandalias', cat: 'Sandalias', img: 'cat-sandalias.jpg' },
+  { t: 'Mocasines', to: '#/c/Mocasines', cat: 'Mocasines', img: 'cat-mocasines.jpg' },
+  { t: 'Bolsos y correas', to: '#/c/Bolsos', cat: 'Bolsos', img: 'cat-bolsos.jpg' },
 ] as const
 
 export default function CategoryGrid() {
@@ -18,7 +19,7 @@ export default function CategoryGrid() {
           return (
             <Reveal key={c.t} delay={(n % 2) * 100}>
               <a href={c.to} className="card relative block h-[440px] overflow-hidden rounded-[20px] lg:h-[374px]">
-                <Art kind={kindOf(p)} name={p.nombre} className="absolute inset-0 h-full w-full" />
+                <Img src={`${import.meta.env.BASE_URL}img/${c.img}`} alt={c.t} kind={kindOf(p)} className="absolute inset-0 h-full w-full" />
                 <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/40 to-transparent" />
                 <div className="relative p-[35px] text-white">
                   <h3 className="font-serif text-[34px] font-bold uppercase leading-9">{c.t}</h3>

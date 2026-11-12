@@ -26,7 +26,7 @@ export default function TiendaFisica() {
           <p className="mt-8 font-script text-3xl text-gold">¿Prefieres comprar desde casa? Mira lo nuevo ↓</p>
         </Reveal>
         <Reveal className="order-1 lg:order-2">
-          <div className="aspect-[4/3] w-full overflow-hidden rounded-[5px] bg-[#f1eeee] shadow-md">
+          <div className="aspect-[1290/1068] w-full overflow-hidden rounded-[5px] bg-[#f1eeee] shadow-md">
             {noPhoto ? (
               <div className="flex h-full w-full items-center justify-center p-8 text-center font-script text-3xl text-gold">Aquí va la foto de la tienda</div>
             ) : (
