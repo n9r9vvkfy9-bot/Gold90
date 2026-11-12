@@ -4,7 +4,6 @@ import Fabrica from './components/Fabrica'
 import TiendaFisica from './components/TiendaFisica'
 import Destacados from './components/Destacados'
 import PromoBanner from './components/PromoBanner'
-import SocialStrip from './components/SocialStrip'
 import BenefitsBar from './components/BenefitsBar'
 import ProductCarousel from './components/ProductCarousel'
 import CategoryPage from './components/CategoryPage'
@@ -47,7 +46,6 @@ function Page({ route }: { route: string }) {
       <PromoBanner />
       <ProductCarousel kicker="Las favoritas" title="Más vendidos" items={popular} outline />
       <ProductCarousel kicker="Complementa tu look" title="Bolsos y accesorios" items={[...byCat('Bolsos'), ...byCat('Correas')].slice(0, 10)} outline to="#/c/Bolsos" />
-      <SocialStrip />
       <Clientas />
       <BenefitsBar />
     </>
