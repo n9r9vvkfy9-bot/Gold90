@@ -132,6 +132,26 @@ const CON_FOTOS: Product[] = [
     colores: ['Blanco con franjas metálicas', 'Blanco y negro', 'Peltre', 'Bronce', 'Rosa dorado'],
     tallas: SIZES,
   },
+  {
+    id: 'sandalias-punta-fina',
+    nombre: 'Sandalias punta fina',
+    categoria: 'Sandalias',
+    subcategoria: 'Sandalias punta fina',
+    precio: 155000,
+    fotos: [1, 2, 3, 4, 5].map((i) => `img/sandalias-punta-fina-nuevo/sandalias-punta-fina-nuevo-${i}.jpg`),
+    colores: ['Dorado y crema', 'Negro con animal print', 'Rojo', 'Azul marino', 'Nude con nudo'],
+    tallas: SIZES,
+  },
+  {
+    id: 'sandalias-deportivas',
+    nombre: 'Sandalias deportivas',
+    categoria: 'Sandalias',
+    subcategoria: 'Sandalias deportivas',
+    precio: 155000,
+    fotos: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => `img/sandalias-deportivas-nuevo/sandalias-deportivas-nuevo-${i}.jpg`),
+    colores: ['Rojo (lado)', 'Rojo (par)', 'Negro (lado)', 'Negro (par)', 'Beige (lado)', 'Beige (par)', 'Crema (lado)', 'Crema (par)', 'Negro con velcro'],
+    tallas: SIZES,
+  },
 ]
 
 export const products: Product[] = [...CON_FOTOS, ...GENERADOS]
