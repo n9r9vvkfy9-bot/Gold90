@@ -3,7 +3,6 @@ import CartDrawer from './components/CartDrawer'
 import CategoryGrid from './components/CategoryGrid'
 import Fabrica from './components/Fabrica'
 import TiendaFisica from './components/TiendaFisica'
-import Looks from './components/Looks'
 import PromoBanner from './components/PromoBanner'
 import SocialStrip from './components/SocialStrip'
 import BenefitsBar from './components/BenefitsBar'
@@ -39,7 +38,6 @@ function Page({ route }: { route: string }) {
       <Hero />
       <Fabrica />
       <TiendaFisica />
-      <Looks />
       <ProductCarousel kicker="Lo más nuevo" title="Nuevos diseños" items={nuevos} />
       <CategoryGrid />
       <PromoBanner />
