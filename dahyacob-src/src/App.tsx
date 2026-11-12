@@ -5,9 +5,7 @@ import Fabrica from './components/Fabrica'
 import TiendaFisica from './components/TiendaFisica'
 import Destacados from './components/Destacados'
 import PromoBanner from './components/PromoBanner'
-import SocialStrip from './components/SocialStrip'
 import BenefitsBar from './components/BenefitsBar'
-import ProductCarousel from './components/ProductCarousel'
 import CategoryPage from './components/CategoryPage'
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -18,7 +16,6 @@ import WhatsAppFloat from './components/WhatsAppFloat'
 import { categories, products, type Category } from './data/products'
 import { useStore, useRoute } from './store'
 
-const POPULAR = ['tenis-samba-samba-oro', 'sandalias-senda-nude', 'mocasines-planos-gaby-plata', 'bolsos-grandes-noir-elite', 'tenis-lumina-lumina-miel', 'sandalias-punta-fina-arena-dorada', 'mocasines-charol-charol-negro', 'bolsos-pequenos-natural-chic']
 
 function Page({ route }: { route: string }) {
   const { favs } = useStore()
@@ -31,21 +28,14 @@ function Page({ route }: { route: string }) {
   }
   if (kind === 'tienda') return <ProductGrid title="Toda la tienda" items={products} />
   if (kind === 'favoritos') return <ProductGrid title="Tus favoritos" items={products.filter((p) => favs.includes(p.id))} />
-  const byCat = (c: Category) => products.filter((p) => p.categoria === c)
-  const nuevos = [0, 12, 24, 36, 45, 54, 62, 70].map((n) => products[n % products.length])
-  const popular = POPULAR.map((id) => products.find((p) => p.id === id)).filter((p) => !!p)
   return (
     <>
       <Hero />
       <Fabrica />
       <TiendaFisica />
       <Destacados />
-      <ProductCarousel kicker="Lo más nuevo" title="Nuevos diseños" items={nuevos} />
       <CategoryGrid />
       <PromoBanner />
-      <ProductCarousel kicker="Las favoritas" title="Más vendidos" items={popular} outline />
-      <ProductCarousel kicker="Complementa tu look" title="Bolsos y accesorios" items={[...byCat('Bolsos'), ...byCat('Correas')].slice(0, 10)} outline to="#/c/Bolsos" />
-      <SocialStrip />
       <BenefitsBar />
     </>
   )
