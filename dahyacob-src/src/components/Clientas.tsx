@@ -27,7 +27,10 @@ export default function Clientas() {
         ))}
       </div>
       <div className="mt-10 text-center">
-        <a href="https://www.instagram.com/calzadocuerodahyacob_" target="_blank" rel="noreferrer" className="btn btn-o inline-block">Más en Instagram</a>
+        <a href="https://www.instagram.com/calzadocuerodahyacob_" target="_blank" rel="noreferrer" className="btn btn-o inline-flex items-center gap-2">
+          <svg aria-hidden viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
+          Más en Instagram
+        </a>
       </div>
     </section>
   )
