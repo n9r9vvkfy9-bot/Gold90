@@ -112,6 +112,26 @@ const CON_FOTOS: Product[] = [
     colores: ['Verde', 'Café y mostaza', 'Azul', 'Negro y café'],
     tallas: SIZES,
   },
+  {
+    id: 'mocasines-valeria',
+    nombre: 'Mocasines Valeria',
+    categoria: 'Mocasines',
+    subcategoria: 'Mocasines',
+    precio: 110000,
+    fotos: [1, 2, 3, 4, 5, 6].map((i) => `img/mocasines-valeria/mocasines-valeria-${i}.jpg`),
+    colores: ['Negro', 'Camel con borlas', 'Camel', 'Crema', 'Dorado', 'Dorado tejido'],
+    tallas: SIZES,
+  },
+  {
+    id: 'tenis-samba',
+    nombre: 'Tenis Samba',
+    categoria: 'Tenis',
+    subcategoria: 'Tenis Samba',
+    precio: 150000,
+    fotos: [1, 2, 3, 4, 5].map((i) => `img/tenis-samba-nuevo/tenis-samba-nuevo-${i}.jpg`),
+    colores: ['Blanco con franjas metálicas', 'Blanco y negro', 'Peltre', 'Bronce', 'Rosa dorado'],
+    tallas: SIZES,
+  },
 ]
 
 export const products: Product[] = [...CON_FOTOS, ...GENERADOS]
