@@ -62,6 +62,26 @@ const CON_FOTOS: Product[] = [
     colores: ['Beige', 'Blanco', 'Negro'],
     tallas: SIZES,
   },
+  {
+    id: 'sandalias-senda',
+    nombre: 'Sandalias senda',
+    categoria: 'Sandalias',
+    subcategoria: 'Sandalias',
+    precio: 130000,
+    fotos: Array.from({ length: 10 }, (_, i) => `img/sandalias-senda/sandalias-senda-${i + 1}.jpg`),
+    colores: ['Negro texturizado', 'Animal print', 'Crema', 'Cuadros, rojo y negro', 'Rojo', 'Negro y blanco', 'Azul', 'Dorado y crema', 'Negro y blanco cruzada', 'Negro y rojo'],
+    tallas: SIZES,
+  },
+  {
+    id: 'mocasines-charol',
+    nombre: 'Mocasines charol',
+    categoria: 'Mocasines',
+    subcategoria: 'Mocasines charol',
+    precio: 154000,
+    fotos: [1, 2, 3].map((i) => `img/mocasines-charol/mocasines-charol-${i}.jpg`),
+    colores: ['Rojo', 'Blanco', 'Negro'],
+    tallas: SIZES,
+  },
 ]
 
 export const products: Product[] = [...CON_FOTOS, ...GENERADOS]
