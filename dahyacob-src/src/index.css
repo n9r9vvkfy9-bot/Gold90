@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --blush: #F9DDE6; --rose: #F2B8C9; --gold: #C9A24A; --ink: #2B2326; --pearl: #FFF8F9;
+  --t: 300ms;
+}
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--pearl); color: var(--ink); font-family: Montserrat, sans-serif; font-weight: 300; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.clouds { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--pearl); opacity: .55; }
+.clouds i { position: absolute; border-radius: 50%; filter: blur(70px); background: #f7c5d5; opacity: .7; animation: drift 40s ease-in-out infinite alternate; }
+.clouds i:nth-child(1) { width: 480px; height: 320px; top: 5%; left: -8%; }
+.clouds i:nth-child(2) { width: 560px; height: 360px; top: 45%; right: -10%; background: #fff0f4; animation-duration: 55s; }
+.clouds i:nth-child(3) { width: 420px; height: 300px; bottom: -5%; left: 25%; background: #f2b8c9; opacity: .5; animation-duration: 48s; }
+@keyframes drift { to { transform: translate(60px, 40px) scale(1.15); } }
+@keyframes float { 50% { transform: translateY(-6px); } }
+.float { animation: float 6s ease-in-out infinite; }
+@keyframes pop { 40% { transform: scale(1.5); } }
+.pop { animation: pop 400ms; }
+@keyframes spark { 50% { opacity: 1; transform: scale(1.3); } }
+.spark { color: var(--gold); opacity: .3; animation: spark 3s ease-in-out infinite; pointer-events: none; }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 500ms, transform 500ms; }
+.reveal.in { opacity: 1; transform: none; }
+.price { display: inline-block; border: 1px solid var(--rose); background: rgba(255,255,255,.7); border-radius: 999px; padding: 2px 12px; font-weight: 500; font-size: .85rem; }
+.label { text-transform: uppercase; letter-spacing: .15em; font-weight: 500; font-size: .75rem; }
+.btn { text-transform: uppercase; letter-spacing: .15em; font-weight: 500; font-size: .75rem; background: var(--ink); color: var(--pearl); padding: .8rem 1.4rem; border-radius: 0; transition: background var(--t); }
+.btn:hover { background: var(--gold); }
+.btn-o { border-radius: 0; background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+.btn-o:hover { color: var(--pearl); }
+.card img { transition: transform 400ms; }
+.card:hover img { transform: scale(1.05); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* movimiento extra */
+@keyframes artfloat { 50% { transform: translateY(-8px) rotate(-1.5deg); } }
+.art-float { animation: artfloat 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee { animation: marquee 35s linear infinite; }
+@keyframes shimmer { to { background-position: 200% 0; } }
+.shimmer { background: linear-gradient(100deg, var(--gold) 20%, #f6e3a1 40%, var(--gold) 60%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 4s linear infinite; }
+@keyframes rise { from { opacity: 0; transform: translateY(28px) scale(.97); } }
+.rise { animation: rise 800ms cubic-bezier(.2,.7,.2,1) both; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.orbit { animation: spin 60s linear infinite; }
+@keyframes twinkle { 0%,100% { opacity: .1; transform: scale(.6); } 50% { opacity: .9; transform: scale(1.2); } }
+.star { position: absolute; color: var(--gold); animation: twinkle 4s ease-in-out infinite; }
+@keyframes petal { from { transform: translateY(-10vh) rotate(0); } to { transform: translateY(110vh) rotate(360deg); } }
+.petal { position: absolute; top: 0; width: 10px; height: 14px; border-radius: 80% 0 80% 0; background: #f2b8c9; opacity: .6; animation: petal 20s linear infinite; }
+.card { transition: transform 300ms, box-shadow 300ms; }
+.card:hover { transform: translateY(-6px); box-shadow: 0 18px 30px -12px rgba(201,162,74,.45); }
+.marble { background: radial-gradient(circle at 20% 20%, #fff 0, transparent 40%), radial-gradient(circle at 80% 70%, #f6c9d8 0, transparent 45%), linear-gradient(135deg, #fff8f9, #f9dde6); }
