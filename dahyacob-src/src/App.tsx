@@ -14,7 +14,6 @@ import ProductDetail from './components/ProductDetail'
 import ProductGrid from './components/ProductGrid'
 import WhatsAppFloat from './components/WhatsAppFloat'
 import { categories, estilos, products, type Category, type Estilo } from './data/products'
-import Estilos from './components/Estilos'
 import Clientas from './components/Clientas'
 import { useStore, useRoute } from './store'
 
@@ -41,7 +40,6 @@ function Page({ route }: { route: string }) {
       <Fabrica />
       <TiendaFisica />
       <Destacados />
-      <Estilos />
       <ProductCarousel kicker="Lo más nuevo" title="Nuevos diseños" items={nuevos} />
       <PromoBanner />
       <ProductCarousel kicker="Las favoritas" title="Más vendidos" items={popular} outline />

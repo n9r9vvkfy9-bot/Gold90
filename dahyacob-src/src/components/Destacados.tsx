@@ -5,9 +5,9 @@ const base = import.meta.env.BASE_URL
 // Estilo editorial tipo Nike: fotos grandes sin bordes redondeados, texto pequeño abajo a la izquierda y botón blanco.
 // Para sumar más fotos, agrega un objeto aquí y la imagen en /public/img.
 const TILES = [
-  { img: 'look-crema.jpg', alt: 'Tenis, mocasines, sandalias y bolso en tonos crema', label: 'Comprar crema', to: '#/tienda', pos: '50% 60%' },
-  { img: 'look-nude.jpg', alt: 'Sandalias, tenis, balerinas y bolso en tonos nude', label: 'Comprar nude', to: '#/c/Sandalias', pos: '50% 50%' },
-  { img: 'look-metal.jpg', alt: 'Tenis metálicos en dorado, plata y rosa dorado', label: 'Comprar metálicos', to: '#/c/Tenis/Tenis Samba', pos: '50% 50%' },
+  { img: 'look-crema.jpg', alt: 'Tenis, mocasines, sandalias y bolso en tonos crema', label: 'Formales', to: '#/estilo/formal', pos: '50% 60%' },
+  { img: 'look-metal.jpg', alt: 'Tenis metálicos en dorado, plata y rosa dorado', label: 'De diario', to: '#/estilo/diario', pos: '50% 50%' },
+  { img: 'look-nude.jpg', alt: 'Sandalias, tenis, balerinas y bolso en tonos nude', label: 'Cómodos', to: '#/estilo/comodo', pos: '50% 50%' },
 ]
 
 export default function Destacados() {
@@ -15,7 +15,7 @@ export default function Destacados() {
     <section id="destacados" aria-labelledby="dest-t" className="bg-white py-16 lg:py-24">
       <Reveal className="px-5 text-center">
         <h2 id="dest-t" className="font-display text-5xl uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-8xl">Elige tu estilo</h2>
-        <p className="mt-4 text-base font-medium">Cuero colombiano en cada par</p>
+        <p className="mt-4 text-base font-medium">Formales, de diario y cómodos: cuero colombiano en cada par</p>
       </Reveal>
       <div className="mt-10 flex snap-x gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-12 [&::-webkit-scrollbar]:hidden">
         {TILES.map((t, i) => (
