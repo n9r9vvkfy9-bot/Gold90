@@ -15,6 +15,11 @@ export default function Fabrica() {
           Somos una fábrica colombiana de calzado de cuero. Todo lo que ves en esta página se hace en Colombia, con cuidado y a mano:
           desde cortar el cuero hasta armar cada par.
         </p>
+        <p className="mt-4 text-base font-light leading-7">
+          Creemos que unos buenos zapatos no tienen que sacrificar el estilo por la comodidad. Por eso diseñamos tenis, mocasines, sandalias,
+          bolsos y correas que se sienten bien desde el primer día y combinan con tu forma de vestir, para el trabajo, para salir o para el día a día.
+          Cada pieza pasa por manos colombianas antes de llegar a ti.
+        </p>
         <ul className="mt-6 flex flex-wrap justify-center gap-3">
           {POINTS.map((p) => <li key={p} className="price">{p}</li>)}
         </ul>

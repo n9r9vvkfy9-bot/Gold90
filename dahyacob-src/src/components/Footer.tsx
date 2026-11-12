@@ -2,7 +2,7 @@ import { INSTAGRAM } from '../data/products'
 
 const COLS: [string, [string, string][]][] = [
   ['Tienda', [['Todos los productos', '#/tienda'], ['Tenis', '#/c/Tenis'], ['Sandalias', '#/c/Sandalias'], ['Mocasines', '#/c/Mocasines'], ['Bolsos', '#/c/Bolsos'], ['Correas', '#/c/Correas']]],
-  ['Compañía', [['Nosotros (EDITAR)', '#/'], ['Contacto', 'https://wa.me/573150950719'], ['Instagram', INSTAGRAM]]],
+  ['Compañía', [['Nuestra fábrica', '#/'], ['Contacto', 'https://wa.me/573150950719'], ['Instagram', INSTAGRAM]]],
   ['Ayuda', [['Envíos y pagos', '#/'], ['Preguntas frecuentes', '#/'], ['Pedir por WhatsApp', 'https://wa.me/573150950719']]],
 ]
 

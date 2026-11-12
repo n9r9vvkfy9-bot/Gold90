@@ -8,6 +8,14 @@ import ProductGrid from './ProductGrid'
 
 const base = import.meta.env.BASE_URL
 
+const DESCRIPCION: Record<string, string> = {
+  Tenis: 'Tenis en cuero hechos en Colombia, livianos y cómodos para usar todo el día. Un diseño que combina con jeans, faldas o vestidos.',
+  Sandalias: 'Sandalias en cuero hechas en Colombia, con plantilla cómoda y un diseño fresco para el día a día y para salir.',
+  Mocasines: 'Mocasines en cuero hechos en Colombia, suaves y fáciles de poner. Un clásico cómodo que va bien con tu ropa de diario y de oficina.',
+  Bolsos: 'Bolso en cuero hecho en Colombia, con acabados cuidados y espacio para lo que necesitas llevar contigo.',
+  Correas: 'Correa en cuero hecha en Colombia, con hebilla dorada. El detalle que completa tu look.',
+}
+
 export default function ProductDetail({ id }: { id: string }) {
   const p = products.find((x) => x.id === id)
   const { add } = useStore()
@@ -79,7 +87,7 @@ export default function ProductDetail({ id }: { id: string }) {
 
           <div className="mt-8 divide-y divide-rose/60 border-y border-rose/60">
             {[
-              ['Descripción', `${p.nombre}: ${p.subcategoria.toLowerCase()} en cuero, hecho en Colombia. EDITAR con la descripción real.`],
+              ['Descripción', DESCRIPCION[p.categoria]],
               ['Material y cuidados', '100% cuero. Limpia con un paño suave y húmedo, evita el exceso de agua y guárdalo lejos del sol directo.'],
               ['Envíos y pagos', 'Envíos a todo el país con Inter Rapidísimo en 24 a 72 horas. Paga contra entrega, con Addi o con Sistecrédito.'],
             ].map(([t, c]) => (
