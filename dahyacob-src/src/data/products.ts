@@ -343,6 +343,16 @@ const CON_FOTOS: Product[] = [
     tallas: [],
   },
   {
+    id: 'correas-delgadas',
+    nombre: 'Correas delgadas',
+    categoria: 'Correas',
+    subcategoria: 'Correas',
+    precio: 55000,
+    fotos: Array.from({ length: 5 }, (_, i) => `img/correas-delgadas/correas-delgadas-${i + 1}.jpg`),
+    colores: ['Rojo con dije', 'Animal print', 'Crema', 'Crema (enrollada)', 'Rojo con dije (fondo café)'],
+    tallas: [],
+  },
+  {
     id: 'bolsos-300',
     nombre: 'Bolsos',
     categoria: 'Bolsos',

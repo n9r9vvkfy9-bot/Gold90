@@ -31,7 +31,7 @@ function Page({ route }: { route: string }) {
   if (kind === 'tienda') return <ProductGrid title="Toda la tienda" items={products} />
   if (kind === 'favoritos') return <ProductGrid title="Tus favoritos" items={products.filter((p) => favs.includes(p.id))} />
   const byCat = (c: Category) => products.filter((p) => p.categoria === c)
-  const nuevos = Array.from({ length: 37 }, (_, i) => i).map((n) => products[n % products.length])
+  const nuevos = Array.from({ length: 38 }, (_, i) => i).map((n) => products[n % products.length])
   const popular = POPULAR.map((id) => products.find((p) => p.id === id)).filter((p) => !!p)
   return (
     <>
