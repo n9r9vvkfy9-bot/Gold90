@@ -27,8 +27,45 @@ nav a.l:hover{background:rgba(255,255,255,.12)}
 .btn.alt{background:var(--cream);color:var(--ink)}
 nav .btn{padding:8px 16px;font-size:14px;box-shadow:none;border-color:var(--cream)}
 @media(max-width:620px){nav a.l{display:none}}
+/* announce */
+.ann{position:fixed;top:0;left:0;right:0;z-index:60;background:var(--wine);color:var(--cream);font-size:13.5px;font-weight:500;text-align:center;padding:7px 12px;border-bottom:3px solid var(--ink)}
+.ann b{color:var(--yellow)}
+nav{top:48px}
+.cartbtn{position:relative;background:var(--cream);color:var(--ink);border:0;border-radius:99px;padding:8px 14px;font:600 14px Fredoka;cursor:pointer}
+.cartbtn i{position:absolute;top:-6px;right:-4px;background:var(--pink);color:#fff;font-style:normal;border-radius:99px;min-width:20px;height:20px;display:grid;place-items:center;font-size:12px;border:2px solid var(--ink)}
+/* trust */
+.trust{display:flex;justify-content:center;gap:10px 34px;flex-wrap:wrap;background:var(--cream);padding:46px 20px 22px;font-weight:600;border-bottom:4px solid var(--ink)}
+.trust span::before{content:"✦ ";color:var(--red)}
+/* cats */
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-bottom:60px}
+.cat{border:4px solid var(--ink);border-radius:26px;padding:22px 16px;text-align:center;font-family:'Bowlby One';font-size:18px;line-height:1.1;box-shadow:6px 6px 0 var(--ink);transition:.2s;cursor:pointer;background:var(--c)}
+.cat:hover,.cat.on{transform:translateY(-6px) rotate(-1.5deg);box-shadow:8px 12px 0 var(--ink)}
+.cat em{display:block;font:500 13px Fredoka;margin-top:8px;color:var(--ink)}
+/* featured */
+.feat{display:grid;grid-template-columns:1fr 1fr;border:4px solid var(--ink);border-radius:36px;overflow:hidden;box-shadow:10px 10px 0 var(--ink);background:var(--cream);margin-bottom:60px}
+.feat .l{background:var(--pink);display:grid;place-items:center;padding:30px;min-height:260px}
+.feat .l svg{width:70%;max-width:260px;filter:drop-shadow(8px 10px 0 rgba(0,0,0,.2));animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-12px) rotate(3deg)}}
+.feat .r{padding:34px}
+.feat h3{font-size:34px;color:var(--wine);margin:10px 0}
+.feat p{margin-bottom:18px;line-height:1.4}
+@media(max-width:760px){.feat{grid-template-columns:1fr}}
+.sizes{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+.sz{border:2.5px solid var(--ink);background:#fff;border-radius:99px;padding:4px 11px;font:600 13px Fredoka;cursor:pointer}
+.sz.on{background:var(--ink);color:var(--yellow)}
+.add{margin-top:12px;width:100%;justify-content:center;padding:10px;font-size:15px}
+/* drawer */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--cream);z-index:120;border-left:4px solid var(--ink);transform:translateX(105%);transition:.35s;display:flex;flex-direction:column;padding:22px}
+.drawer.open{transform:none}
+.drawer h3{font-size:26px;color:var(--red);margin-bottom:14px;display:flex;justify-content:space-between}
+.drawer h3 button{background:none;border:0;font-size:26px;cursor:pointer}
+#items{flex:1;overflow:auto}
+.it{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:2px dashed var(--ink)}
+.it small{display:block;opacity:.7}
+.q button{width:26px;height:26px;border-radius:50%;border:2px solid var(--ink);background:#fff;font-weight:700;cursor:pointer}
+.empt{padding:30px 0;text-align:center;font-family:'Caveat';font-size:28px}
 /* hero */
-.hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding:120px 20px 90px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#ffe04a 0,var(--yellow) 60%)}
+.hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding:140px 20px 90px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#ffe04a 0,var(--yellow) 60%)}
 .hero .tag{display:inline-block;background:var(--ink);color:var(--yellow);padding:6px 16px;border-radius:99px;font-weight:600;transform:rotate(-3deg);margin-bottom:18px}
 .hero h1{font-size:clamp(54px,13vw,170px);line-height:.88;color:var(--red);text-shadow:4px 4px 0 var(--ink),8px 8px 0 rgba(0,0,0,.15);transform:rotate(-2deg)}
 .hero h1 small{display:block;font-size:.42em;color:var(--cream);text-shadow:3px 3px 0 var(--ink);margin-top:6px}
@@ -103,12 +140,13 @@ footer{text-align:center;padding:30px;font-weight:500;background:var(--red);colo
 </head>
 <body>
 
+<div class="ann">🚚 <b>Envíos en Bucaramanga</b> · Pedidos por WhatsApp · Hechos al momento, bien cargados de chile</div>
 <nav>
   <a class="logo" href="#top">GOMI<span>MEX</span>.co</a>
   <a class="l" href="#picante">Picómetro</a>
   <a class="l" href="#menu">Menú</a>
   <a class="l" href="#brocheta">Arma tu brocheta</a>
-  <a class="btn" href="#pedir">Pedir 🌶️</a>
+  <button class="cartbtn" id="cartOpen">🛒 Carrito<i id="cc">0</i></button>
 </nav>
 
 <header class="hero" id="top">
@@ -130,6 +168,8 @@ footer{text-align:center;padding:30px;font-weight:500;background:var(--red);colo
 
 <div class="marq"><div id="mq"></div></div>
 
+<div class="trust"><span>Dulces mexicanos originales</span><span>Armados al momento</span><span>Pedidos por WhatsApp</span><span>Bucaramanga, Colombia</span></div>
+
 <section id="picante">
   <h2 class="rv">¿Qué tan<br>picante eres?</h2>
   <p class="sub rv">Mueve la barra y te decimos qué pedirte. Sin juzgar. Bueno, un poquito.</p>
@@ -142,8 +182,15 @@ footer{text-align:center;padding:30px;font-weight:500;background:var(--red);colo
 </section>
 
 <section id="menu">
-  <h2 class="rv">El menú</h2>
-  <p class="sub rv">Todo lo que vive en nuestro fondo amarillo.</p>
+  <div class="feat rv">
+    <div class="l"><svg viewBox="0 0 120 100"><path d="M10 45h100l-12 48H22z" fill="#fff" stroke="#2a0608" stroke-width="5"/><g stroke="#2a0608" stroke-width="3"><circle cx="38" cy="40" r="15" fill="#d7191f"/><circle cx="66" cy="34" r="16" fill="#ffb400"/><circle cx="90" cy="42" r="13" fill="#37b34a"/><rect x="40" y="10" width="40" height="14" rx="7" fill="#3fa9f5" transform="rotate(-12 60 17)"/></g><path d="M20 64h80l-6 24H26z" fill="#7a0d12"/></svg></div>
+    <div class="r"><span class="price">Combo del mes</span><h3>Vaso Mix Enchilado</h3>
+      <p>Gomitas, anillos y gusanos bañados en chamoy con chile en polvo. Todo listo para mezclar y disfrutar.</p>
+      <button class="btn" data-feat="1">Pedir combo · $15.000</button></div>
+  </div>
+  <h2 class="rv">¿Qué se te<br>antoja hoy?</h2>
+  <p class="sub rv">Elige una categoría y filtramos el menú.</p>
+  <div class="cats rv" id="cats"></div>
   <div class="grid" id="grid"></div>
 </section>
 
@@ -186,6 +233,8 @@ footer{text-align:center;padding:30px;font-weight:500;background:var(--red);colo
   </div>
 </section>
 
+<aside class="drawer" id="drawer"><h3>Tu pedido <button id="cartClose">✕</button></h3><div id="items"></div>
+<div class="total" style="color:var(--wine)">Total: <span id="ctot">$0</span></div><a class="btn" id="checkout" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a></aside>
 <footer>© 2026 Gomimex.co · Bucaramanga, Colombia · Los dulces pican, no te asustes 🌶️</footer>
 
 <script>
@@ -208,17 +257,53 @@ const art={
  vaso:`<svg viewBox="0 0 120 100"><path d="M14 40h92l-10 52H24z" fill="#fff8" stroke="#2a0608" stroke-width="5"/><g fill="#d7191f" stroke="#2a0608" stroke-width="3"><circle cx="40" cy="38" r="14"/><circle cx="68" cy="34" r="15"/><circle cx="88" cy="40" r="12"/></g><path d="M22 60h76l-6 28H28z" fill="#7a0d12"/></svg>`,
  brocheta:`<svg viewBox="0 0 60 140"><rect x="27" y="40" width="6" height="95" rx="3" fill="#e8c48a" stroke="#2a0608" stroke-width="3"/><g stroke="#2a0608" stroke-width="3"><ellipse cx="30" cy="28" rx="18" ry="14" fill="#d7191f"/><ellipse cx="30" cy="52" rx="22" ry="8" fill="#3fa9f5"/><ellipse cx="30" cy="72" rx="18" ry="12" fill="#d7191f"/><ellipse cx="30" cy="94" rx="22" ry="8" fill="#37b34a"/></g></svg>`
 };
+const S4={"50 g":6000,"100 g":10000,"150 g":14000,"300 g":26000};
 const products=[
- {n:"Gomitas Enchiladas",d:"Nuestra estrella. Gomitas con chamoy, chile y limón.",p:10000,a:art.gomita("#d7191f"),c:"#ffb400",b:"Estrella ⭐",h:2},
- {n:"Brocheta Enchilada",d:"Palito cargado de gomitas bañadas en chile.",p:12000,a:art.brocheta,c:"#ff8a3d",h:3},
- {n:"Pelón Mini",d:"Dulce enchilado. Chamoy, mango o sandía.",p:5000,a:art.pelon,c:"#ffd23a",h:3},
- {n:"Paleta Vero Mango",d:"Dulcesita sabor mango con chilito.",p:2000,a:art.paleta,c:"#ffc01f",h:1},
- {n:"Pulparindo",d:"Tamarindo natural, salado y enchilado.",p:2500,a:art.pulpa,c:"#ffe36b",h:2},
- {n:"Vasito Chamoy",d:"Anillitos y gusanos nadando en salsa.",p:10000,a:art.vaso,c:"#ff6b9d",b:"Nuevo",h:4}
+ {n:"Gomitas Enchiladas",d:"Nuestra estrella. Gomitas con chamoy, chile y limón.",s:S4,a:art.gomita("#d7191f"),c:"#ffb400",b:"Estrella ⭐",k:"gomitas"},
+ {n:"Gomitas Ahogadas",d:"Agridulces nadando en chamoy.",s:S4,a:art.vaso,c:"#ff6b9d",b:"Nuevo",k:"gomitas"},
+ {n:"Brocheta Enchilada",d:"Palito cargado de gomitas bañadas en chile.",p:12000,a:art.brocheta,c:"#ff8a3d",k:"brochetas"},
+ {n:"Pelón Mini",d:"Dulce enchilado. Chamoy, mango o sandía.",p:5000,a:art.pelon,c:"#ffd23a",k:"mexicanos"},
+ {n:"Paleta Vero Mango",d:"Dulcesita sabor mango con chilito.",p:2000,a:art.paleta,c:"#ffc01f",k:"mexicanos"},
+ {n:"Pulparindo",d:"Tamarindo natural, salado y enchilado.",p:2500,a:art.pulpa,c:"#ffe36b",k:"mexicanos"}
 ];
-$("#grid").innerHTML=products.map(x=>`
- <div class="card rv" style="--c:${x.c}">${x.b?`<span class="badge">${x.b}</span>`:""}
-  <div class="art">${x.a}</div><h3>${x.n}</h3><p>${x.d}</p><span class="price">${cop(x.p)}</span></div>`).join("");
+const catsL=[["todo","Toda Gomimex","#ffe36b","Ver todo"],["gomitas","Gomitas picosas","#ff6b9d","Con chile y chamoy"],["brochetas","Brochetas","#ff8a3d","Armadas al momento"],["mexicanos","Dulces mexicanos","#37b34a","Pelón, Vero, Pulparindo"]];
+let cat="todo";
+function minP(x){return x.s?Math.min(...Object.values(x.s)):x.p}
+function drawGrid(){
+ $("#grid").innerHTML=products.map((x,i)=>({x,i})).filter(o=>cat==="todo"||o.x.k===cat).map(({x,i})=>`
+ <div class="card in" style="--c:${x.c}">${x.b?`<span class="badge">${x.b}</span>`:""}
+  <div class="art">${x.a}</div><h3>${x.n}</h3><p>${x.d}</p>
+  ${x.s?`<div class="sizes" data-i="${i}">${Object.keys(x.s).map((k,j)=>`<button class="sz ${j==1?"on":""}" data-k="${k}">${k}</button>`).join("")}</div>`:""}
+  <span class="price" id="pr${i}">${x.s?cop(x.s["100 g"]):cop(x.p)}</span>
+  <button class="btn add" data-add="${i}">Agregar al carrito</button></div>`).join("");
+}
+$("#cats").innerHTML=catsL.map(c=>`<div class="cat ${c[0]==="todo"?"on":""}" data-c="${c[0]}" style="--c:${c[2]}">${c[1]}<em>${c[3]}</em></div>`).join("");
+$("#cats").addEventListener("click",e=>{const c=e.target.closest(".cat");if(!c)return;cat=c.dataset.c;
+ document.querySelectorAll(".cat").forEach(n=>n.classList.toggle("on",n===c));drawGrid();$("#menu").scrollIntoView({behavior:"smooth"})});
+const sel={};
+$("#grid").addEventListener("click",e=>{
+ const z=e.target.closest(".sz");
+ if(z){const w=z.parentElement,i=+w.dataset.i;sel[i]=z.dataset.k;w.querySelectorAll(".sz").forEach(n=>n.classList.toggle("on",n===z));$("#pr"+i).textContent=cop(products[i].s[z.dataset.k]);return}
+ const a=e.target.closest("[data-add]");
+ if(a){const i=+a.dataset.add,x=products[i],k=x.s?(sel[i]||"100 g"):"";add(x.n,k,x.s?x.s[k]:x.p)}
+});
+// cart
+let cart=JSON.parse(localStorage.getItem("gmx")||"[]");
+function add(n,s,p){const f=cart.find(c=>c.n===n&&c.s===s);f?f.q++:cart.push({n,s,p,q:1});saveCart();$("#drawer").classList.add("open")}
+function saveCart(){try{localStorage.setItem("gmx",JSON.stringify(cart))}catch(e){}drawCart()}
+function drawCart(){
+ $("#cc").textContent=cart.reduce((a,c)=>a+c.q,0);
+ $("#items").innerHTML=cart.length?cart.map((c,i)=>`<div class="it"><div><b>${c.n}</b><small>${c.s} · ${cop(c.p)}</small></div><div class="q"><button data-d="${i}">−</button> ${c.q} <button data-u="${i}">+</button></div></div>`).join(""):'<div class="empt">Tu carrito está vacío 🌶️</div>';
+ const t=cart.reduce((a,c)=>a+c.p*c.q,0);$("#ctot").textContent=cop(t);
+ const msg="Hola Gomimex! Quiero pedir:\n"+cart.map(c=>`• ${c.q}x ${c.n} ${c.s}`).join("\n")+`\nTotal: ${cop(t)}`;
+ $("#checkout").href=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+}
+$("#items").addEventListener("click",e=>{const d=e.target.dataset;
+ if(d.u!==undefined)cart[d.u].q++;if(d.d!==undefined&&--cart[d.d].q<=0)cart.splice(d.d,1);saveCart()});
+$("#cartOpen").onclick=()=>$("#drawer").classList.add("open");
+$("#cartClose").onclick=()=>$("#drawer").classList.remove("open");
+document.querySelector("[data-feat]").onclick=()=>add("Vaso Mix Enchilado (combo del mes)","",15000);
+drawGrid();drawCart();
 
 // heat meter
 const heats=[
