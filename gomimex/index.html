@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gomimex.co — Las gomitas enchiladas más deliciosas de Bucaramanga</title>
+<meta name="description" content="Gomitas enchiladas, brochetas, Pelón Mini, paletas Vero y Pulparindo. Dulces mexicanos con chile en Bucaramanga.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Fredoka:wght@400;500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--yellow:#ffc90e;--yellow2:#ffb400;--red:#d7191f;--wine:#8d1117;--ink:#2a0608;--cream:#fff6d6;--pink:#ff2d8a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Fredoka',sans-serif;background:var(--yellow);color:var(--ink);overflow-x:hidden;cursor:default}
+h1,h2,h3,.bowl{font-family:'Bowlby One',sans-serif;font-weight:400;letter-spacing:.5px}
+a{color:inherit;text-decoration:none}
+/* grain */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* nav */
+nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:6px;align-items:center;background:var(--ink);color:var(--cream);padding:8px 10px 8px 18px;border-radius:99px;box-shadow:0 8px 0 rgba(0,0,0,.18);width:min(94%,760px)}
+nav .logo{font-family:'Bowlby One';color:var(--yellow);font-size:18px;margin-right:auto}
+nav .logo span{color:var(--red);-webkit-text-stroke:0}
+nav a.l{padding:8px 12px;border-radius:99px;font-weight:500;font-size:15px}
+nav a.l:hover{background:rgba(255,255,255,.12)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;padding:12px 22px;border-radius:99px;font-weight:600;border:3px solid var(--ink);box-shadow:0 5px 0 var(--ink);transition:.15s;font-size:16px;cursor:pointer}
+.btn:hover{transform:translateY(3px);box-shadow:0 2px 0 var(--ink)}
+.btn.alt{background:var(--cream);color:var(--ink)}
+nav .btn{padding:8px 16px;font-size:14px;box-shadow:none;border-color:var(--cream)}
+@media(max-width:620px){nav a.l{display:none}}
+/* hero */
+.hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding:120px 20px 90px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#ffe04a 0,var(--yellow) 60%)}
+.hero .tag{display:inline-block;background:var(--ink);color:var(--yellow);padding:6px 16px;border-radius:99px;font-weight:600;transform:rotate(-3deg);margin-bottom:18px}
+.hero h1{font-size:clamp(54px,13vw,170px);line-height:.88;color:var(--red);text-shadow:4px 4px 0 var(--ink),8px 8px 0 rgba(0,0,0,.15);transform:rotate(-2deg)}
+.hero h1 small{display:block;font-size:.42em;color:var(--cream);text-shadow:3px 3px 0 var(--ink);margin-top:6px}
+.hero p{max-width:560px;margin:26px auto 28px;font-size:clamp(17px,2.4vw,22px);font-weight:500}
+.hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.float{position:absolute;pointer-events:none;will-change:transform;filter:drop-shadow(6px 8px 0 rgba(0,0,0,.18))}
+/* marquee */
+.marq{background:var(--ink);color:var(--yellow);overflow:hidden;white-space:nowrap;border-block:4px solid var(--red);transform:rotate(-1.2deg);margin:-30px -10px 0;position:relative;z-index:5}
+.marq div{display:inline-block;padding:16px 0;font-family:'Bowlby One';font-size:26px;animation:mq 22s linear infinite}
+.marq span{margin:0 22px}.marq i{color:var(--red);font-style:normal}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* sections */
+section{padding:110px 20px 60px;max-width:1150px;margin:0 auto}
+h2{font-size:clamp(38px,7vw,78px);line-height:.95;color:var(--red);text-shadow:3px 3px 0 var(--ink);margin-bottom:12px}
+.sub{font-size:19px;font-weight:500;max-width:560px;margin-bottom:44px}
+/* spice meter */
+.meter{background:var(--cream);border:4px solid var(--ink);border-radius:28px;padding:30px;box-shadow:10px 10px 0 var(--ink);margin-bottom:20px}
+.meter h3{font-size:24px;color:var(--wine);margin-bottom:6px}
+.bar{height:26px;border-radius:99px;background:#fff;border:3px solid var(--ink);margin:16px 0;overflow:hidden}
+.bar b{display:block;height:100%;width:50%;background:linear-gradient(90deg,#ffd000,#ff8a00,#d7191f,#7a0000);transition:width .3s}
+input[type=range]{width:100%;accent-color:var(--red);height:30px}
+#heatOut{font-family:'Caveat';font-size:34px;color:var(--red);min-height:44px}
+/* products */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:26px}
+.card{background:var(--cream);border:4px solid var(--ink);border-radius:26px;padding:22px;box-shadow:8px 8px 0 var(--ink);transition:.2s;position:relative;transform:rotate(var(--r,0deg))}
+.card:nth-child(odd){--r:-1.2deg}.card:nth-child(even){--r:1deg}
+.card:hover{transform:rotate(0) translateY(-8px) scale(1.02);box-shadow:12px 14px 0 var(--ink)}
+.card .art{height:170px;display:grid;place-items:center;border-radius:18px;margin-bottom:14px;background:var(--c,var(--yellow2));overflow:hidden;position:relative}
+.card .art svg{height:150px;transition:.3s}
+.card:hover .art svg{transform:rotate(-8deg) scale(1.1)}
+.card h3{font-size:22px;color:var(--wine);margin-bottom:6px}
+.card p{font-size:15px;line-height:1.35;margin-bottom:12px}
+.price{display:inline-block;background:var(--red);color:#fff;font-family:'Bowlby One';padding:4px 14px;border-radius:99px;font-size:18px;border:3px solid var(--ink)}
+.badge{position:absolute;top:-14px;right:-10px;background:var(--pink);color:#fff;font-weight:700;padding:5px 12px;border-radius:99px;border:3px solid var(--ink);transform:rotate(8deg);font-size:13px}
+/* brocheta builder */
+.build{background:var(--wine);color:var(--cream);border-radius:36px;border:4px solid var(--ink);box-shadow:10px 10px 0 var(--ink);padding:34px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.build h2{color:var(--yellow)}
+.build .sub{margin-bottom:20px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.chip{border:3px solid var(--cream);background:transparent;color:var(--cream);padding:8px 14px;border-radius:99px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.15s}
+.chip:hover{background:rgba(255,255,255,.15)}
+.chip:active{transform:scale(.92)}
+.skewer{height:430px;display:flex;flex-direction:column-reverse;align-items:center;justify-content:flex-start;position:relative;background:rgba(0,0,0,.2);border-radius:24px;padding:20px 0}
+.skewer::before{content:"";position:absolute;bottom:10px;top:20px;width:8px;background:#e8c48a;border-radius:6px}
+.gum{position:relative;z-index:2;animation:drop .35s cubic-bezier(.3,1.6,.5,1);margin-top:-6px}
+@keyframes drop{from{transform:translateY(-120px) scale(.6);opacity:0}}
+.skewer .empty{position:absolute;inset:0;display:grid;place-items:center;font-family:'Caveat';font-size:28px;opacity:.7;text-align:center;padding:20px}
+.total{font-family:'Bowlby One';font-size:26px;color:var(--yellow);margin:8px 0 14px}
+@media(max-width:760px){.build{grid-template-columns:1fr}}
+/* about */
+.about{display:grid;grid-template-columns:1.2fr 1fr;gap:34px;align-items:center}
+.about p{font-size:19px;line-height:1.5;margin-bottom:16px}
+.stats{display:grid;gap:16px}
+.stat{background:var(--ink);color:var(--yellow);border-radius:24px;padding:22px;text-align:center;transform:rotate(var(--r,0))}
+.stat:nth-child(2){--r:2deg;background:var(--red);color:#fff}
+.stat:nth-child(1){--r:-2deg}
+.stat b{display:block;font-family:'Bowlby One';font-size:52px;line-height:1}
+@media(max-width:760px){.about{grid-template-columns:1fr}}
+/* contact */
+.contact{background:var(--ink);color:var(--cream);border-radius:40px;text-align:center;padding:60px 24px;margin-bottom:60px}
+.contact h2{color:var(--yellow);text-shadow:none}
+.contact p{margin:10px 0 28px;font-size:19px}
+.contact .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+footer{text-align:center;padding:30px;font-weight:500;background:var(--red);color:#fff}
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:.7s}
+.rv.in{opacity:1;transform:none}
+/* sticker pop */
+.pop{position:fixed;pointer-events:none;z-index:98;font-size:28px;animation:pp .9s ease-out forwards}
+@keyframes pp{to{transform:translate(var(--x),var(--y)) rotate(var(--rot));opacity:0}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#top">GOMI<span>MEX</span>.co</a>
+  <a class="l" href="#picante">Picómetro</a>
+  <a class="l" href="#menu">Menú</a>
+  <a class="l" href="#brocheta">Arma tu brocheta</a>
+  <a class="btn" href="#pedir">Pedir 🌶️</a>
+</nav>
+
+<header class="hero" id="top">
+  <!-- floating candy -->
+  <svg class="float" data-s="0.04" style="top:16%;left:6%;width:110px" viewBox="0 0 100 100"><path d="M10 70c-8-30 20-55 45-40s25 40 5 50-42 10-50-10z" fill="#d7191f" stroke="#2a0608" stroke-width="5"/><g fill="#ffd0a0"><circle cx="30" cy="55" r="3"/><circle cx="50" cy="45" r="3"/><circle cx="55" cy="68" r="3"/><circle cx="38" cy="70" r="3"/></g></svg>
+  <svg class="float" data-s="-0.05" style="top:62%;left:10%;width:90px" viewBox="0 0 100 60"><rect x="5" y="10" width="90" height="38" rx="19" fill="#3fa9f5" stroke="#2a0608" stroke-width="5"/><rect x="40" y="10" width="55" height="38" rx="19" fill="#d7191f" stroke="#2a0608" stroke-width="5"/></svg>
+  <svg class="float" data-s="0.06" style="top:20%;right:7%;width:100px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#2a0608" stroke-width="30"/><circle cx="50" cy="50" r="34" fill="none" stroke="#d7191f" stroke-width="20" stroke-dasharray="14 4"/></svg>
+  <svg class="float" data-s="-0.04" style="top:66%;right:8%;width:120px" viewBox="0 0 100 100"><path d="M50 8c10 15 30 20 30 45a30 30 0 0 1-60 0c0-25 20-30 30-45z" fill="#ff8a00" stroke="#2a0608" stroke-width="5"/><path d="M50 40c6 10 14 12 14 24a14 14 0 0 1-28 0c0-12 8-14 14-24z" fill="#ffd000"/></svg>
+  <div>
+    <span class="tag">🌶️ Dulces mexicanos · Bucaramanga</span>
+    <h1>GOMI<br>MEX<small>.co</small></h1>
+    <p>Las gomitas enchiladas más deliciosas de Bucaramanga. Dulces, chile y limón en cada mordida. ¿Te aguantas?</p>
+    <div class="cta">
+      <a class="btn" href="#menu">Ver el menú</a>
+      <a class="btn alt" href="#brocheta">Arma tu brocheta</a>
+    </div>
+  </div>
+</header>
+
+<div class="marq"><div id="mq"></div></div>
+
+<section id="picante">
+  <h2 class="rv">¿Qué tan<br>picante eres?</h2>
+  <p class="sub rv">Mueve la barra y te decimos qué pedirte. Sin juzgar. Bueno, un poquito.</p>
+  <div class="meter rv">
+    <h3>PICÓMETRO GOMIMEX</h3>
+    <input type="range" id="heat" min="0" max="4" value="2">
+    <div class="bar"><b id="heatBar"></b></div>
+    <div id="heatOut"></div>
+  </div>
+</section>
+
+<section id="menu">
+  <h2 class="rv">El menú</h2>
+  <p class="sub rv">Todo lo que vive en nuestro fondo amarillo.</p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="brocheta">
+  <div class="build rv">
+    <div>
+      <h2>Arma tu brocheta</h2>
+      <p class="sub">Toca las gomitas y mira cómo se ensarta. Luego mándanos tu diseño por WhatsApp.</p>
+      <div class="chips" id="chips"></div>
+      <div class="total">Total: <span id="tot">$0</span></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn alt" id="clear">Vaciar</button>
+        <a class="btn" id="send" href="#">Pedir por WhatsApp</a>
+      </div>
+    </div>
+    <div class="skewer" id="skewer"><div class="empty">¡Tu palito está vacío!<br>Agrega gomitas ↑</div></div>
+  </div>
+</section>
+
+<section class="about" id="nosotros">
+  <div>
+    <h2 class="rv">Hecho con<br>chile y cariño</h2>
+    <p class="rv">En Gomimex.co traemos el sabor de México a Bucaramanga: gomitas enchiladas bañadas en chamoy y chile en polvo, paletas Vero, Pelón Mini, Pulparindo y mucho más.</p>
+    <p class="rv">Cada pedido se arma al momento, bien cargado y listo para disfrutar. Sabor intenso, siempre.</p>
+  </div>
+  <div class="stats">
+    <div class="stat rv"><b>10 MIL</b>nuestra vasito estrella</div>
+    <div class="stat rv"><b>100%</b>sabor enchilado</div>
+  </div>
+</section>
+
+<section id="pedir">
+  <div class="contact rv">
+    <h2>¡Pide ya!</h2>
+    <p>Pedidos por Instagram o WhatsApp. Te lo llevamos hasta la puerta.</p>
+    <div class="cta">
+      <a class="btn" href="https://instagram.com/gomimex.co" target="_blank" rel="noopener">@gomimex.co</a>
+      <a class="btn alt" id="wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Gomimex.co · Bucaramanga, Colombia · Los dulces pican, no te asustes 🌶️</footer>
+
+<script>
+/* ====== CONFIG: cambia aquí ====== */
+const WHATSAPP = "573000000000";   // número con indicativo, sin +
+/* ================================== */
+const $=s=>document.querySelector(s);
+const cop=n=>"$"+n.toLocaleString("es-CO");
+
+// marquee
+const words=["GOMITAS ENCHILADAS","BROCHETAS","PELÓN MINI","PALETAS VERO","PULPARINDO","CHAMOY","CHILE Y LIMÓN"];
+$("#mq").innerHTML=(words.map(w=>`<span>${w}</span><i>✦</i>`).join("")).repeat(4);
+
+// svg art
+const art={
+ gomita:c=>`<svg viewBox="0 0 120 80"><path d="M10 50c10-30 40-30 55-10s30 10 40-5c10 20-10 40-35 35s-30-10-45 0-25 0-15-20z" fill="${c}" stroke="#2a0608" stroke-width="5"/><g fill="#ffd9a8"><circle cx="35" cy="45" r="3"/><circle cx="60" cy="50" r="3"/><circle cx="85" cy="55" r="3"/><circle cx="50" cy="38" r="3"/></g></svg>`,
+ pelon:`<svg viewBox="0 0 80 120"><path d="M28 5h24l8 28H20z" fill="#d7191f" stroke="#2a0608" stroke-width="4"/><rect x="14" y="33" width="52" height="32" rx="6" fill="#6a2c91" stroke="#2a0608" stroke-width="4"/><text x="40" y="54" font-size="12" text-anchor="middle" fill="#fff" font-family="Bowlby One">PELÓN</text><rect x="8" y="65" width="64" height="8" rx="4" fill="#d7191f" stroke="#2a0608" stroke-width="4"/><rect x="20" y="73" width="40" height="38" rx="6" fill="#fff" stroke="#2a0608" stroke-width="4"/></svg>`,
+ paleta:`<svg viewBox="0 0 80 120"><rect x="36" y="55" width="8" height="60" rx="4" fill="#fff" stroke="#2a0608" stroke-width="4"/><path d="M40 8c20 0 30 20 22 38s-30 18-40 0S20 8 40 8z" fill="#b8420e" stroke="#2a0608" stroke-width="4"/><ellipse cx="32" cy="24" rx="7" ry="5" fill="#e0752a"/></svg>`,
+ pulpa:`<svg viewBox="0 0 120 70"><rect x="8" y="10" width="104" height="50" rx="6" fill="#ffe14a" stroke="#2a0608" stroke-width="5" transform="rotate(-6 60 35)"/><text x="60" y="44" font-size="17" text-anchor="middle" fill="#5a2a12" stroke="#d7191f" stroke-width="1.5" font-family="Bowlby One" transform="rotate(-6 60 35)">Pulparindo</text></svg>`,
+ vaso:`<svg viewBox="0 0 120 100"><path d="M14 40h92l-10 52H24z" fill="#fff8" stroke="#2a0608" stroke-width="5"/><g fill="#d7191f" stroke="#2a0608" stroke-width="3"><circle cx="40" cy="38" r="14"/><circle cx="68" cy="34" r="15"/><circle cx="88" cy="40" r="12"/></g><path d="M22 60h76l-6 28H28z" fill="#7a0d12"/></svg>`,
+ brocheta:`<svg viewBox="0 0 60 140"><rect x="27" y="40" width="6" height="95" rx="3" fill="#e8c48a" stroke="#2a0608" stroke-width="3"/><g stroke="#2a0608" stroke-width="3"><ellipse cx="30" cy="28" rx="18" ry="14" fill="#d7191f"/><ellipse cx="30" cy="52" rx="22" ry="8" fill="#3fa9f5"/><ellipse cx="30" cy="72" rx="18" ry="12" fill="#d7191f"/><ellipse cx="30" cy="94" rx="22" ry="8" fill="#37b34a"/></g></svg>`
+};
+const products=[
+ {n:"Gomitas Enchiladas",d:"Nuestra estrella. Gomitas con chamoy, chile y limón.",p:10000,a:art.gomita("#d7191f"),c:"#ffb400",b:"Estrella ⭐",h:2},
+ {n:"Brocheta Enchilada",d:"Palito cargado de gomitas bañadas en chile.",p:12000,a:art.brocheta,c:"#ff8a3d",h:3},
+ {n:"Pelón Mini",d:"Dulce enchilado. Chamoy, mango o sandía.",p:5000,a:art.pelon,c:"#ffd23a",h:3},
+ {n:"Paleta Vero Mango",d:"Dulcesita sabor mango con chilito.",p:2000,a:art.paleta,c:"#ffc01f",h:1},
+ {n:"Pulparindo",d:"Tamarindo natural, salado y enchilado.",p:2500,a:art.pulpa,c:"#ffe36b",h:2},
+ {n:"Vasito Chamoy",d:"Anillitos y gusanos nadando en salsa.",p:10000,a:art.vaso,c:"#ff6b9d",b:"Nuevo",h:4}
+];
+$("#grid").innerHTML=products.map(x=>`
+ <div class="card rv" style="--c:${x.c}">${x.b?`<span class="badge">${x.b}</span>`:""}
+  <div class="art">${x.a}</div><h3>${x.n}</h3><p>${x.d}</p><span class="price">${cop(x.p)}</span></div>`).join("");
+
+// heat meter
+const heats=[
+ ["Suave como un abrazo 🙂","Paleta Vero Mango"],
+ ["Un cosquilleo 😋","Pulparindo + Gomitas Enchiladas"],
+ ["Ya te sudó la frente 🥵","Gomitas Enchiladas 10 mil"],
+ ["Pelón Mini sabor intenso 🔥","Pelón Mini chamoy"],
+ ["Nivel demonio 😈","Vasito Chamoy bien cargado"]
+];
+function heat(){const v=+$("#heat").value;
+ $("#heatBar").style.width=(v+1)*20+"%";
+ $("#heatOut").textContent=heats[v][0]+" → "+heats[v][1]}
+$("#heat").addEventListener("input",heat);heat();
+
+// brocheta builder
+const gums=[
+ {n:"Fresa",c:"#d7191f",p:1500,s:"ell"},
+ {n:"Gusano",c:"#3fa9f5",p:1500,s:"worm"},
+ {n:"Aro",c:"#37b34a",p:1500,s:"ring"},
+ {n:"Corazón",c:"#ff2d8a",p:1500,s:"ell"},
+ {n:"Sandía",c:"#ff5a5a",p:1500,s:"worm"},
+ {n:"Mango",c:"#ff9d00",p:1500,s:"ring"}
+];
+let stack=[];
+$("#chips").innerHTML=gums.map((g,i)=>`<button class="chip" data-i="${i}">+ ${g.n}</button>`).join("");
+function shape(g){
+ const base=`stroke="#2a0608" stroke-width="4"`;
+ const dots=`<g fill="#ffd9a8" opacity=".9"><circle cx="14" cy="16" r="2"/><circle cx="30" cy="22" r="2"/><circle cx="48" cy="15" r="2"/><circle cx="62" cy="22" r="2"/></g>`;
+ if(g.s==="ring")return `<svg width="84" height="38" viewBox="0 0 80 40"><ellipse cx="40" cy="20" rx="36" ry="16" fill="${g.c}" ${base}/><ellipse cx="40" cy="20" rx="8" ry="4" fill="#7a0d12" ${base}/>${dots}</svg>`;
+ if(g.s==="worm")return `<svg width="96" height="26" viewBox="0 0 90 26"><rect x="3" y="3" width="84" height="20" rx="10" fill="${g.c}" ${base}/><rect x="46" y="3" width="41" height="20" rx="10" fill="#d7191f" ${base}/>${dots}</svg>`;
+ return `<svg width="70" height="44" viewBox="0 0 70 44"><ellipse cx="35" cy="22" rx="30" ry="18" fill="${g.c}" ${base}/>${dots}</svg>`;
+}
+function render(){
+ const sk=$("#skewer");
+ sk.innerHTML=stack.length?stack.map(i=>`<div class="gum">${shape(gums[i])}</div>`).join(""):`<div class="empty">¡Tu palito está vacío!<br>Agrega gomitas ↑</div>`;
+ const t=stack.reduce((a,i)=>a+gums[i].p,0)+(stack.length?2000:0);
+ $("#tot").textContent=cop(t);
+ const lines=stack.map(i=>gums[i].n).join(", ");
+ const msg=`Hola Gomimex! Quiero una brocheta con: ${lines||"(sorpréndanme)"}. Total aprox ${cop(t)}`;
+ $("#send").href=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+ $("#send").target="_blank";
+}
+$("#chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;
+ if(stack.length>=8){b.textContent="¡Ya no cabe más! 😅";return}
+ stack.push(+b.dataset.i);render();burst(e.clientX,e.clientY)});
+$("#clear").onclick=()=>{stack=[];render()};
+render();
+$("#wa").href=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hola Gomimex! Quiero hacer un pedido 🌶️")}`;
+
+// emoji burst
+function burst(x,y){for(let i=0;i<7;i++){const p=document.createElement("div");p.className="pop";p.textContent=["🌶️","🔥","✨","🍬"][i%4];
+ p.style.left=x+"px";p.style.top=y+"px";
+ p.style.setProperty("--x",(Math.random()*160-80)+"px");p.style.setProperty("--y",(-60-Math.random()*100)+"px");p.style.setProperty("--rot",(Math.random()*360-180)+"deg");
+ document.body.appendChild(p);setTimeout(()=>p.remove(),950)}}
+document.addEventListener("click",e=>{if(e.target.closest(".btn")&&!e.target.closest(".chip"))burst(e.clientX,e.clientY)});
+
+// reveal + parallax
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+const fl=[...document.querySelectorAll(".float")];
+addEventListener("scroll",()=>{const y=scrollY;fl.forEach((f,i)=>f.style.transform=`translateY(${y*(+f.dataset.s)*6}px) rotate(${y*(+f.dataset.s)*(i%2?-1:1)*4}deg)`)},{passive:true});
+addEventListener("mousemove",e=>{const mx=e.clientX/innerWidth-.5,my=e.clientY/innerHeight-.5;
+ fl.forEach((f,i)=>{if(scrollY<innerHeight)f.style.translate=`${mx*(i+1)*14}px ${my*(i+1)*14}px`})});
+</script>
+</body>
+</html>
