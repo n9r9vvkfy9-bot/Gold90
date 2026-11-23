@@ -1020,6 +1020,8 @@ body.hw-shaking{ animation:none !important; }
 #advModal img{ width:100%; aspect-ratio:4/3; object-fit:contain; background:#fff; border-radius:16px; margin-top:16px; box-shadow:inset 0 0 0 1px rgba(212,175,55,.35); }
 #advModal h3{ margin:16px 0 4px; font-size:23px; }
 #advModal .adv-price{ font:700 22px/1 var(--serif); color:var(--xm-green-d); margin-top:8px; }
+#advModal .adv-timer{ margin-top:12px; display:inline-block; padding:8px 14px; border-radius:999px; background:var(--xm-green); color:var(--xm-gold-l); font-size:12.5px; letter-spacing:.06em; }
+#advModal .adv-timer b{ font-variant-numeric:tabular-nums; letter-spacing:.1em; }
 #advModal .adv-offer{ margin-top:14px; padding:12px 14px; border-radius:12px; background:#fff3cf; box-shadow:inset 0 0 0 1px rgba(212,175,55,.7); font-size:13.5px; color:#5a4200; line-height:1.45; }
 #advModal .adv-offer b{ letter-spacing:.08em; }
 #advModal .adv-acts{ display:flex; flex-direction:column; gap:10px; margin-top:18px; }
@@ -1061,7 +1063,7 @@ body.hw-shaking{ animation:none !important; }
   </div>
 </div>
 <div id="hwGhost" aria-hidden="true">
-  <div class="hw-bubble" id="hwBubble">🎄 ¡Ho ho ho! Feliz Navidad. Abre las casillas del calendario de Adviento: ¡camisetas a solo $99.000! 🎁</div>
+  <div class="hw-bubble" id="hwBubble">🎄 ¡Ho ho ho! Feliz Navidad. Abre la casilla de hoy en el calendario de Adviento: ¡la camiseta del día a solo $99.000! 🎁</div>
   <div class="hw-emoji" id="hwEmoji">🎅</div>
 </div>
 
@@ -1166,7 +1168,7 @@ body.hw-shaking{ animation:none !important; }
   <div class="adv-inner reveal">
     <div class="eyebrow-line">Del 1 al 24 de diciembre</div>
     <h2>Calendario de <em>Adviento</em></h2>
-    <p class="lead">Cada día se abre una casilla con una camiseta nueva o retro a <b style="color:var(--xm-gold-l)">solo $99.000</b>. Vuelve todos los días hasta Nochebuena y no te pierdas ninguna.</p>
+    <p class="lead">Cada día se abre una casilla con una camiseta nueva o retro a <b style="color:var(--xm-gold-l)">$99.000, pero solo el día de su casilla</b>. Vuelve todos los días hasta Nochebuena y no dejes pasar ninguna.</p>
     <div class="adv-status" id="advStatus"></div>
     <div class="adv-grid" id="advGrid"></div>
   </div>
@@ -1180,6 +1182,7 @@ body.hw-shaking{ animation:none !important; }
     <h3 id="advName"></h3>
     <p class="sub" id="advSub" style="margin:0"></p>
     <div class="adv-price" id="advPrice"></div>
+    <div class="adv-timer" id="advTimer" style="display:none"></div>
     <div class="adv-offer" id="advOffer" style="display:none"></div>
     <div class="adv-acts">
       <button type="button" class="btn btn-dark" id="advAdd">🛒 Agregar al carrito</button>
@@ -1488,7 +1491,7 @@ window.addEventListener('scroll',function(){
     var n=clean(PRODUCTS[i].name);
     if(!vistos[n]){ vistos[n]=1; items.push(n); }
   }
-  items.push('🎄 Feliz Navidad','🎁 Adviento: camisetas a $99.000','🎁 Empaque de regalo','$120.000 sin dorsal','$130.000 con dorsal','@gold90oficial');
+  items.push('🎄 Feliz Navidad','🎁 Adviento: camiseta del día a $99.000','🎁 Empaque de regalo','$120.000 sin dorsal','$130.000 con dorsal','@gold90oficial');
   var h='';
   for(var r=0;r<2;r++){
     for(var k=0;k<items.length;k++) h+='<span>'+esc(items[k])+' <b>·</b></span>';
@@ -1932,11 +1935,12 @@ observeReveals();
   }catch(e){ cart=[]; }
   function save(){ ls(KEY,JSON.stringify(cart)); }
 
-  function unit(l){ return (l.adv||byId[l.id].price) + (l.dorsal?DORSAL_EXTRA:0); }
+  function advLive(l){ return !!(l.adv && typeof window.g90AdvToday==='function' && window.g90AdvToday()===l.advDay); }
+  function unit(l){ return (advLive(l)?l.adv:byId[l.id].price) + (l.dorsal?DORSAL_EXTRA:0); }
   function count(){ var n=0; cart.forEach(function(l){ n+=l.qty; }); return n; }
   function total(){ var t=0; cart.forEach(function(l){ t+=unit(l)*l.qty; }); return t; }
-  function lineKey(l){ return [l.id,l.size,l.dorsal?1:0,l.nombre||'',l.numero||'',l.regalo?1:0,l.msg||'',l.adv||0].join('|'); }
-  function verText(l){ return (l.dorsal ? 'Con nombre y número: '+l.nombre+' '+l.numero : 'Sin dorsal') + (l.regalo ? ' · 🎁 Para regalo' : '') + (l.adv ? ' · Precio Adviento' : ''); }
+  function lineKey(l){ return [l.id,l.size,l.dorsal?1:0,l.nombre||'',l.numero||'',l.regalo?1:0,l.msg||'',l.adv||0,l.advDay||0].join('|'); }
+  function verText(l){ return (l.dorsal ? 'Con nombre y número: '+l.nombre+' '+l.numero : 'Sin dorsal') + (l.regalo ? ' · 🎁 Para regalo' : '') + (l.adv ? (advLive(l) ? ' · Precio Adviento (solo hoy)' : ' · Precio de Adviento vencido') : ''); }
 
   // ---- elementos ----
   var nav=$('nav');
@@ -2058,11 +2062,11 @@ observeReveals();
     $('coQty').textContent=cur.qty;
     $('coAdd').textContent='Agregar al carrito · '+fmt(curPrice()*cur.qty);
   }
-  function openOpt(id,adv){
+  function openOpt(id,adv,advDay){
     var p=byId[id]; if(!p) return;
     var last=ls(SIZEKEY);
-    cur={id:id,size:SIZES.indexOf(last)!==-1?last:null,dorsal:false,qty:1,regalo:false,adv:adv||0};
-    $('coImg').src=p.img; $('coName').textContent=clean(p.name); $('coSub').textContent=clean(p.sub)+(adv?' · Precio de Adviento':'');
+    cur={id:id,size:SIZES.indexOf(last)!==-1?last:null,dorsal:false,qty:1,regalo:false,adv:adv||0,advDay:advDay||0};
+    $('coImg').src=p.img; $('coName').textContent=clean(p.name); $('coSub').textContent=clean(p.sub)+(adv?' · Precio de Adviento (solo hoy)':'');
     $('coNombre').value=''; $('coNumero').value=''; $('coErr').textContent='';
     $('coGift').checked=false; $('coMsg').value=''; $('coMsg').classList.remove('show');
     paintOpt();
@@ -2102,7 +2106,7 @@ observeReveals();
       nombre=$('coNombre').value.trim(); numero=$('coNumero').value.trim();
       if(!nombre || !numero){ err.textContent='Escribe el nombre y el número que quieres en la camiseta.'; return; }
     }
-    var line={id:cur.id,size:cur.size,dorsal:cur.dorsal,nombre:nombre,numero:numero,qty:cur.qty,adv:cur.adv||0,regalo:!!cur.regalo,msg:cur.regalo?$('coMsg').value.trim():''};
+    var line={id:cur.id,size:cur.size,dorsal:cur.dorsal,nombre:nombre,numero:numero,qty:cur.qty,adv:cur.adv||0,advDay:cur.advDay||0,regalo:!!cur.regalo,msg:cur.regalo?$('coMsg').value.trim():''};
     var k=lineKey(line), merged=false;
     for(var i=0;i<cart.length;i++){
       if(lineKey(cart[i])===k){ cart[i].qty=Math.min(MAXQ,cart[i].qty+line.qty); merged=true; break; }
@@ -2202,7 +2206,7 @@ observeReveals();
   // Para cambiar la camiseta de un día:  ADVENT_PICKS[5]='ID_del_producto';
   // Para agregar una oferta a un día:    ADVENT_OFFERS[5]={text:'10% en esta camiseta',code:'ADV5'};
   var ADVENT_PRICE=99000;
-  var ADVENT_PICKS={1:"CaboVerde_Local_2026",2:"Alemania_1994_Local",3:"Portugal_Visitante_2026",4:"Inglaterra_1998_Local",5:"PSG_Local_2627",6:"Inter_Milan_Retro_9798",7:"Noruega_Local",8:"ManUtd_Local_9899",9:"Bayern_Local_2627",10:"Milan_Retro_Bwin_0607",11:"Argentina_Local_2024",12:"Brasil_Retro_9",13:"Espa_a_Local_2024",14:"Francia_Retro_2006_4",15:"ManCity_Local_Etihad_2627",16:"Napoli_Retro_Buitoni",17:"Brasil_Titular_10",18:"Barcelona_Retro_Manga_Larga_Ronaldinho_10",19:"Real_Madrid_Segunda_Granate",20:"ManUtd_Retro_Moscu2008_Ronaldo",21:"Colombia_Local_2024",22:"Colombia_Retro_1994_Umbro",23:"Colombia_Visitante_LuisDiaz",24:"Colombia_Local_Retro_90"};
+  var ADVENT_PICKS={1:"Barcelona_Local_Spotify_24_25",2:"Alemania_1994_Local",3:"Portugal_Visitante_2026",4:"Inglaterra_1998_Local",5:"PSG_Local_2627",6:"Inter_Milan_Retro_9798",7:"Noruega_Local",8:"ManUtd_Local_9899",9:"Bayern_Local_2627",10:"Milan_Retro_Bwin_0607",11:"Argentina_Local_2024",12:"Brasil_Retro_9",13:"Espa_a_Local_2024",14:"Francia_Retro_2006_4",15:"ManCity_Local_Etihad_2627",16:"Napoli_Retro_Buitoni",17:"Brasil_Titular_10",18:"Barcelona_Retro_Manga_Larga_Ronaldinho_10",19:"Real_Madrid_Segunda_Granate",20:"ManUtd_Retro_Moscu2008_Ronaldo",21:"Colombia_Local_2024",22:"Colombia_Retro_1994_Umbro",23:"Colombia_Visitante_LuisDiaz",24:"Colombia_Local_Retro_90"};
   var ADVENT_OFFERS={};
   var grid=document.getElementById('advGrid'); if(!grid||typeof PRODUCTS==='undefined') return;
   var KEY='g90_xm_advent', WA=(typeof WA_NUMBER!=='undefined'?WA_NUMBER:'573117206057');
@@ -2216,6 +2220,8 @@ observeReveals();
   else if(co.getUTCMonth()===11) today=co.getUTCDate();
   else today=0;
   var open=function(d){ return today>=d; };
+  window.g90AdvToday=function(){ return today; };
+  function msLeft(){ var co=Date.now()-5*3600e3; return (Math.floor(co/864e5)+1)*864e5+5*3600e3-Date.now(); }
 
   // una camiseta distinta por día (orden mezclado fijo, igual para todos)
   function rng(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return((t^t>>>14)>>>0)/4294967296; }; }
@@ -2231,7 +2237,7 @@ observeReveals();
       if(done) n++;
       h+='<button type="button" class="adv-door'+(isOpen?'':' locked')+(done?' opened':'')+(today===d?' today':'')+'" data-d="'+d+'" aria-label="Casilla '+d+(isOpen?'':' (bloqueada)')+'">'+
         (done?'<img src="'+p.img+'" alt="" loading="lazy">':'')+
-        '<span class="n">'+d+'</span>'+(done?'<span class="tick">$99.000</span>':'')+'</button>';
+        '<span class="n">'+d+'</span>'+(done?'<span class="tick">'+(today===d?'$99.000 · hoy':'Terminó')+'</span>':'')+'</button>';
     }
     grid.innerHTML=h;
     var st=document.getElementById('advStatus'), av=Math.min(today,24);
@@ -2247,12 +2253,26 @@ observeReveals();
     document.getElementById('advImg').src=p.img; document.getElementById('advImg').alt=nm;
     document.getElementById('advName').textContent=nm;
     document.getElementById('advSub').textContent=clean(p.sub);
-    document.getElementById('advPrice').innerHTML='<s style="font:500 15px Inter,sans-serif;color:#8a7a55;margin-right:8px">'+fmt(p.price)+'</s>'+fmt(ADVENT_PRICE)+'<small style="display:block;margin-top:6px;font:700 10.5px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#B0102A">Precio de Adviento · sin dorsal</small>';
+    var live=(today===d);
+    document.getElementById('advPrice').innerHTML= live
+      ? '<s style="font:500 15px Inter,sans-serif;color:#8a7a55;margin-right:8px">'+fmt(p.price)+'</s>'+fmt(ADVENT_PRICE)+'<small style="display:block;margin-top:6px;font:700 10.5px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#B0102A">Precio de Adviento · solo hoy · sin dorsal</small>'
+      : fmt(p.price)+'<small style="display:block;margin-top:6px;font:700 10.5px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7a6a45">El precio de Adviento fue solo el día '+d+'</small>';
+    startTimer(live);
     var of=ADVENT_OFFERS[d], ofEl=document.getElementById('advOffer');
     if(of){ ofEl.style.display=''; ofEl.innerHTML='🎉 <b>'+esc(of.text)+'</b>'+(of.code?'<br>Código: <b>'+esc(of.code)+'</b>':''); } else ofEl.style.display='none';
-    var msg='Hola GOLD90, abrí la casilla del día '+d+' del calendario de Adviento: '+nm+' a '+fmt(ADVENT_PRICE)+(of?' ('+of.text+(of.code?', código '+of.code:'')+')':'')+'. Quiero pedirla:';
+    var msg='Hola GOLD90, abrí la casilla del día '+d+' del calendario de Adviento: '+nm+(live?' a '+fmt(ADVENT_PRICE)+' (precio de Adviento, solo hoy)':'')+(of?' ('+of.text+(of.code?', código '+of.code:'')+')':'')+'. Quiero pedirla:';
     document.getElementById('advWa').href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
     modal.classList.add('show'); modal.setAttribute('aria-hidden','false');
+  }
+  var tmr=0;
+  function pad(n){ return n<10?'0'+n:''+n; }
+  function startTimer(live){
+    var el=document.getElementById('advTimer'); clearInterval(tmr);
+    if(!live){ el.style.display='none'; return; }
+    el.style.display='';
+    function t(){ var m=Math.max(0,msLeft()), h=Math.floor(m/36e5), mi=Math.floor(m%36e5/6e4), se=Math.floor(m%6e4/1e3);
+      el.innerHTML='⏳ Termina en <b>'+pad(h)+':'+pad(mi)+':'+pad(se)+'</b>'; }
+    t(); tmr=setInterval(t,1000);
   }
   function confetti(x,y){
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -2277,13 +2297,13 @@ observeReveals();
     show(d);
     if(first) setTimeout(paint,50);
   });
-  function close(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); }
+  function close(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); clearInterval(tmr); }
   document.getElementById('advClose').addEventListener('click',close);
   modal.addEventListener('click',function(e){ if(e.target===modal) close(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
   document.getElementById('advAdd').addEventListener('click',function(){
     var d=cur; close();
-    if(typeof window.g90OpenOpt==='function') window.g90OpenOpt(pick(d).id, ADVENT_PRICE);
+    if(typeof window.g90OpenOpt==='function') window.g90OpenOpt(pick(d).id, today===d?ADVENT_PRICE:0, today===d?d:0);
   });
   paint();
 })();
