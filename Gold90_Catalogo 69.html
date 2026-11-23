@@ -961,6 +961,23 @@ body.hw-shaking{ animation:none !important; }
   #hwGhost{ left:10px; bottom:76px; } #hwGhost .hw-bubble{ max-width:176px; font-size:11.5px; padding:9px 12px; }
   #hwGhost .hw-emoji{ font-size:34px; }
 }
+
+/* ---------- ENTRADA ROJA ---------- */
+#gold90-intro .stagebg{ background:
+  radial-gradient(ellipse 70% 55% at 50% 42%,rgba(226,40,66,.55),transparent 70%),
+  radial-gradient(ellipse at 50% 115%,rgba(255,120,90,.35),transparent 60%),
+  linear-gradient(180deg,#8f0b20 0%,#B0102A 45%,#5a0614 100%) !important; }
+#gold90-intro .beam{ background:linear-gradient(180deg,rgba(255,235,190,.30),rgba(255,235,190,0) 75%) !important; }
+#gold90-intro .vignette{ background:radial-gradient(ellipse at 50% 50%,transparent 38%,rgba(40,0,8,.78) 100%) !important; }
+#gold90-intro .ring{ border-color:rgba(244,217,122,.55) !important; box-shadow:0 0 50px rgba(255,215,120,.18) inset !important; }
+#gold90-intro .welcome{ color:#fff3d6 !important; text-shadow:0 0 16px rgba(0,0,0,.45) !important; }
+#gold90-intro .tagline{ color:#fff3d6 !important; }
+#gold90-intro .tagline b{ color:var(--xm-gold-l) !important; }
+#gold90-intro .wordmark{ filter:drop-shadow(0 4px 22px rgba(60,0,10,.75)) drop-shadow(0 0 30px rgba(255,215,120,.35)) !important; }
+#gold90-intro .wordmark{ background:linear-gradient(100deg,#F0CC5A 0%,#fff7d6 45%,#F4D97A 70%,#E3B93E 100%) !important; -webkit-background-clip:text !important; background-clip:text !important; }
+#gold90-intro .hw-sub{ text-shadow:0 2px 16px rgba(60,0,10,.8),0 0 26px rgba(255,215,120,.45) !important; }
+#gold90-intro .enter{ background:rgba(255,243,214,.12) !important; border-color:rgba(244,217,122,.85) !important; color:#fff3d6 !important; }
+#gold90-intro .enter:hover{ background:var(--xm-gold-l) !important; color:#5a0614 !important; }
 </style>
 
 </head>
@@ -1643,7 +1660,7 @@ observeReveals();
 
 <script>
 (function(){
-  var target = (function(){ var n=new Date(), y=n.getFullYear(), t=new Date(y+'-12-25T00:00:00-05:00'); if(t.getTime()<n.getTime()) t=new Date((y+1)+'-12-25T00:00:00-05:00'); return t.getTime(); })();
+  var target = (function(){ var n=new Date(), y=n.getFullYear(), t=new Date(y+'-12-24T00:00:00-05:00'); if(t.getTime()<n.getTime()) t=new Date((y+1)+'-12-24T00:00:00-05:00'); return t.getTime(); })();
   var dEl = document.getElementById('cdDays');
   var hEl = document.getElementById('cdHours');
   var mEl = document.getElementById('cdMins');
@@ -2040,8 +2057,8 @@ observeReveals();
 
   // ---------- cuenta regresiva a Navidad ----------
   function target(){
-    var n=new Date(), y=n.getFullYear(), t=new Date(y+'-12-25T00:00:00-05:00');
-    if(t.getTime()<n.getTime()) t=new Date((y+1)+'-12-25T00:00:00-05:00');
+    var n=new Date(), y=n.getFullYear(), t=new Date(y+'-12-24T00:00:00-05:00');
+    if(t.getTime()<n.getTime()) t=new Date((y+1)+'-12-24T00:00:00-05:00');
     return t.getTime();
   }
   var T=target();
