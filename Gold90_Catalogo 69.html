@@ -978,6 +978,54 @@ body.hw-shaking{ animation:none !important; }
 #gold90-intro .hw-sub{ text-shadow:0 2px 16px rgba(60,0,10,.8),0 0 26px rgba(255,215,120,.45) !important; }
 #gold90-intro .enter{ background:rgba(255,243,214,.12) !important; border-color:rgba(244,217,122,.85) !important; color:#fff3d6 !important; }
 #gold90-intro .enter:hover{ background:var(--xm-gold-l) !important; color:#5a0614 !important; }
+
+/* ---------- CALENDARIO DE ADVIENTO ---------- */
+.adv{ position:relative; padding:88px 20px 84px; text-align:center; color:#F6EFDC; overflow:hidden;
+  background:radial-gradient(60% 45% at 50% 0%,rgba(212,175,55,.2),transparent 70%),radial-gradient(45% 40% at 8% 100%,rgba(176,16,42,.4),transparent 70%),
+  linear-gradient(180deg,var(--xm-green-d),var(--xm-green)); }
+.adv:before{ content:''; position:absolute; left:0; right:0; top:0; height:6px; background:repeating-linear-gradient(135deg,var(--xm-red) 0 18px,#f6efdc 18px 36px); }
+.adv-inner{ max-width:1000px; margin:0 auto; position:relative; }
+.adv .eyebrow-line{ color:var(--xm-gold-l); }
+.adv h2{ margin-top:12px; font:700 clamp(32px,5vw,52px)/1.08 var(--serif); }
+.adv h2 em{ font-style:italic; color:var(--xm-gold-l); }
+.adv .lead{ margin:14px auto 0; max-width:540px; font-size:15px; line-height:1.6; color:rgba(246,239,220,.8); }
+.adv-status{ margin:22px auto 0; display:inline-flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:center; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:600; color:var(--xm-gold-l); }
+.adv-status span{ padding:7px 14px; border-radius:999px; box-shadow:inset 0 0 0 1px rgba(212,175,55,.5); background:rgba(7,36,27,.5); }
+.adv-grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:14px; margin:38px auto 0; }
+@media(max-width:760px){ .adv-grid{ grid-template-columns:repeat(4,1fr); gap:10px; } }
+@media(max-width:420px){ .adv-grid{ grid-template-columns:repeat(3,1fr); } }
+.adv-door{ position:relative; aspect-ratio:1/1.05; border:0; cursor:pointer; border-radius:16px; overflow:hidden; color:#fff; font:inherit; padding:0;
+  background:linear-gradient(150deg,var(--xm-red-l),var(--xm-red) 55%,var(--xm-red-d)); box-shadow:0 14px 26px -16px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.14);
+  transition:transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease, filter .3s ease; }
+.adv-door:nth-child(3n+2){ background:linear-gradient(150deg,var(--xm-green-l),#0f4a38 55%,var(--xm-green-d)); box-shadow:0 14px 26px -16px rgba(0,0,0,.7), inset 0 0 0 1px rgba(212,175,55,.35); }
+.adv-door:nth-child(5n){ background:linear-gradient(150deg,#F4D97A,#D4AF37 55%,#9A7A1C); color:#2a1d00; }
+.adv-door:before,.adv-door:after{ content:''; position:absolute; background:rgba(255,243,214,.55); pointer-events:none; }
+.adv-door:before{ left:50%; top:0; bottom:0; width:9px; margin-left:-4.5px; }
+.adv-door:after{ top:50%; left:0; right:0; height:9px; margin-top:-4.5px; }
+.adv-door .n{ position:absolute; z-index:2; left:50%; top:50%; transform:translate(-50%,-50%); width:46%; aspect-ratio:1; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font:700 clamp(18px,3.2vw,28px)/1 var(--serif); background:rgba(7,36,27,.82); color:var(--xm-gold-l); box-shadow:0 0 0 2px rgba(244,217,122,.7); }
+.adv-door:hover:not(.locked){ transform:translateY(-6px) rotate(-1.5deg); box-shadow:0 24px 34px -16px rgba(0,0,0,.8), 0 0 0 2px var(--xm-gold-l); }
+.adv-door.today{ animation:advPulse 1.8s ease-in-out infinite; }
+@keyframes advPulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(244,217,122,.7), 0 14px 26px -16px rgba(0,0,0,.7); } 50%{ box-shadow:0 0 0 10px rgba(244,217,122,0), 0 14px 26px -16px rgba(0,0,0,.7); } }
+.adv-door.locked{ cursor:not-allowed; filter:saturate(.35) brightness(.55); }
+.adv-door.locked .n:after{ content:'🔒'; position:absolute; right:-14px; bottom:-14px; font-size:15px; }
+.adv-door.opened{ background:#fff !important; color:var(--xm-green-d); }
+.adv-door.opened:before,.adv-door.opened:after{ display:none; }
+.adv-door.opened img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:8px 8px 22px; }
+.adv-door.opened .n{ left:8px; top:8px; transform:none; width:26px; font-size:13px; background:var(--xm-green); }
+.adv-door.opened .tick{ position:absolute; z-index:2; left:0; right:0; bottom:0; padding:3px 0 5px; font-size:10px; letter-spacing:.16em; text-transform:uppercase; font-weight:700; background:linear-gradient(180deg,transparent,rgba(212,175,55,.35)); }
+#advModal .modal-card{ max-width:400px; text-align:center; padding:30px 24px 26px; background:linear-gradient(180deg,#fffdf7,var(--xm-cream)); }
+#advModal .adv-day{ display:inline-block; padding:6px 14px; border-radius:999px; background:var(--xm-red); color:#fff; font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; }
+#advModal img{ width:100%; aspect-ratio:4/3; object-fit:contain; background:#fff; border-radius:16px; margin-top:16px; box-shadow:inset 0 0 0 1px rgba(212,175,55,.35); }
+#advModal h3{ margin:16px 0 4px; font-size:23px; }
+#advModal .adv-price{ font:700 22px/1 var(--serif); color:var(--xm-green-d); margin-top:8px; }
+#advModal .adv-offer{ margin-top:14px; padding:12px 14px; border-radius:12px; background:#fff3cf; box-shadow:inset 0 0 0 1px rgba(212,175,55,.7); font-size:13.5px; color:#5a4200; line-height:1.45; }
+#advModal .adv-offer b{ letter-spacing:.08em; }
+#advModal .adv-acts{ display:flex; flex-direction:column; gap:10px; margin-top:18px; }
+#advModal .adv-acts .btn{ min-width:0; width:100%; margin:0; text-decoration:none; text-align:center; }
+.adv-confetti{ position:fixed; left:0; top:0; z-index:1100; pointer-events:none; font-size:22px; will-change:transform,opacity; }
+@media(prefers-reduced-motion:reduce){ .adv-door.today{ animation:none; } .adv-confetti{ display:none; } }
+@media(max-width:700px){ #hwToast{ bottom:auto !important; top:104px !important; height:auto !important; } }
 </style>
 
 </head>
@@ -1068,6 +1116,7 @@ body.hw-shaking{ animation:none !important; }
     <a href="#lineup" data-jump="seleccion">Selecciones</a>
     <a href="#lineup" data-jump="actuales">Clubes</a>
     <a href="#lineup" data-jump="retro">Retro</a>
+    <a href="#adviento">Adviento</a>
     <a href="#regalos">Regalos</a>
     <a href="#quejas">Quejas</a>
     <a href="https://wa.me/573117206057?text=Estoy%20interesado%20en%3A" target="_blank" rel="noopener">WhatsApp</a>
@@ -1106,6 +1155,32 @@ body.hw-shaking{ animation:none !important; }
 
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<section class="adv" id="adviento">
+  <div class="adv-inner reveal">
+    <div class="eyebrow-line">Del 1 al 24 de diciembre</div>
+    <h2>Calendario de <em>Adviento</em></h2>
+    <p class="lead">Cada día se abre una casilla con la camiseta del día. Vuelve todos los días hasta Nochebuena y no te pierdas ninguna sorpresa.</p>
+    <div class="adv-status" id="advStatus"></div>
+    <div class="adv-grid" id="advGrid"></div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="advModal" aria-hidden="true">
+  <div class="modal-card">
+    <button class="modal-close" id="advClose" aria-label="Cerrar">&times;</button>
+    <span class="adv-day" id="advDay"></span>
+    <img id="advImg" alt="">
+    <h3 id="advName"></h3>
+    <p class="sub" id="advSub" style="margin:0"></p>
+    <div class="adv-price" id="advPrice"></div>
+    <div class="adv-offer" id="advOffer" style="display:none"></div>
+    <div class="adv-acts">
+      <button type="button" class="btn btn-dark" id="advAdd">🛒 Agregar al carrito</button>
+      <a class="btn btn-ghost" id="advWa" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+    </div>
+  </div>
 </div>
 
 <div class="filterbar">
@@ -1988,6 +2063,7 @@ observeReveals();
     optModal.classList.add('show'); optModal.setAttribute('aria-hidden','false');
   }
   function closeOpt(){ optModal.classList.remove('show'); optModal.setAttribute('aria-hidden','true'); }
+  window.g90OpenOpt=openOpt;
 
   $('coSizes').addEventListener('click',function(e){
     var b=e.target.closest('[data-size]'); if(!b) return;
@@ -2111,6 +2187,97 @@ observeReveals();
     if(document.hidden){ running=false; cancelAnimationFrame(raf); }
     else if(!running){ running=true; raf=requestAnimationFrame(frame); }
   });
+})();
+</script>
+<script>
+(function(){
+  // ---------- CALENDARIO DE ADVIENTO ----------
+  // Para cambiar la camiseta de un día:  ADVENT_PICKS[5]='ID_del_producto';
+  // Para agregar una oferta a un día:    ADVENT_OFFERS[5]={text:'10% en esta camiseta',code:'ADV5'};
+  var ADVENT_PICKS={};
+  var ADVENT_OFFERS={};
+  var grid=document.getElementById('advGrid'); if(!grid||typeof PRODUCTS==='undefined') return;
+  var KEY='g90_xm_advent', WA=(typeof WA_NUMBER!=='undefined'?WA_NUMBER:'573117206057');
+  function ls(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){} return null; }
+  var opened={}; try{ opened=JSON.parse(ls(KEY)||'{}')||{}; }catch(e){ opened={}; }
+
+  // día actual en Colombia (UTC-5). ?adviento=N simula el día N para probar.
+  var sim=(location.search.match(/[?&]adviento=(\d+)/)||[])[1];
+  var co=new Date(Date.now()-5*3600e3), today;
+  if(sim!==undefined) today=+sim;
+  else if(co.getUTCMonth()===11) today=co.getUTCDate();
+  else today=0;
+  var open=function(d){ return today>=d; };
+
+  // una camiseta distinta por día (orden mezclado fijo, igual para todos)
+  function rng(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return((t^t>>>14)>>>0)/4294967296; }; }
+  var rnd=rng(2026), pool=PRODUCTS.slice();
+  for(var i=pool.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)), tmp=pool[i]; pool[i]=pool[j]; pool[j]=tmp; }
+  var byId={}; PRODUCTS.forEach(function(p){ byId[p.id]=p; });
+  function pick(d){ return byId[ADVENT_PICKS[d]] || pool[(d-1)%pool.length]; }
+
+  function paint(){
+    var h='', n=0;
+    for(var d=1; d<=24; d++){
+      var p=pick(d), isOpen=open(d), done=isOpen&&opened[d];
+      if(done) n++;
+      h+='<button type="button" class="adv-door'+(isOpen?'':' locked')+(done?' opened':'')+(today===d?' today':'')+'" data-d="'+d+'" aria-label="Casilla '+d+(isOpen?'':' (bloqueada)')+'">'+
+        (done?'<img src="'+p.img+'" alt="" loading="lazy">':'')+
+        '<span class="n">'+d+'</span>'+(done?'<span class="tick">Abierta</span>':'')+'</button>';
+    }
+    grid.innerHTML=h;
+    var st=document.getElementById('advStatus'), av=Math.min(today,24);
+    if(today<=0) st.innerHTML='<span>🎄 Empieza el 1 de diciembre</span>';
+    else st.innerHTML='<span>🎁 Casillas abiertas: '+n+' / '+av+'</span>'+(today<=24?'<span>Hoy: día '+today+'</span>':'<span>¡Feliz Navidad!</span>');
+  }
+
+  var modal=document.getElementById('advModal'), cur=0;
+  function fmt(n){ return '$'+Number(n).toLocaleString('es-CO'); }
+  function show(d){
+    var p=pick(d), nm=clean(p.name); cur=d;
+    document.getElementById('advDay').textContent='Día '+d+' · Adviento';
+    document.getElementById('advImg').src=p.img; document.getElementById('advImg').alt=nm;
+    document.getElementById('advName').textContent=nm;
+    document.getElementById('advSub').textContent=clean(p.sub);
+    document.getElementById('advPrice').textContent=fmt(p.price)+' sin dorsal';
+    var of=ADVENT_OFFERS[d], ofEl=document.getElementById('advOffer');
+    if(of){ ofEl.style.display=''; ofEl.innerHTML='🎉 <b>'+esc(of.text)+'</b>'+(of.code?'<br>Código: <b>'+esc(of.code)+'</b>':''); } else ofEl.style.display='none';
+    var msg='Hola GOLD90, abrí la casilla del día '+d+' del calendario de Adviento: '+nm+(of?' ('+of.text+(of.code?', código '+of.code:'')+')':'')+'. Quiero pedirla:';
+    document.getElementById('advWa').href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
+    modal.classList.add('show'); modal.setAttribute('aria-hidden','false');
+  }
+  function confetti(x,y){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var set=['🎁','⭐','🎄','✨','🔔','❄️'];
+    for(var i=0;i<16;i++){
+      var e=document.createElement('span'); e.className='adv-confetti'; e.textContent=set[i%set.length];
+      e.style.left=x+'px'; e.style.top=y+'px'; document.body.appendChild(e);
+      var a=Math.random()*6.28, v=90+Math.random()*150;
+      var an=e.animate([{transform:'translate(0,0) scale(.6) rotate(0)',opacity:1},{transform:'translate('+Math.cos(a)*v+'px,'+(Math.sin(a)*v-40)+'px) scale(1.1) rotate('+(Math.random()*360)+'deg)',opacity:1,offset:.55},{transform:'translate('+Math.cos(a)*v*1.1+'px,'+(Math.sin(a)*v+120)+'px) scale(.8) rotate(540deg)',opacity:0}],{duration:1100+Math.random()*500,easing:'cubic-bezier(.2,.7,.3,1)'});
+      an.onfinish=(function(el){ return function(){ el.remove(); }; })(e);
+    }
+  }
+  grid.addEventListener('click',function(e){
+    var b=e.target.closest('.adv-door'); if(!b) return;
+    var d=+b.getAttribute('data-d');
+    if(!open(d)){
+      b.animate([{transform:'translateX(0)'},{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(-3px)'},{transform:'translateX(0)'}],{duration:320});
+      return;
+    }
+    var first=!opened[d];
+    if(first){ opened[d]=1; ls(KEY,JSON.stringify(opened)); var r=b.getBoundingClientRect(); confetti(r.left+r.width/2,r.top+r.height/2); }
+    show(d);
+    if(first) setTimeout(paint,50);
+  });
+  function close(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); }
+  document.getElementById('advClose').addEventListener('click',close);
+  modal.addEventListener('click',function(e){ if(e.target===modal) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+  document.getElementById('advAdd').addEventListener('click',function(){
+    var d=cur; close();
+    if(typeof window.g90OpenOpt==='function') window.g90OpenOpt(pick(d).id);
+  });
+  paint();
 })();
 </script>
 </body>
