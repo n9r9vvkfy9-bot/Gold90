@@ -34,7 +34,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:var(--sans);font-weight:400;color:var(--text);background:var(--cream);line-height:1.6;overflow-x:hidden}
+body{font-feature-settings:'lnum' 1;font-variant-numeric:lining-nums;font-family:var(--sans);font-weight:400;color:var(--text);background:var(--cream);line-height:1.6;overflow-x:hidden}
 img,svg{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 a{color:inherit;text-decoration:none}
@@ -112,7 +112,7 @@ em{font-style:italic;color:var(--deep)}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-bottom:60px}
 .sec-head h2{margin-top:16px;text-wrap:balance}
 .sec-head p{max-width:26em;color:var(--muted);font-weight:300}
-.arches{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.arches{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
 .arch{position:relative;aspect-ratio:3/4.6;border-radius:999px 999px 26px 26px;overflow:hidden;text-align:center;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:0 10px 26px;isolation:isolate;transition:transform .6s var(--ease),box-shadow .6s;box-shadow:0 20px 40px -26px rgba(90,24,48,.4)}
 .arch:hover{transform:translateY(-12px);box-shadow:0 40px 60px -26px rgba(90,24,48,.5)}
 .arch::before{content:"";position:absolute;inset:0;background:var(--g);z-index:-2}
@@ -284,6 +284,72 @@ footer .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;p
   html{scroll-behavior:auto}
   .js .rv{opacity:1;transform:none}
 }
+
+/* ===== v2: fotos reales ===== */
+.hero-photo{position:absolute;left:52%;top:5%;width:60%;aspect-ratio:3/4.1;translate:-50% 0;border-radius:999px 999px 30px 30px;overflow:hidden;border:8px solid #fff;box-shadow:0 50px 80px -30px rgba(90,24,48,.6);animation:float 7s ease-in-out infinite reverse;background:#fff}
+.hero-photo img,.hero-mini img{width:100%;height:100%;object-fit:cover}
+.hero-mini{position:absolute;left:-1%;bottom:6%;width:33%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:6px solid #fff;box-shadow:0 24px 40px -16px rgba(90,24,48,.5);animation:float 8s ease-in-out infinite}
+.hero-chip{position:absolute;right:-1%;bottom:16%;background:#fff;border-radius:20px;padding:12px 20px;box-shadow:0 24px 40px -18px rgba(90,24,48,.45);animation:float 6s ease-in-out infinite;animation-delay:-2s}
+.hero-chip small{display:block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.hero-chip b{font-family:var(--serif);font-size:1.9rem;font-weight:500;color:var(--deep);line-height:1.1}
+.card figure{background:var(--bg)}
+.card figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;cursor:zoom-in;transition:transform .9s var(--ease)}
+.card:hover figure img{transform:scale(1.06)}
+.badge.hot{background:var(--deep);color:#fff}
+.card h3{font-size:1.55rem;line-height:1.08}
+#sort{font:inherit;font-size:.78rem;letter-spacing:.06em;padding:.6em 1em;border-radius:999px;border:1px solid rgba(21,11,15,.18);background:#fff;color:var(--text);cursor:pointer}
+.it .th{width:64px;height:78px;border-radius:32px 32px 10px 10px}
+.it .th img{width:100%;height:100%;object-fit:cover}
+.it b{font-size:1.15rem}
+/* builder */
+.builder{position:relative;padding:120px 0;background:linear-gradient(var(--cream),var(--blush-soft));overflow:hidden}
+.bgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+.b-panel h2{margin:16px 0 18px}
+.b-panel .lead{color:var(--muted);font-weight:300;max-width:34em;margin-bottom:10px}
+.b-panel h4{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;font-weight:500;color:var(--deep);margin:28px 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;flex-direction:column;align-items:center;gap:2px;padding:.7em 1.3em;border-radius:18px;border:1px solid rgba(21,11,15,.16);background:#fff;font-size:.86rem;transition:all .3s var(--ease);min-width:78px}
+.chip small{font-size:.74rem;color:var(--muted)}
+.chip b{font-family:var(--serif);font-size:1.3rem;font-weight:500;line-height:1}
+.chip:hover{border-color:var(--ink);transform:translateY(-2px)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip.on small{color:var(--blush)}
+.chip.col{flex-direction:row;gap:10px;border-radius:999px;padding:.6em 1.1em;min-width:0}
+.chip.col i{width:16px;height:16px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+.b-total{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:34px;padding:22px 26px;background:#fff;border-radius:24px;box-shadow:0 30px 50px -34px rgba(90,24,48,.5)}
+.b-total small{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.b-total b{font-family:var(--serif);font-size:2.4rem;font-weight:500;color:var(--wine);line-height:1.1}
+.note{margin-top:16px;font-size:.82rem;color:var(--muted);font-weight:300;max-width:38em}
+.b-view{position:relative;max-width:460px;margin-inline:auto;width:100%}
+.b-arch{aspect-ratio:3/4.3;border-radius:999px 999px 32px 32px;overflow:hidden;border:8px solid #fff;box-shadow:0 50px 80px -34px rgba(90,24,48,.6);background:#fff}
+.b-arch img{width:100%;height:100%;object-fit:cover;transition:opacity .25s,transform .8s var(--ease)}
+.b-arch img.swap{opacity:0;transform:scale(1.04)}
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:110;background:rgba(21,11,15,.7);backdrop-filter:blur(6px);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s}
+.lb.on{opacity:1;pointer-events:auto}
+.lb-card{position:relative;display:grid;grid-template-columns:1.1fr 1fr;width:min(940px,100%);max-height:92vh;background:var(--cream);border-radius:28px;overflow:hidden;transform:translateY(20px) scale(.97);transition:transform .5s var(--ease)}
+.lb.on .lb-card{transform:none}
+.lb-card>.x{position:absolute;top:14px;right:14px;z-index:2;background:rgba(255,255,255,.85)}
+.lb-card img{width:100%;height:100%;object-fit:cover;min-height:360px;max-height:92vh}
+.lb-info{padding:48px 36px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.lb-info small{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.lb-info h3{font-size:2.4rem}
+.lb-info b{font-family:var(--serif);font-size:1.8rem;font-weight:500;color:var(--deep)}
+.lb-info p{color:var(--muted);font-weight:300;margin-bottom:12px}
+@media (max-width:900px){
+  .bgrid{grid-template-columns:1fr;gap:40px}
+  .b-view{max-width:340px;order:-1}
+  .hero-art{max-width:400px}
+}
+@media (max-width:640px){
+  .lb-card{grid-template-columns:1fr;overflow:auto}
+  .lb-card img{min-height:0;height:340px}
+  .lb-info{padding:26px 24px 30px}
+  .lb-info h3{font-size:1.9rem}
+  .builder{padding:80px 0}
+  .card h3{font-size:1.2rem}
+  .hero-chip{padding:8px 14px}.hero-chip b{font-size:1.4rem}
+}
 </style>
 </head>
 <body>
@@ -298,6 +364,7 @@ footer .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;p
     <nav class="nav-links" aria-label="Principal">
       <a href="#colores">Colores</a>
       <a href="#catalogo">Catálogo</a>
+      <a href="#medida">A tu medida</a>
       <a href="#historia">La casa</a>
       <a href="#pedir">Cómo pedir</a>
     </nav>
@@ -325,12 +392,14 @@ footer .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;p
       <div class="hero-meta rv" style="--d:.4s">
         <div><b>34,5 mil</b>en Instagram</div>
         <div><b>Bucaramanga</b>Cra 30 # 34-24</div>
-        <div><b>Flores &amp; regalos</b>con dedicatoria</div>
+        <div><b>Desde $45.000</b>bouquets mini</div>
       </div>
     </div>
     <div class="hero-art rv" style="--d:.2s">
       <div class="moon-disc"></div>
-      <div class="hero-bouquet" id="heroArt"></div>
+      <div class="hero-photo"><img src="img/hero.jpg" alt="Bouquet de rosas rosadas La Lune" fetchpriority="high"></div>
+      <div class="hero-mini"><img src="img/g2.jpg" alt="Bouquet de 100 rosas rojas con gypsophila"></div>
+      <div class="hero-chip"><small>Bouquets desde</small><b>$45.000</b></div>
       <svg class="spark" style="top:6%;left:6%;--s:34px;--c:#fff" viewBox="-12 -12 24 24"><use href="#star"/></svg>
       <svg class="spark" style="top:20%;right:2%;--s:22px;--c:var(--deep);--dl:.8s" viewBox="-12 -12 24 24"><use href="#star"/></svg>
       <svg class="spark" style="bottom:26%;left:-2%;--s:20px;--c:var(--gold);--dl:1.4s" viewBox="-12 -12 24 24"><use href="#star"/></svg>
@@ -360,11 +429,36 @@ footer .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;p
       <p class="rv" style="--d:.2s">Agrega al pedido lo que te guste y lo enviamos a WhatsApp con tu dedicatoria y fecha de entrega.</p>
     </div>
     <div class="filters">
-      <div class="pills" id="pills" role="tablist" aria-label="Categoría"></div>
+      <div class="pills" id="pills" role="tablist" aria-label="Tamaño"></div>
       <div class="dots" id="dots" aria-label="Filtrar por color"><label>Color</label></div>
+      <select id="sort" aria-label="Ordenar"><option value="def">Destacados</option><option value="asc">Precio: menor a mayor</option><option value="desc">Precio: mayor a menor</option></select>
       <div class="count" id="count"></div>
     </div>
     <div class="grid" id="grid" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ARMA TU BOUQUET -->
+<section class="builder" id="medida">
+  <div class="wrap bgrid">
+    <div class="b-panel">
+      <span class="eyebrow rv">A tu medida</span>
+      <h2 class="rv" style="--d:.1s">Arma tu <em>bouquet</em></h2>
+      <p class="lead rv" style="--d:.15s">Elige el tamaño, cuántas rositas y el color. Cada referencia incluye tarjeta personalizada tipo sobre, moño en tela, gypsophila y envoltura estilo La Lune.</p>
+      <h4>1 · Tamaño</h4><div class="chips" id="bSize"></div>
+      <h4>2 · Cantidad de rositas</h4><div class="chips" id="bQty"></div>
+      <h4>3 · Color</h4><div class="chips" id="bColor"></div>
+      <div class="b-total">
+        <div><small id="bLabel"></small><b id="bPrice"></b></div>
+        <button class="btn btn-dark" id="bAdd">Agregar al pedido</button>
+      </div>
+      <p class="note">Color de las flores y del envoltorio según disponibilidad, manteniendo siempre el estilo y la estética del diseño. Foto de referencia.</p>
+    </div>
+    <div class="b-view rv" style="--d:.15s">
+      <div class="b-arch"><img id="bImg" src="img/p01.jpg" alt="Bouquet de referencia"></div>
+      <svg class="spark" style="top:4%;right:6%;--s:34px;--c:var(--deep)" viewBox="-12 -12 24 24"><use href="#star"/></svg>
+      <svg class="spark" style="bottom:12%;left:2%;--s:26px;--c:var(--gold);--dl:1s" viewBox="-12 -12 24 24"><use href="#star"/></svg>
+    </div>
   </div>
 </section>
 
@@ -380,9 +474,9 @@ footer .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;p
       <h2 class="rv" style="--d:.1s">No vendemos flores, <em>creamos felicidad</em></h2>
       <p class="rv" style="--d:.2s">En La Lune, floristería y detalles en Bucaramanga, creemos que unas flores bien elegidas dicen lo que las palabras no alcanzan. Cada arreglo se compone cuidando la paleta, la textura y el detalle final, para cumpleaños, aniversarios, el Día de la Madre y cada momento que merece celebrarse.</p>
       <div class="pillars rv" style="--d:.3s">
-        <div><b>Flores &amp; regalos</b><span>Bouquets, box florales, globos y detalles en un solo lugar.</span></div>
-        <div><b>Diseño por color</b><span>Paletas armoniosas, nunca al azar.</span></div>
-        <div><b>Con tu dedicatoria</b><span>Cada pedido lleva tarjeta con tu mensaje.</span></div>
+        <div><b>Tarjeta y moño</b><span>Cada referencia incluye tarjeta personalizada tipo sobre y moño en tela.</span></div>
+        <div><b>Tú eliges el color</b><span>Flores y envoltorio a tu gusto, según disponibilidad.</span></div>
+        <div><b>Experiencias</b><span>Ramos con mensaje oculto para sorprender de verdad.</span></div>
       </div>
     </div>
   </div>
@@ -453,6 +547,14 @@ footer .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;p
     <a class="btn" id="send" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
   </footer>
 </aside>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Detalle del producto">
+  <div class="lb-card">
+    <button class="x" data-lbclose aria-label="Cerrar">×</button>
+    <img id="lbImg" alt="">
+    <div class="lb-info"><small id="lbMeta"></small><h3 id="lbName"></h3><b id="lbPrice"></b><p id="lbDesc"></p>
+      <button class="btn btn-dark" id="lbAdd" data-add="0">Agregar al pedido</button></div>
+  </div>
+</div>
 <div class="toast" id="toast"><i>✦</i><span id="toastT"></span></div>
 
 <!-- símbolos -->
@@ -464,62 +566,78 @@ footer .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;p
 /* ============ CONFIGURACIÓN (cambia estos datos) ============ */
 const CONFIG = {
   whatsapp: '573000000000',   // número con indicativo de país, sin + ni espacios
-  instagram: 'lalune.col',        // usuario de Instagram sin @
-  currency: 'COP',
-  city: 'Bucaramanga',
-  address: 'Carrera 30 # 34-24, Bucaramanga'
+  instagram: 'lalune.col',
+  currency: 'COP'
 };
 
 /* ============ DATOS ============ */
 const COLORS = {
-  rosa:     {name:'Rosa',     hex:'#F29BB5', tint:'#FFE1E8', g:'linear-gradient(170deg,#FFD3DD,#F6A3BB)', tx:'#5A1830', sub:'Ternura'},
-  blanco:   {name:'Blanco',   hex:'#FDF3EE', tint:'#F3E4DE', g:'linear-gradient(170deg,#FFFFFF,#EBD7CF)', tx:'#5A1830', sub:'Paz'},
-  rojo:     {name:'Rojo',     hex:'#C8203F', tint:'#FAD3D9', g:'linear-gradient(170deg,#E24A66,#8E1B3A)', tx:'#fff',    sub:'Pasión'},
-  lila:     {name:'Lila',     hex:'#B79AE6', tint:'#E9DFFA', g:'linear-gradient(170deg,#DCCDF7,#A98BE0)', tx:'#3A2466', sub:'Misterio'},
-  amarillo: {name:'Amarillo', hex:'#F8CF4F', tint:'#FFF0B8', g:'linear-gradient(170deg,#FFE790,#F3BD2E)', tx:'#5E3F00', sub:'Alegría'},
-  durazno:  {name:'Durazno',  hex:'#FFAE88', tint:'#FFE0D0', g:'linear-gradient(170deg,#FFD0B8,#FF9D74)', tx:'#6B2A12', sub:'Calidez'}
+  rojo:      {name:'Rojo',      hex:'#C8203F', tint:'#FAD3D9', g:'linear-gradient(170deg,#E24A66,#8E1B3A)', tx:'#fff', sub:'Pasión', t:'rose', c:'#C8203F'},
+  rosa:      {name:'Rosa',      hex:'#F29BB5', tint:'#FFE1E8', g:'linear-gradient(170deg,#FFD3DD,#F6A3BB)', tx:'#5A1830', sub:'Ternura', t:'rose', c:'#F29BB5'},
+  blanco:    {name:'Blanco',    hex:'#FDF3EE', tint:'#F3E4DE', g:'linear-gradient(170deg,#FFFFFF,#EBD7CF)', tx:'#5A1830', sub:'Paz', t:'peony', c:'#FDF3EE'},
+  combinado: {name:'Combinado', hex:'#E58AA6', tint:'#FFE4DC', g:'linear-gradient(170deg,#FFE3D8,#F6A3BB 50%,#D93A5C)', tx:'#5A1830', sub:'Mezcla', t:'rose', c:'#F29BB5'},
+  azul:      {name:'Azul',      hex:'#7EB6E6', tint:'#DCEEFB', g:'linear-gradient(170deg,#D5EAFB,#7EB6E6)', tx:'#17415f', sub:'Único', t:'rose', c:'#7EB6E6'}
 };
-const CATS = {ramo:'Bouquets', caja:'Box florales', florero:'Floreros'};
-const P = {rosa:'#F29BB5', rosaL:'#F8BDCD', rosaD:'#E5638C', blanco:'#FDF3EE', rojo:'#C8203F', vino:'#8E1B3A',
-           lila:'#B79AE6', lilaL:'#D8C7F5', amarillo:'#F8CF4F', amarilloL:'#FFE485', durazno:'#FFAE88', crema:'#FFE3D3'};
-
-const PRODUCTS = [
- {id:1, name:'Luna Rosa', cat:'ramo', color:'rosa', price:129000, badge:'Favorito', desc:'Rosas en degradé rosa con gypsophila y envoltura blush.',
-  style:'cone', n:9, types:['rose'], cols:[P.rosa,P.rosaL,P.rosaD], filler:true, wrap:'#FFF1F4', ribbon:'#B8325A', seed:11},
- {id:2, name:'Blanc de Lune', cat:'ramo', color:'blanco', price:169000, badge:'Nuevo', desc:'Peonías y rosas blancas con toques de gypsophila.',
-  style:'cone', n:6, types:['peony','rose'], cols:[P.blanco,'#FFE8EC'], filler:true, wrap:'#FFFFFF', ribbon:'#C9A46A', seed:23},
- {id:3, name:'Aurora', cat:'ramo', color:'durazno', price:119000, desc:'Tulipanes y rosas en tonos durazno, suaves como un amanecer.',
-  style:'cone', n:8, types:['tulip','rose'], cols:[P.durazno,P.crema,'#FFC4A6'], filler:false, wrap:'#FFF4EC', ribbon:'#C8643B', seed:31},
- {id:4, name:'Rouge Éternel', cat:'ramo', color:'rojo', price:249000, badge:'Más pedido', desc:'Rosas rojas de tallo largo con envoltura negra y lazo dorado.',
-  style:'cone', n:9, types:['rose'], cols:[P.rojo,P.vino,'#D9304F'], filler:false, wrap:'#2A0F18', ribbon:'#C9A46A', seed:47},
- {id:5, name:'Lilas Nocturne', cat:'ramo', color:'lila', price:139000, desc:'Peonías y rosas lila con detalles en lavanda claro.',
-  style:'cone', n:6, types:['peony','rose'], cols:[P.lila,P.lilaL], filler:true, wrap:'#F4EEFF', ribbon:'#6C4BB5', seed:53},
- {id:6, name:'Soleil', cat:'ramo', color:'amarillo', price:99000, desc:'Margaritas amarillas, frescas y llenas de luz.',
-  style:'cone', n:8, types:['daisy'], cols:[P.amarillo,P.amarilloL], filler:false, wrap:'#FFFBEA', ribbon:'#D9962B', seed:61},
- {id:7, name:'Caja Étoile', cat:'caja', color:'rosa', price:189000, badge:'Regalo ideal', desc:'Caja redonda rosa con rosas y peonías en rosa y blanco.',
-  style:'box', box:'#FFC2CD', n:8, types:['rose','peony'], cols:[P.rosa,P.blanco,P.rosaL], wrap:'', ribbon:'#C9A46A', seed:71},
- {id:8, name:'Caja Velours', cat:'caja', color:'rojo', price:229000, desc:'Caja negra con rosas rojas y vino, acabado de terciopelo.',
-  style:'box', box:'#1E0E14', n:8, types:['rose'], cols:[P.rojo,P.vino,'#D9304F'], wrap:'', ribbon:'#C9A46A', seed:83},
- {id:9, name:'Jardín de Medianoche', cat:'florero', color:'lila', price:199000, desc:'Florero de cristal con peonías, rosas y margaritas lila y rosa.',
-  style:'vase', n:8, types:['peony','rose','daisy'], cols:[P.lila,P.rosa,P.lilaL], wrap:'', ribbon:'', seed:97},
- {id:10, name:'Perle', cat:'florero', color:'blanco', price:159000, desc:'Florero con rosas, peonías y margaritas blancas.',
-  style:'vase', n:6, types:['rose','daisy','peony'], cols:[P.blanco,'#FFE8EC',P.blanco], wrap:'', ribbon:'', seed:101},
- {id:11, name:'Petit Lune', cat:'ramo', color:'rosa', price:69000, badge:'Mini', desc:'Pequeño ramo de rosas rosadas, el detalle perfecto.',
-  style:'cone', n:3, scale:.95, types:['rose'], cols:[P.rosa,P.rosaL,P.rosaD], filler:true, wrap:'#FFF1F4', ribbon:'#B8325A', seed:109},
- {id:12, name:'Amanecer', cat:'florero', color:'durazno', price:149000, desc:'Florero con rosas, tulipanes y margaritas en durazno, crema y amarillo.',
-  style:'vase', n:8, types:['rose','daisy','tulip','peony'], cols:[P.durazno,P.amarillo,P.rosa,P.crema], wrap:'', ribbon:'', seed:113}
+const REFS = ['Mini','Mediano','Grande','Premium'];
+const GEN = 'Puedes elegir el color de las flores y del envoltorio según disponibilidad.';
+const TON = 'Las tonalidades de las rosas pueden variar ligeramente según disponibilidad floral.';
+/* [nombre, referencia, precio, color, descripción, insignia] — la foto es img/pNN.jpg en este mismo orden */
+const RAW = [
+ ['150 Rositas Corazón','Premium',745000,'rojo','Diseño floral en forma de corazón con 150 rosas rojas: intenso, envolvente y lleno de protagonismo.'],
+ ['200 Rositas Cono Corazón','Premium',970000,'rojo','200 rositas en forma de corazón. Incluye moño, cinta de 4 cm personalizada y tarjetita. Color de rosa y envoltura según disponibilidad.'],
+ ['Conito 50 Rositas Secret','Premium',315000,'rojo','50 rositas frescas del color que desees y una rosita de otro color con un mensaje personalizado oculto.'],
+ ['Conito 50 Rositas Combinadas','Premium',300000,'combinado','50 rositas en la combinación de color que desees, con toques de caspia y gipso y tarjeta personalizada.'],
+ ['Bouquet Corazón de Ensueño','Premium',540000,'rosa','100 rositas frescas en el color de tu preferencia, acompañadas de elegantes lirios.'],
+ ['Bouquet Grand Rose','Premium',345000,'rosa','50 rosas premium, unos 25 claveles, follajes decorativos y presentación premium. Incluye tarjeta personalizada.'],
+ ['Bouquet 100 Rosas Premium','Premium',495000,'rojo','Diseño premium de rositas y gipsofila. Incluye moño y tarjetica personalizada. Pregunta por colores.'],
+ ['100 Rositas & Corazón Ferreros','Premium',530000,'rojo','Impactante corazón de 100 rosas con centro de Ferrero y delicados detalles decorativos.'],
+ ['Ramo 20 Rositas Experiencia','Mediano',175000,'rojo','Ramo en forma de corazón con 20 rositas y una experiencia sensorial: un mensaje se revela entre las cenizas.'],
+ ['Bouquet Abierto 50 Rosas','Grande',298000,'rojo','Bouquet abierto con base y 50 rosas del color de tu elección, romántico y elegante.'],
+ ['Ramo 50 Rositas Experiencia','Grande',385000,'rojo','50 rositas con una experiencia sensorial: un mensaje especial va apareciendo poco a poco entre las cenizas.'],
+ ['Bouquet Cono 50 Rosas','Grande',298000,'rojo','Bouquet con base y 50 rosas del color de tu elección, romántico y visualmente encantador.'],
+ ['Bouquet Abierto 3 Rosas','Mini',45000,'rojo','Un detalle sutil, romántico y especial, perfecto para pequeños momentos llenos de intención y amor.'],
+ ['Cono 12 Rosas Combinado','Mediano',95000,'rosa','Rosas en tonos suaves y vibrantes: un bouquet romántico, femenino y muy impactante.'],
+ ['Bouquet 9 Rositas','Mediano',75000,'rojo',GEN],
+ ['Bouquet 10 Rositas','Mediano',75000,'rosa',GEN],
+ ['Bouquet Abierto 15 Rosas','Mediano',110000,'rojo',GEN],
+ ['Bouquet 15 Rosas Combinadas','Mediano',115000,'combinado',GEN],
+ ['Bouquet Abierto 20 Rosas & 10 Ferreros','Grande',245000,'rojo','20 rosas rojas y 10 Ferrero: un detalle clásico, elegante y delicioso para enamorar.'],
+ ['Bouquet 25 Rositas','Mediano',165000,'rosa',GEN],
+ ['Bouquet Cono 30 Rosas & Snoopy','Grande',295000,'rojo','Bouquet en cono con 30 rosas y Snoopy: un detalle tierno y romántico.'],
+ ['Bouquet 30 Rositas','Mediano',200000,'rojo',GEN],
+ ['Bouquet 50 Rosas Corazón & Cinta','Grande',320000,'rojo','50 rosas en forma de corazón con cinta decorativa. Ideal para regalos de alto impacto.'],
+ ['Bouquet 60 Rositas Soft Pink','Grande',360000,'combinado','Rosas rosadas y celestes con envoltura iridiscente. El color del envoltorio se personaliza según disponibilidad.'],
+ ['Bouquet 80 Rositas','Grande',440000,'rojo','Rosa roja con delicados toques de eucalipto baby. El envoltorio puede variar según disponibilidad.'],
+ ['Conito 30 Rositas','Grande',195000,'rosa',GEN],
+ ['Bouquet 30 Rosas Combinadas','Mediano',210000,'combinado',GEN],
+ ['Bouquet Abierto 30 Rosas','Grande',210000,'combinado','30 rosas rojas, rosadas, blancas y fucsias en un diseño romántico, elegante y encantador.'],
+ ['Bouquet Abierto 50 Rosas','Grande',298000,'combinado','50 rosas rosadas y rojas en un diseño amplio, elegante y perfecto para sorprender.'],
+ ['Ramo 50 Rositas Experiencia','Grande',350000,'rojo','50 rositas con una experiencia sensorial y emotiva: un mensaje especial, íntimo y sorprendente.','Top seller'],
+ ['100 Rositas Unicolor','Premium',485000,'rojo','100 rositas premium en un solo color: el regalo perfecto para expresar amor y emociones inolvidables.','Top seller'],
+ ['Ramo Abierto 50 Rositas','Grande',298000,'rojo','50 rositas con una experiencia sensorial y emotiva: un mensaje especial, íntimo y significativo.','Top seller'],
+ ['Reflejo de Amor','Grande',215000,'rosa','Diseño floral con espejo mediano y de 20 a 25 rosas del color que elijas. Incluye mensaje personalizado.','Nuevo'],
+ ['Bouquet 3 Rositas','Mini',45000,'rosa',TON],
+ ['Bouquet 3 Rositas','Mini',45000,'blanco',TON],
+ ['Bouquet 5 Rositas','Mini',60000,'azul',TON],
+ ['Bouquet 5 Rositas','Mini',60000,'combinado',TON],
+ ['Bouquet 6 Rositas','Mini',68000,'rojo',TON],
+ ['Bouquet 6 Rositas','Mini',68000,'rosa',TON]
 ];
+const PRODUCTS = RAW.map((r,i)=>({id:i+1,name:r[0],ref:r[1],price:r[2],color:r[3],desc:r[4],badge:r[5]||'',img:`img/p${String(i+1).padStart(2,'0')}.jpg`}));
+const TIERS = {
+  Mini:[[3,45000],[6,68000],[9,75000]],
+  Mediano:[[10,80000],[12,95000],[15,115000]],
+  Grande:[[20,125000],[25,165000],[30,195000]],
+  Premium:[[50,295000],[60,365000],[80,445000],[100,495000],[150,745000],[200,970000]]
+};
 
-/* ============ ILUSTRACIÓN DE FLORES (SVG generado) ============ */
+/* ============ FLORES ILUSTRADAS (solo para los arcos de color) ============ */
 const mix=(a,b,t)=>{const p=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));const A=p(a),B=p(b);
   return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('')};
 const lighten=(c,t)=>mix(c,'#ffffff',t), darken=(c,t)=>mix(c,'#2a0a14',t);
-const rng=seed=>()=>(seed=(seed*16807)%2147483647)/2147483647;
 const f=n=>Math.round(n*10)/10;
-
 function flower(type,x,y,r,c,rot=0){
-  let s=`<g transform="translate(${f(x)} ${f(y)}) rotate(${rot})">`;
-  const st=darken(c,.3);
+  let s=`<g transform="translate(${f(x)} ${f(y)}) rotate(${rot})">`; const st=darken(c,.3);
   if(type==='rose'){
     s+=`<circle r="${f(r)}" fill="${darken(c,.28)}"/>`;
     for(let i=0;i<5;i++) s+=`<ellipse rx="${f(r*.56)}" ry="${f(r*.82)}" cy="${f(-r*.36)}" transform="rotate(${i*72})" fill="${i%2?lighten(c,.1):c}" stroke="${st}" stroke-opacity=".45" stroke-width=".9"/>`;
@@ -527,195 +645,137 @@ function flower(type,x,y,r,c,rot=0){
     for(let i=0;i<4;i++) s+=`<ellipse rx="${f(r*.3)}" ry="${f(r*.44)}" cy="${f(-r*.14)}" transform="rotate(${i*90+20})" fill="${i%2?c:lighten(c,.14)}" stroke="${st}" stroke-opacity=".5" stroke-width=".8"/>`;
     s+=`<path d="M0 ${f(-r*.08)} a${f(r*.2)} ${f(r*.2)} 0 1 1 ${f(r*.04)} ${f(r*.2)} a${f(r*.1)} ${f(r*.1)} 0 1 1 ${f(-r*.08)} ${f(-r*.1)}" fill="none" stroke="${darken(c,.4)}" stroke-width="1.4" stroke-linecap="round"/>`;
     s+=`<ellipse cx="${f(-r*.3)}" cy="${f(-r*.45)}" rx="${f(r*.22)}" ry="${f(r*.1)}" transform="rotate(-30 ${f(-r*.3)} ${f(-r*.45)})" fill="#fff" opacity=".35"/>`;
-  }else if(type==='peony'){
+  }else{
     const L=[[r,9,0,.0],[r*.74,8,20,.1],[r*.5,7,8,.2],[r*.28,6,30,.3]];
     s+=`<circle r="${f(r*1.02)}" fill="${darken(c,.2)}"/>`;
-    L.forEach(([rr,n,o,l],k)=>{for(let i=0;i<n;i++) s+=`<ellipse rx="${f(rr*.42)}" ry="${f(rr*.58)}" cy="${f(-rr*.5)}" transform="rotate(${o+i*360/n})" fill="${lighten(c,l)}" stroke="${st}" stroke-opacity=".35" stroke-width=".8"/>`});
-    s+=`<circle r="${f(r*.12)}" fill="${darken(c,.25)}" opacity=".7"/>`;
-  }else if(type==='daisy'){
-    const pc=(c===P.blanco||c==='#FFE8EC')?'#fff':lighten(c,.1);
-    for(let i=0;i<14;i++) s+=`<ellipse rx="${f(r*.15)}" ry="${f(r*.5)}" cy="${f(-r*.5)}" transform="rotate(${i*360/14})" fill="${pc}" stroke="${darken(c,.25)}" stroke-opacity=".35" stroke-width=".8"/>`;
-    s+=`<circle r="${f(r*.26)}" fill="${(c===P.amarillo||c===P.amarilloL)?'#E58A1F':'#F2B53C'}"/><circle r="${f(r*.26)}" fill="none" stroke="#B8671B" stroke-opacity=".4"/>`;
-  }else if(type==='tulip'){
-    const w=r*.62;
-    s+=`<path d="M${f(-w)} ${f(-r*.15)} Q${f(-w*1.12)} ${f(r*.8)} 0 ${f(r*.9)} Q${f(w*1.12)} ${f(r*.8)} ${f(w)} ${f(-r*.15)} Q${f(w*.55)} ${f(-r*.5)} ${f(w*.35)} ${f(-r*.95)} Q0 ${f(-r*.55)} ${f(-w*.35)} ${f(-r*.95)} Q${f(-w*.55)} ${f(-r*.5)} ${f(-w)} ${f(-r*.15)}Z" fill="${c}" stroke="${st}" stroke-opacity=".45" stroke-width=".9"/>`;
-    s+=`<path d="M${f(-w*.55)} ${f(-r*.2)} Q0 ${f(r*.55)} ${f(w*.55)} ${f(-r*.2)} Q0 ${f(-r*.8)} ${f(-w*.55)} ${f(-r*.2)}Z" fill="${lighten(c,.22)}" opacity=".9"/>`;
-    s+=`<path d="M0 ${f(-r*.7)} L0 ${f(r*.7)}" stroke="${st}" stroke-opacity=".25" stroke-width="1"/>`;
+    L.forEach(([rr,n,o,l])=>{for(let i=0;i<n;i++) s+=`<ellipse rx="${f(rr*.42)}" ry="${f(rr*.58)}" cy="${f(-rr*.5)}" transform="rotate(${o+i*360/n})" fill="${lighten(c,l)}" stroke="${st}" stroke-opacity=".35" stroke-width=".8"/>`});
   }
   return s+'</g>';
-}
-
-const LAY=[[200,185,52],[135,226,46],[265,226,46],[200,272,44],[88,292,34],[312,292,34],[150,302,34],[250,302,34],[200,120,36]];
-const GREENS=['#6F9A7D','#5E8A6F','#86AE90'];
-
-function art(p){
-  const R=rng(p.seed||7);
-  let pos = p.n===1 ? [[200,200,70]] : LAY.slice(0,p.n);
-  pos = pos.map((q,i)=>({x:q[0]+(R()-.5)*6,y:q[1]+(R()-.5)*6,r:q[2]*(p.scale||1),c:p.cols[i%p.cols.length],t:p.types[i%p.types.length],rot:(R()-.5)*50}));
-  const dy = p.style==='box'?34:p.style==='vase'?22:0;
-  const [bx,by] = p.style==='vase'?[200,415]:p.style==='box'?[200,350]:[200,335];
-  const tint = COLORS[p.color].tint;
-  let s=`<svg viewBox="0 0 400 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${p.name}">`;
-  s+=`<circle cx="200" cy="235" r="178" fill="${lighten(p.cols[0],.6)}" opacity=".35"/><circle cx="200" cy="235" r="138" fill="${lighten(p.cols[0],.7)}" opacity=".4"/>`;
-  s+=`<ellipse cx="200" cy="470" rx="${p.style==='cone'?60:100}" ry="8" fill="#2a0a14" opacity=".1"/>`;
-  // gypsophila
-  if(p.filler){
-    for(let k=0;k<11;k++){
-      const a=(-80+k*16+(R()-.5)*8)*Math.PI/180, d=150+R()*38, ex=200+Math.sin(a)*d, ey=300-Math.cos(a)*d;
-      s+=`<path d="M${bx} ${by-20} Q${(bx+ex)/2} ${(by+ey)/2-10} ${f(ex)} ${f(ey)}" stroke="#7fa38a" stroke-width="1.6" fill="none"/>`;
-      for(let j=0;j<7;j++){const ox=ex+(R()-.5)*34, oy=ey+(R()-.5)*34;
-        s+=`<circle cx="${f(ox)}" cy="${f(oy)}" r="${f(2.6+R()*2.4)}" fill="#fff" stroke="#000" stroke-opacity=".08"/>`;}
-    }
-  }
-  // leaves
-  [-72,-48,-26,26,48,72].forEach((a,i)=>{
-    s+=`<ellipse cx="0" cy="-95" rx="15" ry="${60+(i%2)*14}" transform="translate(${bx} ${by-10}) rotate(${a})" fill="${GREENS[i%3]}" opacity=".95"/>`;
-    s+=`<path d="M0 -40 L0 -${130+(i%2)*14}" stroke="#4b7359" stroke-opacity=".5" stroke-width="1.2" transform="translate(${bx} ${by-10}) rotate(${a})"/>`;
-  });
-  // stems
-  pos.forEach(q=>{ s+=`<path d="M${bx} ${by} Q${f((bx+q.x)/2)} ${f((by+q.y+dy)/2+14)} ${f(q.x)} ${f(q.y+dy)}" stroke="#5f8a6b" stroke-width="4.5" fill="none" stroke-linecap="round"/>`; });
-
-  if(p.style==='cone'){
-    s+=`<path d="M92 262 Q200 236 308 262 L220 470 L180 470Z" fill="${darken(p.wrap,.07)}"/>`;
-  }
-  if(p.style==='vase'){
-    s+=`<path d="M150 335 Q122 405 156 452 Q200 468 244 452 Q278 405 250 335Z" fill="#fff" opacity=".42"/>`;
-    s+=`<path d="M138 388 Q128 420 156 452 Q200 468 244 452 Q272 420 262 388 Q200 402 138 388Z" fill="${lighten(p.cols[0],.45)}" opacity=".45"/>`;
-  }
-  if(p.style==='box'){
-    s+=`<ellipse cx="200" cy="350" rx="106" ry="22" fill="${darken(p.box,.35)}"/>`;
-  }
-  // heads (fondo -> frente)
-  [...pos].sort((a,b)=>a.y-b.y).forEach(q=>{ s+=flower(q.t,q.x,q.y+dy,q.r,q.c,q.rot); });
-
-  if(p.style==='cone'){
-    s+=`<path d="M116 296 Q160 316 200 299 Q240 316 284 296 L219 470 L181 470Z" fill="${p.wrap}" stroke="${darken(p.wrap,.2)}" stroke-opacity=".5"/>`;
-    s+=`<path d="M200 299 Q240 316 284 296 L219 470 L200 470Z" fill="#2a0a14" opacity=".07"/>`;
-    s+=`<path d="M150 312 L196 466" stroke="#2a0a14" stroke-opacity=".08" stroke-width="1.2"/><path d="M250 312 L204 466" stroke="#fff" stroke-opacity=".5" stroke-width="1.2"/>`;
-    s+=`<path d="M154 384 L246 384 L242 399 L158 399Z" fill="${p.ribbon}"/>`;
-    s+=`<ellipse cx="183" cy="392" rx="19" ry="10" transform="rotate(-18 183 392)" fill="${p.ribbon}"/><ellipse cx="217" cy="392" rx="19" ry="10" transform="rotate(18 217 392)" fill="${p.ribbon}"/>`;
-    s+=`<path d="M196 396 L184 428 L196 421Z M204 396 L216 428 L204 421Z" fill="${darken(p.ribbon,.15)}"/><circle cx="200" cy="392" r="7" fill="${darken(p.ribbon,.2)}"/>`;
-  }
-  if(p.style==='box'){
-    s+=`<path d="M94 350 L94 450 Q200 486 306 450 L306 350 Q200 384 94 350Z" fill="${p.box}"/>`;
-    s+=`<path d="M94 350 Q200 384 306 350" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2"/>`;
-    s+=`<path d="M94 404 Q200 438 306 404 L306 418 Q200 452 94 418Z" fill="${p.ribbon}"/>`;
-    s+=`<g transform="translate(200 438)"><circle r="19" fill="${darken(p.box,.15)}" opacity=".0"/><path d="M5 -13 A14 14 0 1 0 12 9 A11 11 0 1 1 5 -13Z" fill="#fff" opacity=".92" transform="scale(.9)"/></g>`;
-  }
-  if(p.style==='vase'){
-    s+=`<path d="M150 335 Q122 405 156 452 Q200 468 244 452 Q278 405 250 335" fill="none" stroke="#fff" stroke-opacity=".95" stroke-width="3"/>`;
-    s+=`<path d="M146 360 Q132 405 158 440" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="5" stroke-linecap="round"/>`;
-    s+=`<ellipse cx="200" cy="335" rx="52" ry="9" fill="#fff" fill-opacity=".35" stroke="#fff" stroke-width="2.5"/>`;
-  }
-  return s+'</svg>';
 }
 
 /* ============ HELPERS ============ */
 const $=(q,el=document)=>el.querySelector(q);
 const money=n=>new Intl.NumberFormat('es-CO',{style:'currency',currency:CONFIG.currency,maximumFractionDigits:0}).format(n);
 const waLink=txt=>`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(txt)}`;
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
 document.documentElement.classList.replace('no-js','js');
 
-/* ============ HERO / MARQUEE ============ */
-$('#heroArt').innerHTML = art({...PRODUCTS[0], n:9});
-const words=['Bouquets','Box florales','Floreros','Flores &amp; regalos','Detalles que enamoran','Bucaramanga','Creamos felicidad'];
-$('#marq').innerHTML = [...words,...words,...words,...words].map(w=>`<span>${w}</span>`).join('');
+const words=['Bouquets','Box florales','Rositas premium','Hecho con amor','Tarjeta personalizada','Bucaramanga','Creamos felicidad'];
+$('#marq').innerHTML=[...words,...words,...words,...words].map(w=>`<span>${w}</span>`).join('');
 
 /* ============ COLORES (arcos) ============ */
-const state={cat:'all',color:'all'};
+const state={ref:'all',color:'all',sort:'def'};
 function archFlower(key){
-  const c=COLORS[key];
-  const t = key==='amarillo'?'daisy':key==='blanco'?'peony':key==='durazno'?'tulip':'rose';
-  const col= key==='blanco'?P.blanco:c.hex;
-  return `<svg class="fl" viewBox="0 0 200 200" aria-hidden="true">${flower(t,100,100,62,col,-10)}${flower(t==='tulip'?'rose':t,40,150,30,lighten(col,.12),20)}</svg>`;
+  const c=COLORS[key]; const col=c.c;
+  return `<svg class="fl" viewBox="0 0 200 200" aria-hidden="true">${flower(c.t,100,100,62,col,-10)}${flower('rose',40,150,30,lighten(col,.14),20)}</svg>`;
 }
-$('#arches').innerHTML = Object.entries(COLORS).map(([k,c],i)=>{
+$('#arches').innerHTML=Object.entries(COLORS).map(([k,c],i)=>{
   const n=PRODUCTS.filter(p=>p.color===k).length;
   return `<button class="arch rv" style="--g:${c.g};--tx:${c.tx};--d:${i*.08}s" data-color="${k}" aria-label="Ver diseños en ${c.name}">
     ${archFlower(k)}<span class="nm">${c.name}</span><span class="ct">${c.sub} · ${n}</span></button>`;
 }).join('');
 
 /* ============ FILTROS + CATÁLOGO ============ */
-$('#pills').innerHTML = [['all','Todo'],...Object.entries(CATS)].map(([k,v])=>`<button class="pill ${k==='all'?'on':''}" data-cat="${k}">${v}</button>`).join('');
+$('#pills').innerHTML=[['all','Todo'],...REFS.map(r=>[r,r])].map(([k,v])=>`<button class="pill ${k==='all'?'on':''}" data-ref="${k}">${v}</button>`).join('');
 $('#dots').insertAdjacentHTML('beforeend',
   `<button class="dot all on" data-color="all" title="Todos los colores" aria-label="Todos los colores"></button>`+
   Object.entries(COLORS).map(([k,c])=>`<button class="dot" style="--c:${c.hex}" data-color="${k}" title="${c.name}" aria-label="${c.name}"></button>`).join(''));
 
+function visible(){
+  let list=PRODUCTS.filter(p=>(state.ref==='all'||p.ref===state.ref)&&(state.color==='all'||p.color===state.color));
+  if(state.sort==='asc') list=[...list].sort((a,b)=>a.price-b.price);
+  else if(state.sort==='desc') list=[...list].sort((a,b)=>b.price-a.price);
+  else list=[...list].sort((a,b)=>(b.badge==='Top seller')-(a.badge==='Top seller'));
+  return list;
+}
 function renderGrid(){
-  const list=PRODUCTS.filter(p=>(state.cat==='all'||p.cat===state.cat)&&(state.color==='all'||p.color===state.color));
-  $('#count').textContent = list.length+(list.length===1?' diseño':' diseños');
-  $('#grid').innerHTML = list.length ? list.map((p,i)=>{
+  const list=visible();
+  $('#count').textContent=list.length+(list.length===1?' diseño':' diseños');
+  $('#grid').innerHTML=list.length?list.map((p,i)=>{
     const c=COLORS[p.color];
-    return `<article class="card" style="--d:${i*.06}s">
-      <figure style="--bg:linear-gradient(180deg,${c.tint},${lighten(c.tint,.55)})">
-        ${p.badge?`<span class="badge">${p.badge}</span>`:''}
-        ${art(p)}
-        <button class="quick" data-add="${p.id}" aria-label="Agregar ${p.name}">+</button>
+    return `<article class="card" style="--d:${Math.min(i,8)*.05}s">
+      <figure style="--bg:${c.tint}">
+        ${p.badge?`<span class="badge ${p.badge==='Top seller'?'hot':''}">${p.badge}</span>`:''}
+        <img src="${p.img}" alt="${esc(p.name)} · ${c.name}" loading="lazy" data-zoom="${p.id}">
+        <button class="quick" data-add="${p.id}" aria-label="Agregar ${esc(p.name)}">+</button>
       </figure>
       <div class="info">
-        <div class="meta"><i style="--c:${c.hex}"></i>${c.name} · ${CATS[p.cat]}</div>
+        <div class="meta"><i style="--c:${c.hex}"></i>${c.name} · Ref. ${p.ref}</div>
         <div class="row"><h3>${p.name}</h3><span class="price">${money(p.price)}</span></div>
         <p class="desc">${p.desc}</p>
         <div class="acts">
           <button class="btn btn-dark" data-add="${p.id}">Agregar</button>
-          <a class="btn btn-line wa-only" href="${waLink(`Hola La Lune ✦ Me interesa «${p.name}» (${money(p.price)}). ¿Está disponible?`)}" target="_blank" rel="noopener">Pedir ya</a>
+          <a class="btn btn-line wa-only" href="${waLink(`Hola La Lune ✦ Me interesa «${p.name}» (${c.name}, ${money(p.price)}). ¿Está disponible?`)}" target="_blank" rel="noopener">Pedir ya</a>
         </div>
       </div></article>`;
-  }).join('') : `<div class="empty">Pronto tendremos diseños en este color ✦</div>`;
+  }).join(''):`<div class="empty">Pronto tendremos diseños así ✦</div>`;
 }
 function syncFilters(){
-  document.querySelectorAll('.pill').forEach(b=>b.classList.toggle('on',b.dataset.cat===state.cat));
+  document.querySelectorAll('.pill').forEach(b=>b.classList.toggle('on',b.dataset.ref===state.ref));
   document.querySelectorAll('.dot').forEach(b=>b.classList.toggle('on',b.dataset.color===state.color));
   document.querySelectorAll('.arch').forEach(b=>b.classList.toggle('on',b.dataset.color===state.color));
 }
+$('#sort').addEventListener('change',e=>{state.sort=e.target.value;renderGrid()});
 document.addEventListener('click',e=>{
-  const pill=e.target.closest('.pill'); if(pill){state.cat=pill.dataset.cat;syncFilters();renderGrid();return}
+  const pill=e.target.closest('.pill'); if(pill){state.ref=pill.dataset.ref;syncFilters();renderGrid();return}
   const dot=e.target.closest('.dot'); if(dot){state.color=dot.dataset.color;syncFilters();renderGrid();return}
   const arch=e.target.closest('.arch'); if(arch){
-    state.color = state.color===arch.dataset.color?'all':arch.dataset.color; state.cat='all';
-    syncFilters();renderGrid();
-    if(state.color!=='all') $('#catalogo').scrollIntoView({behavior:'smooth'}); return}
-  const add=e.target.closest('[data-add]'); if(add){addToCart(+add.dataset.add);return}
+    state.color=state.color===arch.dataset.color?'all':arch.dataset.color; state.ref='all';
+    syncFilters();renderGrid(); if(state.color!=='all') $('#catalogo').scrollIntoView({behavior:'smooth'}); return}
+  const add=e.target.closest('[data-add]'); if(add){addProduct(+add.dataset.add);return}
+  const z=e.target.closest('[data-zoom]'); if(z){openLB(+z.dataset.zoom);return}
 });
 renderGrid();
 
+/* ============ LIGHTBOX ============ */
+function openLB(id){
+  const p=PRODUCTS.find(x=>x.id===id), c=COLORS[p.color];
+  $('#lbImg').src=p.img; $('#lbImg').alt=p.name;
+  $('#lbMeta').textContent=`${c.name} · Ref. ${p.ref}`; $('#lbName').textContent=p.name;
+  $('#lbPrice').textContent=money(p.price); $('#lbDesc').textContent=p.desc;
+  $('#lbAdd').dataset.add=id; $('#lb').classList.add('on'); document.body.style.overflow='hidden';
+}
+function closeLB(){$('#lb').classList.remove('on');document.body.style.overflow=$('#drawer').classList.contains('on')?'hidden':''}
+$('#lb').addEventListener('click',e=>{if(e.target.id==='lb'||e.target.closest('[data-lbclose]'))closeLB(); if(e.target.closest('#lbAdd'))closeLB()});
+
 /* ============ CARRITO ============ */
 let cart={};
-try{cart=JSON.parse(localStorage.getItem('lalune_cart')||'{}')}catch(e){cart={}}
-const save=()=>{try{localStorage.setItem('lalune_cart',JSON.stringify(cart))}catch(e){}};
-function addToCart(id){
-  cart[id]=(cart[id]||0)+1; save(); renderCart();
-  const p=PRODUCTS.find(x=>x.id===id);
-  toast(`«${p.name}» agregado a tu pedido`);
+try{cart=JSON.parse(localStorage.getItem('lalune_cart2')||'{}')}catch(e){cart={}}
+const save=()=>{try{localStorage.setItem('lalune_cart2',JSON.stringify(cart))}catch(e){}};
+function addItem(key,item){
+  if(cart[key]) cart[key].qty++; else cart[key]={...item,qty:1};
+  save(); renderCart(); toast(`«${item.name}» agregado a tu pedido`);
   const b=$('#cartBtn'); b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump');
 }
+function addProduct(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  addItem('p'+id,{name:p.name,sub:`${COLORS[p.color].name} · Ref. ${p.ref}`,price:p.price,img:p.img});
+}
 function renderCart(){
-  const ids=Object.keys(cart).filter(k=>cart[k]>0&&PRODUCTS.some(p=>p.id==k));
-  const count=ids.reduce((a,k)=>a+cart[k],0);
-  $('#cartN').textContent=count;
+  const keys=Object.keys(cart).filter(k=>cart[k].qty>0);
+  $('#cartN').textContent=keys.reduce((a,k)=>a+cart[k].qty,0);
   let total=0;
-  $('#items').innerHTML = ids.length ? ids.map(k=>{
-    const p=PRODUCTS.find(x=>x.id==k), c=COLORS[p.color]; total+=p.price*cart[k];
+  $('#items').innerHTML=keys.length?keys.map(k=>{
+    const it=cart[k]; total+=it.price*it.qty;
     return `<div class="it">
-      <div class="th" style="--bg:${c.tint}">${art({...p,n:Math.min(p.n,4)})}</div>
-      <div><b>${p.name}</b><small>${money(p.price)}</small><br>
-        <div class="qty"><button data-q="${k}" data-d="-1" aria-label="Quitar uno">−</button><span>${cart[k]}</span><button data-q="${k}" data-d="1" aria-label="Agregar uno">+</button></div></div>
+      <div class="th"><img src="${it.img}" alt=""></div>
+      <div><b>${esc(it.name)}</b><small>${esc(it.sub)} · ${money(it.price)}</small><br>
+        <div class="qty"><button data-q="${k}" data-d="-1" aria-label="Quitar uno">−</button><span>${it.qty}</span><button data-q="${k}" data-d="1" aria-label="Agregar uno">+</button></div></div>
       <button class="rm" data-rm="${k}">Quitar</button></div>`;
-  }).join('') : `<div class="empty-cart">Tu pedido está vacío<small>Agrega algo del catálogo para empezar ✦</small></div>`;
+  }).join(''):`<div class="empty-cart">Tu pedido está vacío<small>Agrega algo del catálogo para empezar ✦</small></div>`;
   $('#total').textContent=money(total);
-  $('#send').toggleAttribute('disabled',!ids.length);
-  $('#send').dataset.total=total;
+  $('#send').toggleAttribute('disabled',!keys.length);
 }
 $('#items').addEventListener('click',e=>{
   const q=e.target.closest('[data-q]'), r=e.target.closest('[data-rm]');
-  if(q){cart[q.dataset.q]=Math.max(0,(cart[q.dataset.q]||0)+ +q.dataset.d); if(!cart[q.dataset.q]) delete cart[q.dataset.q]; save(); renderCart()}
+  if(q){const k=q.dataset.q; cart[k].qty=Math.max(0,cart[k].qty+ +q.dataset.d); if(!cart[k].qty) delete cart[k]; save(); renderCart()}
   if(r){delete cart[r.dataset.rm]; save(); renderCart()}
 });
 $('#send').addEventListener('click',e=>{
   e.preventDefault();
-  const ids=Object.keys(cart).filter(k=>cart[k]>0); if(!ids.length) return;
+  const keys=Object.keys(cart).filter(k=>cart[k].qty>0); if(!keys.length) return;
   let total=0;
-  const lines=ids.map(k=>{const p=PRODUCTS.find(x=>x.id==k); total+=p.price*cart[k]; return `• ${cart[k]} × ${p.name} — ${money(p.price*cart[k])}`});
+  const lines=keys.map(k=>{const it=cart[k]; total+=it.price*it.qty; return `• ${it.qty} × ${it.name} (${it.sub}) — ${money(it.price*it.qty)}`});
   const v=id=>$(id).value.trim();
   const msg=['Hola La Lune ✦ Quiero hacer este pedido:','',...lines,'',`Total estimado: ${money(total)}`,'',
     v('#fName')&&`Nombre: ${v('#fName')}`, v('#fDate')&&`Fecha de entrega: ${v('#fDate')}`, v('#fZone')&&`Zona: ${v('#fZone')}`, v('#fNote')&&`Dedicatoria: ${v('#fNote')}`
@@ -725,13 +785,38 @@ $('#send').addEventListener('click',e=>{
 const drawer=$('#drawer'), veil=$('#veil');
 function openCart(o){drawer.classList.toggle('on',o);veil.classList.toggle('on',o);drawer.setAttribute('aria-hidden',!o);document.body.style.overflow=o?'hidden':''}
 $('#cartBtn').onclick=()=>openCart(true); $('#closeCart').onclick=()=>openCart(false); veil.onclick=()=>openCart(false);
-document.addEventListener('keydown',e=>{if(e.key==='Escape')openCart(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){openCart(false);closeLB()}});
 $('#fDate').min=new Date().toISOString().slice(0,10);
 renderCart();
-
 let tt; function toast(t){const el=$('#toast');$('#toastT').textContent=t;el.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('on'),2200)}
 
-/* ============ ENLACES WHATSAPP / INSTAGRAM, NAV, REVEAL ============ */
+/* ============ ARMA TU BOUQUET ============ */
+const BCOL={...Object.fromEntries(Object.entries(COLORS).map(([k,c])=>[k,c.name])),otro:'Otro (lo coordinamos)'};
+const B={size:'Premium',qty:50,color:'rojo'};
+function bRender(){
+  $('#bSize').innerHTML=REFS.map(r=>`<button class="chip ${B.size===r?'on':''}" data-bs="${r}">${r}</button>`).join('');
+  $('#bQty').innerHTML=TIERS[B.size].map(([n,pr])=>`<button class="chip ${B.qty===n?'on':''}" data-bq="${n}"><b>${n}</b> rositas<small>${money(pr)}</small></button>`).join('');
+  $('#bColor').innerHTML=Object.entries(BCOL).map(([k,n])=>`<button class="chip col ${B.color===k?'on':''}" data-bc="${k}"><i style="--c:${COLORS[k]?COLORS[k].hex:'conic-gradient(#F29BB5,#F8CF4F,#B79AE6,#C8203F,#F29BB5)'}"></i>${n.split(' (')[0]}</button>`).join('');
+  const pr=TIERS[B.size].find(t=>t[0]===B.qty)[1];
+  $('#bPrice').textContent=money(pr);
+  $('#bLabel').textContent=`${B.qty} rositas · Ref. ${B.size} · ${BCOL[B.color].split(' (')[0]}`;
+  const pool=PRODUCTS; 
+  const pick=pool.find(p=>p.color===B.color&&p.ref===B.size)||pool.find(p=>p.color===B.color)||pool.find(p=>p.ref===B.size)||pool[0];
+  const img=$('#bImg'); if(img.getAttribute('src')!==pick.img){img.classList.add('swap');setTimeout(()=>{img.src=pick.img;img.classList.remove('swap')},180)}
+}
+$('#medida').addEventListener('click',e=>{
+  const s=e.target.closest('[data-bs]'),q=e.target.closest('[data-bq]'),c=e.target.closest('[data-bc]');
+  if(s){B.size=s.dataset.bs;B.qty=TIERS[B.size][0][0];bRender()}
+  if(q){B.qty=+q.dataset.bq;bRender()}
+  if(c){B.color=c.dataset.bc;bRender()}
+  if(e.target.closest('#bAdd')){
+    const pr=TIERS[B.size].find(t=>t[0]===B.qty)[1];
+    addItem(`c-${B.size}-${B.qty}-${B.color}`,{name:`Bouquet ${B.qty} rositas a tu medida`,sub:`${BCOL[B.color].split(' (')[0]} · Ref. ${B.size}`,price:pr,img:$('#bImg').getAttribute('src')});
+  }
+});
+bRender();
+
+/* ============ ENLACES, NAV, REVEAL ============ */
 document.querySelectorAll('[data-wa]').forEach(a=>{a.href=waLink(a.dataset.wa);a.target='_blank';a.rel='noopener'});
 document.querySelectorAll('[data-ig]').forEach(a=>a.href=`https://instagram.com/${CONFIG.instagram}`);
 const nav=$('#nav'); const onScroll=()=>nav.classList.toggle('solid',scrollY>30); onScroll(); addEventListener('scroll',onScroll,{passive:true});
