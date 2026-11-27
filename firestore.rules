@@ -1,0 +1,44 @@
+rules_version = '2';
+// Reglas de seguridad para la tarjeta de sellos de GOLD90 (sellos.html).
+// Pégalas en: Firebase Console → Firestore Database → Reglas → Publicar.
+// IMPORTANTE: cambia el correo de abajo por el correo de la cuenta de GOLD90
+// que creaste en Authentication.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isStaff() {
+      return request.auth != null
+        && request.auth.token.email in ['REEMPLAZA_CON_TU_CORREO@gmail.com'];
+    }
+
+    match /clientes/{phone} {
+      // Cualquiera puede ver UNA tarjeta si sabe el número; solo GOLD90 puede ver la lista completa
+      allow get: if true;
+      allow list: if isStaff();
+
+      // El cliente puede registrarse, pero siempre empieza en 0 sellos
+      allow create: if isStaff() || (
+        request.resource.data.keys().hasOnly(['phone', 'name', 'stamps', 'rewardsClaimed', 'createdAt'])
+        && request.resource.data.phone == phone
+        && request.resource.data.stamps == 0
+        && request.resource.data.rewardsClaimed == 0
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 40
+      );
+
+      // El cliente solo puede cambiar su nombre; los sellos solo los toca GOLD90
+      allow update: if isStaff() || (
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 40
+      );
+
+      allow delete: if isStaff();
+    }
+
+    // Todo lo demás (incluida la colección vieja gold90_sellos) queda cerrado
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
