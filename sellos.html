@@ -230,6 +230,99 @@
   .btn-small{ font-size:13px; padding:10px 12px; }
   .status-dot{ display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--green-ok); margin-right:6px; vertical-align:1px; }
   .status-dot.off{ background:#d9534f; }
+
+  /* ---------- Tarjeta VIP negro y dorado ---------- */
+  .card.vip{
+    --g1:#f7e7a6; --g2:#d4af37; --g3:#a6802c; --g4:#5e4515;
+    position:relative; overflow:hidden; isolation:isolate;
+    border:none; border-radius:22px; padding:22px 20px 20px;
+    background:
+      repeating-linear-gradient(135deg, rgba(212,175,55,.035) 0 2px, transparent 2px 9px),
+      radial-gradient(120% 80% at 100% 0%, rgba(212,175,55,.16), transparent 55%),
+      radial-gradient(90% 70% at 0% 100%, rgba(212,175,55,.08), transparent 60%),
+      linear-gradient(160deg, #141210 0%, #050505 60%, #0c0a07 100%);
+    box-shadow:0 26px 60px rgba(0,0,0,.75), 0 0 0 1px rgba(212,175,55,.08);
+  }
+  .card.vip::before{ /* borde dorado tipo foil */
+    content:""; position:absolute; inset:0; border-radius:22px; padding:1.5px; z-index:-1;
+    background:linear-gradient(135deg, var(--g1), var(--g3) 30%, var(--g4) 50%, var(--g2) 70%, var(--g1));
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+  }
+  .vip-shine{
+    position:absolute; top:-60%; left:-80%; width:55%; height:220%; z-index:0; pointer-events:none;
+    background:linear-gradient(100deg, transparent, rgba(247,231,166,.10), transparent);
+    transform:rotate(18deg); animation:vipShine 6s ease-in-out infinite;
+  }
+  @keyframes vipShine{ 0%,60%{ left:-80%; } 100%{ left:140%; } }
+  .card.vip > *:not(.vip-shine){ position:relative; z-index:1; }
+
+  .vip-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+  .vip-brand{
+    font-family:'Oswald',sans-serif; font-weight:700; font-size:22px; letter-spacing:.14em;
+    background:linear-gradient(180deg, var(--g1), var(--g2) 55%, var(--g3));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .vip-tier{ font-size:9.5px; letter-spacing:.32em; color:var(--g2); font-weight:700; opacity:.85; }
+  .vip-chip{
+    width:34px; height:26px; border-radius:6px; margin-right:10px;
+    background:linear-gradient(135deg, var(--g1), var(--g2) 45%, var(--g3));
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.25);
+    position:relative; flex:none;
+  }
+  .vip-chip::after{ content:""; position:absolute; inset:6px 8px; border:1px solid rgba(60,40,10,.45); border-radius:3px; }
+  .vip-head-left{ display:flex; align-items:center; }
+
+  .card.vip .card-top{ margin-bottom:16px; }
+  .card.vip .card-top .name{ color:#f3ead2; font-size:18px; letter-spacing:.04em; text-transform:uppercase; }
+  .card.vip .card-top .phone{ color:rgba(243,234,210,.5); letter-spacing:.12em; font-variant-numeric:tabular-nums; }
+  .card.vip .card-top .badge{ color:var(--g1); border-color:rgba(212,175,55,.6); background:rgba(212,175,55,.08); }
+
+  .card.vip .stamps-grid{ gap:9px; margin-bottom:16px; }
+  .card.vip .stamp{
+    border-radius:50%; border:1.5px dashed rgba(212,175,55,.35);
+    background:radial-gradient(circle at 50% 40%, rgba(212,175,55,.06), transparent 70%);
+    box-shadow:none;
+  }
+  .card.vip .stamp .num{
+    position:static; font-family:'Oswald',sans-serif; font-size:14px; font-weight:500;
+    color:rgba(212,175,55,.45);
+  }
+  .card.vip .stamp.filled{
+    border:none;
+    background:
+      radial-gradient(circle at 32% 28%, #fff6cf 0%, var(--g1) 18%, var(--g2) 50%, var(--g3) 80%, var(--g4) 100%);
+    box-shadow:0 4px 12px rgba(212,175,55,.35), inset 0 -2px 4px rgba(60,40,10,.45), inset 0 2px 3px rgba(255,255,255,.55);
+  }
+  .card.vip .stamp.filled::after{ /* aro interior grabado */
+    content:""; position:absolute; inset:12%; border-radius:50%; border:1px solid rgba(80,55,15,.35);
+  }
+  .card.vip .stamp svg{ width:52%; height:52%; }
+  .card.vip .stamp.just{ animation:coinIn .7s cubic-bezier(.2,1.4,.4,1); }
+  @keyframes coinIn{ 0%{ transform:scale(.2) rotateY(180deg); opacity:0; } 100%{ transform:scale(1) rotateY(0); opacity:1; } }
+
+  .card.vip .stamp.prize{ border:1.5px solid rgba(212,175,55,.7); flex-direction:column; gap:1px; }
+  .card.vip .stamp.prize svg{ width:42%; height:42%; }
+  .card.vip .stamp.prize .gr{ font-size:7.5px; letter-spacing:.12em; font-weight:800; color:var(--g2); }
+  .card.vip .stamp.prize.filled .gr{ color:#3a2a0a; }
+
+  .vip-bar{ height:6px; border-radius:99px; background:rgba(212,175,55,.12); overflow:hidden; margin-bottom:10px; }
+  .vip-bar > i{
+    display:block; height:100%; border-radius:99px;
+    background:linear-gradient(90deg, var(--g3), var(--g2), var(--g1));
+    box-shadow:0 0 10px rgba(212,175,55,.6); transition:width .6s ease;
+  }
+  .card.vip .progress-line{ color:rgba(243,234,210,.6); }
+  .card.vip .progress-line b{ color:var(--g1); }
+
+  .card.vip .reward-banner{
+    border:1px solid var(--g2);
+    background:linear-gradient(135deg, rgba(212,175,55,.22), rgba(212,175,55,.05));
+  }
+  .card.vip .reward-banner .tt{ color:var(--g1); }
+  .card.vip.complete{ animation:vipGlow 2.4s ease-in-out infinite; }
+  @keyframes vipGlow{ 0%,100%{ box-shadow:0 26px 60px rgba(0,0,0,.75), 0 0 0 rgba(212,175,55,0);} 50%{ box-shadow:0 26px 60px rgba(0,0,0,.75), 0 0 34px rgba(212,175,55,.45);} }
+  .vip-qr{ display:inline-block; background:#fff; padding:12px; border-radius:16px; box-shadow:0 0 0 2px #d4af37, 0 10px 24px rgba(0,0,0,.5); }
   .net-banner{ display:none; background:#3a1d1d; color:#ffd7d7; border:1px solid #d9534f; border-radius:12px; padding:10px 12px; font-size:13px; margin-bottom:14px; text-align:center; }
 </style>
 </head>
@@ -475,39 +568,56 @@ function forgetClient(){
 }
 
 function stampIcon(filled){
+  const c = filled ? '#3a2a0a' : 'rgba(212,175,55,.5)';
   return `<svg viewBox="0 0 24 24" fill="none">
     <path d="M12 2 L14.2 6.6 L19 7.3 L15.5 10.7 L16.4 15.5 L12 13.1 L7.6 15.5 L8.5 10.7 L5 7.3 L9.8 6.6 Z"
-      fill="${filled ? '#0d1b3d' : 'none'}" stroke="${filled ? '#0d1b3d' : 'rgba(207,160,58,.55)'}" stroke-width="1.3" stroke-linejoin="round"/>
+      fill="${filled ? c : 'none'}" stroke="${c}" stroke-width="1.2" stroke-linejoin="round"/>
   </svg>`;
+}
+function jerseyIcon(filled){
+  const c = filled ? '#3a2a0a' : '#d4af37';
+  return `<svg viewBox="0 0 24 24" fill="none"><path d="M8 3 L3.5 5.2 L2 9.5 L5.2 10.8 L6.2 9.4 V21 H17.8 V9.4 L18.8 10.8 L22 9.5 L20.5 5.2 L16 3 C15.4 4.6 13.9 5.6 12 5.6 C10.1 5.6 8.6 4.6 8 3 Z" fill="${filled ? c : 'none'}" stroke="${c}" stroke-width="1.3" stroke-linejoin="round"/></svg>`;
 }
 function qrPayload(phone){ return 'GOLD90-' + phone; }
 
-function renderCard(data){
+function renderCard(data, justIndex){
   const stamps = Math.min(TOTAL_STAMPS, data.stamps || 0);
   const rewards = data.rewardsClaimed || 0;
   let grid = '';
   for(let i=1;i<=TOTAL_STAMPS;i++){
     const filled = i <= stamps;
-    grid += `<div class="stamp ${filled?'filled':''}">${stampIcon(filled)}<span class="num">${i}</span></div>`;
+    const just = i === justIndex ? ' just' : '';
+    if(i === TOTAL_STAMPS){
+      grid += `<div class="stamp prize ${filled?'filled':''}${just}">${jerseyIcon(filled)}<span class="gr">GRATIS</span></div>`;
+    }else{
+      grid += `<div class="stamp ${filled?'filled':''}${just}">${filled ? stampIcon(true) : `<span class="num">${i}</span>`}</div>`;
+    }
   }
   const remaining = Math.max(0, TOTAL_STAMPS - stamps);
   const ready = stamps >= TOTAL_STAMPS;
+  const pct = Math.round(stamps / TOTAL_STAMPS * 100);
   return `
-    <div class="card">
+    <div class="card vip ${ready ? 'complete' : ''}">
+      <div class="vip-shine"></div>
+      <div class="vip-head">
+        <div class="vip-head-left"><div class="vip-chip"></div><div class="vip-brand">GOLD90</div></div>
+        <div class="vip-tier">MEMBER</div>
+      </div>
       <div class="card-top">
         <div>
           <div class="name">${esc(data.name || 'Cliente GOLD90')}</div>
           <div class="phone">${esc(data.phone)}</div>
         </div>
-        <div class="badge">${rewards > 0 ? '🏆 ' + rewards + (rewards===1?' camiseta canjeada':' camisetas canjeadas') : '✨ Nuevo'}</div>
+        <div class="badge">${rewards > 0 ? '🏆 ' + rewards + (rewards===1?' canjeada':' canjeadas') : '✦ Nuevo'}</div>
       </div>
       <div class="stamps-grid">${grid}</div>
-      <div class="progress-line">${ready ? '<b>🎉 ¡Tarjeta completa!</b>' : `<b>${stamps} / ${TOTAL_STAMPS}</b> ⭐ sellos · faltan <b>${remaining}</b> para tu camiseta gratis`}</div>
+      <div class="vip-bar"><i style="width:${pct}%"></i></div>
+      <div class="progress-line">${ready ? '<b>🎉 ¡Tarjeta completa!</b>' : `<b>${stamps} / ${TOTAL_STAMPS}</b> sellos · faltan <b>${remaining}</b> para tu camiseta gratis`}</div>
       ${ready ? `<div class="reward-banner"><div class="tt">🏆 Camiseta gratis desbloqueada</div><div class="ss">Muéstrale esta pantalla a GOLD90 para canjearla.</div></div>` : ''}
     </div>
     <div style="text-align:center; margin:6px 0 4px;">
-      <div style="display:inline-block; background:#fff; padding:12px; border-radius:14px;" id="qr-holder"></div>
-      <p class="hint" style="margin-top:10px;">📷 Este es tu código de sello. Muéstralo en cada compra.</p>
+      <div class="vip-qr" id="qr-holder"></div>
+      <p class="hint" style="margin-top:12px;">Este es tu código de sello. Muéstralo en cada compra.</p>
     </div>`;
 }
 function generateClientQR(phone){
@@ -520,12 +630,14 @@ function generateClientQR(phone){
 // La tarjeta del cliente se actualiza sola cuando GOLD90 le suma un sello
 let clientUnsub = null;
 let shownPhone = null;
+let shownStamps = null;
 function showClientCard(data){
-  const firstRender = shownPhone !== data.phone;
-  document.getElementById('cli-card-holder').innerHTML = renderCard(data);
+  const st = Math.min(TOTAL_STAMPS, data.stamps || 0);
+  const just = (shownPhone === data.phone && shownStamps !== null && st > shownStamps) ? st : null;
+  document.getElementById('cli-card-holder').innerHTML = renderCard(data, just);
   generateClientQR(data.phone);
   shownPhone = data.phone;
-  if(!firstRender) return;
+  shownStamps = st;
 }
 function listenClient(phone){
   if(clientUnsub) clientUnsub();
