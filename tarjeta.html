@@ -322,6 +322,51 @@ body.tier-black::before{opacity:0}
 .nv.cur .nv-cur{display:block}
 .nv-tip{text-align:center;font-size:12.5px;color:var(--dim);margin:0 0 30px}
 .demo{margin:0 0 14px;padding:9px 14px;border-radius:12px;font-size:12.5px;text-align:center;color:var(--g1);border:1px dashed rgba(var(--gr),.5);background:rgba(var(--gr),.08)}
+
+/* ---------- Tarjeta estilo American Express ---------- */
+.card{padding:0;overflow:visible;background:none;box-shadow:none;aspect-ratio:1.586;border-radius:20px;container-type:inline-size;cursor:pointer;
+  --cf-bg:linear-gradient(135deg,#f7de8f 0%,#dcae3e 26%,#f4d97f 47%,#b98a26 72%,#ecc968 100%);--cf-tx:#4a3408;--cf-em:0 1px 0 rgba(255,244,200,.85),0 -1px 0 rgba(60,40,5,.28)}
+.card::before{display:none}
+body.tier-black .card{--cf-bg:linear-gradient(135deg,#34343a 0%,#0c0c0d 38%,#232327 66%,#050505 100%);--cf-tx:#dfe0e5;--cf-em:0 1px 0 rgba(0,0,0,.95),0 -1px 0 rgba(255,255,255,.28)}
+body.tier-legend .card{--cf-bg:linear-gradient(135deg,#f2faff 0%,#a5d8ff 28%,#e6f4ff 50%,#6fb8ee 76%,#c4e6ff 100%);--cf-tx:#0d3a68;--cf-em:0 1px 0 rgba(255,255,255,.9),0 -1px 0 rgba(13,58,104,.25)}
+#card>.cflip{position:absolute;inset:0;z-index:1;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.3,.8,.2,1)}
+#card.flipped>.cflip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:20px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 28px 56px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.16)}
+.face.front{background:var(--cf-bg);color:var(--cf-tx)}
+.face.front::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 1px,transparent 1px 5px);mix-blend-mode:overlay;pointer-events:none}
+.face .glare{z-index:2;mix-blend-mode:overlay}
+.face.back{transform:rotateY(180deg);background:radial-gradient(120% 80% at 100% 0%,rgba(var(--gr),.16),transparent 55%),linear-gradient(160deg,#16130e,#050505 60%,#0c0a07);box-shadow:0 28px 56px rgba(0,0,0,.7),0 0 0 1.5px rgba(var(--gr),.5)}
+.f-logo{position:absolute;left:6cqw;top:6.4cqw;font-family:'Oswald',sans-serif;font-weight:700;font-size:7.4cqw;letter-spacing:.22em;line-height:1;text-shadow:var(--cf-em)}
+.f-sub{position:absolute;left:6cqw;top:15cqw;font-size:2.4cqw;letter-spacing:.3em;font-weight:700;opacity:.7}
+.f-nfc{position:absolute;right:6cqw;top:6cqw;width:8.4cqw;height:8.4cqw;filter:drop-shadow(0 1px 0 rgba(255,255,255,.3))}
+.f-chip{position:absolute;left:6cqw;top:30cqw;width:13.4cqw;height:10.2cqw;border-radius:2cqw;background:linear-gradient(135deg,#f6e3a0,#c9a042 45%,#8a6a1c);box-shadow:inset 0 0 0 .3cqw rgba(0,0,0,.3),0 .3cqw .6cqw rgba(0,0,0,.35)}
+.f-chip::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,transparent 31%,rgba(70,48,10,.45) 31% 32%,transparent 32% 68%,rgba(70,48,10,.45) 68% 69%,transparent 69%),linear-gradient(0deg,transparent 31%,rgba(70,48,10,.45) 31% 32%,transparent 32% 68%,rgba(70,48,10,.45) 68% 69%,transparent 69%)}
+.f-num{position:absolute;left:6cqw;right:6cqw;top:45cqw;font-family:'Oswald',sans-serif;font-weight:500;font-size:7cqw;letter-spacing:.14em;text-shadow:var(--cf-em);font-variant-numeric:tabular-nums;white-space:nowrap}
+.f-since{position:absolute;left:6cqw;bottom:13cqw;font-size:2.3cqw;letter-spacing:.2em;font-weight:700;opacity:.75}
+.f-name{position:absolute;left:6cqw;right:34cqw;bottom:6.4cqw;font-family:'Oswald',sans-serif;font-weight:500;font-size:5.2cqw;letter-spacing:.1em;text-transform:uppercase;text-shadow:var(--cf-em);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.f-tier{position:absolute;right:6cqw;bottom:5.8cqw;text-align:right;line-height:1}
+.f-tier b{display:block;font-family:'Oswald',sans-serif;font-weight:600;font-size:6.2cqw;letter-spacing:.14em;text-transform:uppercase;text-shadow:var(--cf-em)}
+.f-tier span{display:block;margin-top:1.2cqw;font-size:2.4cqw;letter-spacing:.2em;font-weight:700;opacity:.8}
+.f-holo{position:absolute;right:6cqw;top:30cqw;width:9.6cqw;height:9.6cqw;border-radius:50%;background:conic-gradient(from 20deg,#ffd6f0,#cfe7ff,#d4ffe9,#fff4c2,#ffd6f0);opacity:.75;box-shadow:inset 0 0 0 .3cqw rgba(255,255,255,.5),0 .4cqw 1cqw rgba(0,0,0,.25);mix-blend-mode:hard-light}
+.b-strip{position:absolute;left:0;right:0;top:7cqw;height:10cqw;background:linear-gradient(180deg,#242424,#050505 50%,#1c1c1c)}
+.b-body{position:absolute;left:4.4cqw;right:4.4cqw;top:21cqw;bottom:4cqw;display:flex;flex-direction:column;justify-content:space-between}
+.face.back .coins{gap:1.9cqw;margin:0}
+.face.back .coin{font-size:3.6cqw}
+.b-foot{display:flex;justify-content:space-between;align-items:center;font-size:3cqw;color:rgba(243,234,210,.7);letter-spacing:.04em;gap:3cqw}
+.b-foot b{color:var(--g1)}
+.b-foot .meter{flex:1;margin:0}
+.card.done .face{animation:none}
+.card.done{animation:glow 2.6s ease-in-out infinite}
+.c-under{text-align:center;margin:18px 0 0;font-size:13.5px;color:var(--dim)}
+.c-under b{color:var(--g1)}
+.c-under .win{margin-top:12px}
+.flip-tip{text-align:center;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--gr),.6);margin:10px 0 24px}
+.f-chip{top:24cqw}.f-holo{top:25cqw}
+.f-num{top:39cqw;font-size:6.6cqw}
+.f-since{bottom:15cqw}
+.f-name{bottom:6cqw;font-size:4.6cqw;right:36cqw}
+.f-tier{bottom:5.4cqw}
+.f-sub{top:14.4cqw}
 </style>
 </head>
 <body>
@@ -391,6 +436,8 @@ body.tier-black::before{opacity:0}
       </div>
     </div>
     <div class="stage"><div class="card" id="card"></div></div>
+    <div class="c-under" id="cUnder"></div>
+    <p class="flip-tip">Toca la tarjeta para girarla</p>
     <button class="tile act" id="goCode" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 012-2h2M16 4h2a2 2 0 012 2v2M20 16v2a2 2 0 01-2 2h-2M8 20H6a2 2 0 01-2-2v-2"/><path d="M8 12h8"/></svg>
       <span>Mostrar mi código en la compra</span><i>&#8250;</i>
@@ -498,24 +545,33 @@ body.tier-black::before{opacity:0}
 
   /* ---- Tarjeta ---- */
   var shown=null, prev=null, me={name:'',phone:''};
+  var flipped=false;
+  function fmtPhone(ph){ph=String(ph||'');return ph.length===10?ph.slice(0,3)+' '+ph.slice(3,6)+' '+ph.slice(6):ph}
+  function yr(c){try{var d=c.createdAt&&c.createdAt.toDate?c.createdAt.toDate():null;return String((d||new Date()).getFullYear()).slice(2)}catch(e){return String(new Date().getFullYear()).slice(2)}}
+  var NFC='<svg class="f-nfc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 8.5c1.6 2.2 1.6 4.8 0 7"/><path d="M10 6c2.7 3.4 2.7 8.6 0 12"/><path d="M14 3.5c3.8 4.6 3.8 12.4 0 17"/></svg>';
   function renderCard(c,justIdx){
-    var st=Math.min(TOTAL,c.stamps||0), done=st>=TOTAL, g='';
+    var st=Math.min(TOTAL,c.stamps||0), done=st>=TOTAL, g='', tier=tierOf(c.rewardsClaimed||0);
     for(var i=1;i<=TOTAL;i++){
       var on=i<=st, nw=i===justIdx?' new':'';
       if(i===TOTAL) g+='<div class="coin prize'+(on?' on':'')+nw+'">'+JERSEY+'<em>GRATIS</em></div>';
       else g+='<div class="coin'+(on?' on':'')+nw+'">'+(on?STAMP:i)+'</div>';
     }
-    var ph=String(c.phone||''), mask=ph.length>4?'•••• '+ph.slice(-4):ph;
-    $('card').className='card'+(done?' done':'');
-    $('card').innerHTML=
-      '<div class="glare"></div><div class="sheen"></div>'+
-      '<div class="c-head"><div class="c-l"><div class="chip"></div><div class="c-brand gt">GOLD90</div></div><div class="c-tier">'+tierOf(c.rewardsClaimed||0).name.toUpperCase()+'</div></div>'+
-      '<div class="c-id"><div><div class="c-name">'+esc(c.name||'Cliente GOLD90')+'</div><div class="c-ph">'+esc(mask)+'</div></div>'+
-      '<div class="c-cnt"><b class="gt">'+st+'/'+TOTAL+'</b><span>SELLOS</span></div></div>'+
-      '<div class="coins">'+g+'</div>'+
-      '<div class="meter"><i style="width:'+Math.round(st/TOTAL*100)+'%"></i></div>'+
-      '<div class="c-line">'+(done?'<b>Tarjeta completa</b>':'Faltan <b>'+(TOTAL-st)+'</b> para tu camiseta gratis')+'</div>'+
-      (done?'<div class="win"><b>Camiseta gratis desbloqueada</b><span>Muestra esta pantalla en GOLD90 para canjearla.</span></div>':'');
+    $('card').className='card'+(done?' done':'')+(flipped?' flipped':'');
+    $('card').innerHTML='<div class="cflip">'+
+      '<div class="face front"><div class="glare"></div>'+
+        '<div class="f-logo">GOLD90</div><div class="f-sub">TARJETA DE SELLOS</div>'+NFC+
+        '<div class="f-chip"></div><div class="f-holo"></div>'+
+        '<div class="f-num">'+esc(fmtPhone(c.phone))+'</div>'+
+        '<div class="f-since">MIEMBRO DESDE '+yr(c)+'</div>'+
+        '<div class="f-name">'+esc(c.name||'Cliente GOLD90')+'</div>'+
+        '<div class="f-tier"><b>'+tier.name+'</b><span>'+st+'/'+TOTAL+' SELLOS</span></div>'+
+      '</div>'+
+      '<div class="face back"><div class="b-strip"></div><div class="b-body">'+
+        '<div class="coins">'+g+'</div>'+
+        '<div class="b-foot"><div class="meter"><i style="width:'+Math.round(st/TOTAL*100)+'%"></i></div><span>'+(done?'<b>Completa</b>':'Faltan <b>'+(TOTAL-st)+'</b>')+'</span></div>'+
+      '</div></div>'+
+    '</div>';
+    $('cUnder').innerHTML=done?'<b>Tarjeta completa</b><div class="win"><b>Camiseta gratis desbloqueada</b><span>Muestra esta pantalla en GOLD90 para canjearla.</span></div>':'Faltan <b>'+(TOTAL-st)+'</b> sellos para tu camiseta gratis';
   }
   function sparks(){
     var card=$('card').getBoundingClientRect(),x=card.left+card.width/2,y=card.top+card.height/2;
@@ -556,6 +612,7 @@ body.tier-black::before{opacity:0}
   /* ---- Inclinación 3D (arrastrar o mover el mouse) ---- */
   (function(){
     var card=$('card'),stage=card.parentNode;
+    card.addEventListener('click',function(){flipped=!flipped;card.classList.toggle('flipped',flipped)});
     function move(e){
       var r=stage.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
       card.classList.add('drag');
@@ -687,7 +744,7 @@ body.tier-black::before{opacity:0}
     }
     document.addEventListener('pointerdown',function(e){
       light(e.clientX,e.clientY,e.pointerType!=='mouse');
-      if(e.target.closest('button,a,input,textarea,.dock,.sheet,#intro'))return;
+      if(e.target.closest('button,a,input,textarea,.dock,.sheet,#intro,.card'))return;
       burst(e.clientX,e.clientY);
     },{passive:true});
   })();
