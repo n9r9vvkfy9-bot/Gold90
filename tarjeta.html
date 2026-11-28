@@ -590,15 +590,15 @@ body.tier-black::before{opacity:0}
   /* ---- Niveles según camisetas canjeadas ---- */
   var TIERS=[{k:'gold',name:'Gold',min:0},{k:'legend',name:'Azul',min:1},{k:'black',name:'Black',min:3}];
   function tierOf(n){var t=TIERS[0];for(var i=0;i<TIERS.length;i++)if(n>=TIERS[i].min)t=TIERS[i];return t}
+  function tierFor(c){var k=c&&c.tier;for(var i=0;i<TIERS.length;i++)if(TIERS[i].k===k)return TIERS[i];return tierOf((c&&c.rewardsClaimed)||0)}
   function nextTier(n){for(var i=0;i<TIERS.length;i++)if(TIERS[i].min>n)return TIERS[i];return null}
   var prevTierK=null;
-  function applyTier(n){
-    var t=tierOf(n),nx=nextTier(n);
+  function applyTier(c){
+    var n=c.rewardsClaimed||0,t=tierFor(c),idx=TIERS.indexOf(t),nx=TIERS[idx+1]||null,manual=!!c.tier;
     document.body.classList.remove('tier-gold','tier-black','tier-legend');document.body.classList.add('tier-'+t.k);
     $('tTier').textContent=t.name;
     document.querySelectorAll('.nv').forEach(function(el){el.classList.toggle('cur',el.getAttribute('data-t')===t.k)});
-    var canj=n+(n===1?' camiseta canjeada':' camisetas canjeadas');
-    $('tNext').textContent=nx?(nx.min-n)+(nx.min-n===1?' canje':' canjes')+' para '+nx.name:'Nivel máximo';
+    $('tNext').textContent=!nx?'Nivel máximo':(manual?'Siguiente: '+nx.name:(nx.min-n)+(nx.min-n===1?' canje':' canjes')+' para '+nx.name);
     if(prevTierK&&prevTierK!==t.k){say('Subiste a nivel '+t.name);sparks()}
     prevTierK=t.k;
   }
@@ -630,7 +630,7 @@ body.tier-black::before{opacity:0}
     $('card').className='card'+(done?' done':'');
     $('card').innerHTML=
       '<div class="glare"></div><div class="sheen"></div>'+
-      '<div class="c-head"><div class="c-l"><div class="chip"></div><div class="c-brand gt">GOLD90</div></div><div class="c-tier">'+tierOf(c.rewardsClaimed||0).name.toUpperCase()+'</div></div>'+
+      '<div class="c-head"><div class="c-l"><div class="chip"></div><div class="c-brand gt">GOLD90</div></div><div class="c-tier">'+tierFor(c).name.toUpperCase()+'</div></div>'+
       '<div class="c-id"><div><div class="c-name">'+esc(c.name||'Cliente GOLD90')+'</div><div class="c-ph">'+esc(mask)+'</div></div>'+
       '<div class="c-cnt"><b class="gt">'+st+'/'+TOTAL+'</b><span>SELLOS</span></div></div>'+
       '<div class="coins">'+g+'</div>'+
@@ -676,7 +676,7 @@ body.tier-black::before{opacity:0}
     return '<svg class="m-fol" viewBox="0 0 320 202" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;pointer-events:none;-webkit-mask:linear-gradient(105deg,transparent 22%,rgba(0,0,0,.55) 40%,#000 60%);mask:linear-gradient(105deg,transparent 22%,rgba(0,0,0,.55) 40%,#000 60%)">'+h+'</svg>';
   }
   function renderMini(c){
-    var st=Math.min(TOTAL,c.stamps||0),t=tierOf(c.rewardsClaimed||0),k=t.k,ph=String(c.phone||''),
+    var st=Math.min(TOTAL,c.stamps||0),t=tierFor(c),k=t.k,ph=String(c.phone||''),
         last=ph.slice(-4),num=ph.length===10?ph.slice(0,3)+' '+ph.slice(3,6)+' '+ph.slice(6):ph,
         y=String(new Date().getFullYear()).slice(2),sub={gold:'MEMBER',legend:'MEMBER',black:'MEMBER'}[k];
     var h='<div class="m-bg"></div><div class="m-guil"></div>';
@@ -709,7 +709,7 @@ body.tier-black::before{opacity:0}
     $('hello').textContent='Hola, '+String(c.name||'').split(' ')[0];
     drawRing(st);
     $('tLeft').textContent=st>=TOTAL?'Lista':Math.max(0,TOTAL-st);$('tLeftU').textContent=st>=TOTAL?'canjéala en tienda':(TOTAL-st===1?'sello':'sellos');
-    applyTier(c.rewardsClaimed||0);
+    applyTier(c);
     me={name:c.name||'',phone:c.phone||''};
     if(fresh){say('Nuevo sello  ·  '+st+' de '+TOTAL);sparks()}
     if(shown!==c.phone){
