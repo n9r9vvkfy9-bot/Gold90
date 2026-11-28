@@ -419,6 +419,11 @@ body.tier-black::before{opacity:0}
 .sp-foot{position:absolute;bottom:calc(26px + env(safe-area-inset-bottom));font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(212,175,55,.45)}
 #splash.done .sp-fg{stroke:#f7e7a6;filter:drop-shadow(0 0 14px rgba(247,231,166,.85))}
 .nv{cursor:default}.nv:active{transform:none}
+
+.rule.tap{width:100%;text-align:left;color:inherit;font-family:inherit;cursor:pointer;text-decoration:none;align-items:center}
+button.rule{background:rgba(var(--gr),.035)}
+.rule.tap:active{transform:scale(.985)}
+.rule.tap em{margin-left:auto;font-style:normal;font-size:28px;line-height:1;color:var(--g2)}
 </style>
 </head>
 <body>
@@ -531,8 +536,8 @@ body.tier-black::before{opacity:0}
   <section class="view" id="v-rules">
     <div class="hello"><h2>Cómo ganas sellos</h2></div>
     <div class="rules">
-      <div class="rule"><div class="n">1</div><div><b>Compra una camisa</b><span>Cada camisa que compres suma 1 sello.</span></div></div>
-      <div class="rule"><div class="n">+1</div><div><b>Recomienda a alguien</b><span>Si un amigo o familiar compra y dice que viene de tu parte, ganas 1 sello.</span></div></div>
+      <a class="rule tap" href="https://gold90.com.co/" target="_blank" rel="noopener"><div class="n">1</div><div><b>Compra una camisa</b><span>Cada camisa que compres suma 1 sello. Toca para ver el catálogo.</span></div><em>&#8250;</em></a>
+      <button class="rule tap" id="shareBtn" type="button"><div class="n">+1</div><div><b>Recomienda a alguien</b><span>Si un amigo o familiar compra y dice que viene de tu parte, ganas 1 sello. Toca para enviárselo.</span></div><em>&#8250;</em></button>
       <div class="rule"><div class="n">10</div><div><b>Camiseta gratis</b><span>Con 10 sellos canjeas una camiseta sin costo.</span></div></div>
     </div>
     <div class="sec-t" style="margin-top:6px">Niveles</div>
@@ -866,6 +871,19 @@ body.tier-black::before{opacity:0}
       burst(e.clientX,e.clientY);
     },{passive:true});
   })();
+
+
+  /* ---- Recomendar: abre el menú de compartir ---- */
+  $('shareBtn').addEventListener('click',function(){
+    var first=(me&&me.name?String(me.name).split(' ')[0]:'');
+    var txt='Mira GOLD90, camisetas de fútbol. Cuando compres, dile que vas recomendado'+(first?' por '+first:'')+'.';
+    var url='https://gold90.com.co/';
+    if(navigator.share){
+      navigator.share({title:'GOLD90',text:txt,url:url}).catch(function(){});
+    }else{
+      window.open('https://wa.me/?text='+encodeURIComponent(txt+' '+url),'_blank');
+    }
+  });
 
   /* ---- Pestañas y panel de perfil ---- */
   function view(v){
