@@ -343,6 +343,16 @@ body.tier-black .mini{background:linear-gradient(135deg,#34343a 0%,#0c0c0d 38%,#
 .w-box b{display:block;font-family:'Oswald',sans-serif;font-weight:500;font-size:19px;letter-spacing:.04em;color:var(--g1)}
 .w-box p{margin-top:8px;font-size:14px;line-height:1.6;color:var(--dim)}
 .w-soon{display:inline-block;margin-top:14px;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--g1);border:1px solid rgba(var(--gr),.45);background:rgba(var(--gr),.08)}
+
+.w-ladder{margin-top:16px;display:grid;gap:8px}
+.wl{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.wl i{flex:none;width:30px;height:22px;border-radius:5px;background:linear-gradient(135deg,#f6e3a0,#c9a042 50%,#8a6a1c)}
+.wl[data-t=legend] i{background:linear-gradient(135deg,#fff,#8fd3ff 50%,#3b8fd6)}
+.wl[data-t=black] i{background:linear-gradient(135deg,#6a6a70,#111 60%,#000);box-shadow:0 0 0 1px rgba(255,255,255,.4)}
+.wl b{display:block;font-family:'Oswald',sans-serif;font-weight:500;letter-spacing:.06em;font-size:15px;color:var(--g1)}
+.wl span{font-size:12.5px;color:var(--dim)}
+.wl.cur{border-color:rgba(var(--gr),.6);background:rgba(var(--gr),.1)}
+.w-up{margin-top:14px;font-weight:700;color:var(--tx)!important;font-size:14px}
 </style>
 </head>
 <body>
@@ -424,7 +434,13 @@ body.tier-black .mini{background:linear-gradient(135deg,#34343a 0%,#0c0c0d 38%,#
     <div class="mini" id="mini" aria-label="Tarjeta GOLD90"></div>
     <div class="w-box">
       <b>Tu tarjeta GOLD90</b>
-      <p>Esta tarjeta es tuya. La usaremos para promociones y beneficios especiales para clientes GOLD90. Cuando haya una, te avisamos y solo tienes que mostrarla.</p>
+      <p>Esta tarjeta es tuya. La usaremos para promociones y descuentos. Cuando haya una, te avisamos y solo tienes que mostrarla.</p>
+      <div class="w-ladder">
+        <div class="wl" data-t="gold"><i></i><div><b>Gold</b><span>Descuentos para clientes GOLD90</span></div></div>
+        <div class="wl" data-t="legend"><i></i><div><b>Azul</b><span>Más descuentos</span></div></div>
+        <div class="wl" data-t="black"><i></i><div><b>Black</b><span>Los mejores descuentos</span></div></div>
+      </div>
+      <p class="w-up">Entre más subas de nivel, más descuentos tendrás.</p>
       <div class="w-soon">Próximamente: promociones</div>
     </div>
   </section>
@@ -508,6 +524,7 @@ body.tier-black .mini{background:linear-gradient(135deg,#34343a 0%,#0c0c0d 38%,#
     var t=tierOf(n),nx=nextTier(n);
     document.body.classList.remove('tier-gold','tier-black','tier-legend');document.body.classList.add('tier-'+t.k);
     $('tTier').textContent=t.name;
+    document.querySelectorAll('.wl').forEach(function(el){el.classList.toggle('cur',el.getAttribute('data-t')===t.k)});
     document.querySelectorAll('.nv').forEach(function(el){el.classList.toggle('cur',el.getAttribute('data-t')===t.k)});
     var canj=n+(n===1?' camiseta canjeada':' camisetas canjeadas');
     $('tNext').textContent=nx?(nx.min-n)+(nx.min-n===1?' canje':' canjes')+' para '+nx.name:'Nivel máximo';
