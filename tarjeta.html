@@ -365,7 +365,7 @@ button{font-family:inherit}
       openApp({phone:phone,name:name});
     }catch(e){
       console.error(e);
-      err.textContent=navigator.onLine?'No pudimos guardar tus datos. Intenta de nuevo.':'Sin conexión a internet. Intenta de nuevo.';
+      err.textContent=navigator.onLine?'No pudimos guardar tus datos. Intenta de nuevo.'+(e&&e.code?' ('+e.code+')':''):'Sin conexión a internet. Intenta de nuevo.';
       btn.textContent='Crear mi tarjeta';
     }
     btn.disabled=false;
