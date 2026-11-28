@@ -540,6 +540,38 @@ body{background:radial-gradient(900px 520px at 50% -8%,rgba(255,255,255,.1),tran
 .seg.on{background:linear-gradient(180deg,#fff,#cfcfd4)!important;color:#0b0b0c!important}
 .av,.dot.on{background:radial-gradient(circle at 35% 30%,#fff,#d6d6db 45%,#7d7d83)!important;color:#111!important}
 .status-dot{background:#7bd88f}
+
+/* ---------- 3 secciones con el color de las tarjetas ---------- */
+body.m-sumar{--a1:#f7e7a6;--a2:#d4af37;--a3:#a6802c;--ar:212,175,55;--at:#1a1204;--ag:rgba(212,175,55,.2)}
+body.m-promo{--a1:#ffffff;--a2:#8fd3ff;--a3:#3b8fd6;--ar:143,211,255;--at:#06223f;--ag:rgba(143,211,255,.22)}
+body.m-canjear{--a1:#ffffff;--a2:#d6d6db;--a3:#8e8e94;--ar:255,255,255;--at:#0b0b0c;--ag:rgba(255,255,255,.1)}
+body.m-sumar,body.m-promo,body.m-canjear{background:radial-gradient(900px 520px at 50% -8%,var(--ag),transparent 62%),repeating-linear-gradient(135deg,rgba(var(--ar),.025) 0 1px,transparent 1px 9px),#050505!important}
+body.m-promo{background:radial-gradient(900px 520px at 50% -8%,var(--ag),transparent 62%),linear-gradient(180deg,#0b1a2e,#050b16 60%,#04070d)!important}
+body.m-sumar .eyebrow,body.m-promo .eyebrow,body.m-canjear .eyebrow{color:var(--a2)}
+body.m-sumar .btn-gold,body.m-promo .btn-gold,body.m-canjear .btn-gold,
+body.m-sumar .scan-btn,body.m-promo .scan-btn,body.m-canjear .scan-btn{background:linear-gradient(180deg,var(--a1),var(--a2) 55%,var(--a3))!important;color:var(--at)!important;box-shadow:0 12px 30px rgba(var(--ar),.25),inset 0 1px 0 rgba(255,255,255,.55)!important}
+body.m-sumar .scan-btn.on,body.m-promo .scan-btn.on,body.m-canjear .scan-btn.on{background:rgba(var(--ar),.1)!important;color:var(--a1)!important;box-shadow:inset 0 0 0 1.5px rgba(var(--ar),.55)!important}
+body.m-sumar .seg.on,body.m-promo .seg.on{background:linear-gradient(180deg,var(--a1),var(--a2))!important;color:var(--at)!important}
+body.m-sumar .av,body.m-promo .av,body.m-canjear .av,body.m-sumar .dot.on,body.m-promo .dot.on,body.m-canjear .dot.on{background:radial-gradient(circle at 35% 30%,#fff,var(--a1) 22%,var(--a2) 60%,var(--a3))!important;color:var(--at)!important}
+body.m-sumar .res-cnt b,body.m-promo .res-cnt b,body.m-canjear .res-cnt b{background:linear-gradient(180deg,var(--a1),var(--a2) 60%,var(--a3));-webkit-background-clip:text;background-clip:text;color:transparent}
+body.m-sumar .res::before,body.m-promo .res::before,body.m-canjear .res::before{background:linear-gradient(135deg,var(--a1),var(--a3) 30%,#222 50%,var(--a2) 70%,var(--a1))}
+body.m-sumar .res-tag,body.m-promo .res-tag,body.m-canjear .res-tag,body.m-sumar .sec-t2,body.m-promo .sec-t2,body.m-canjear .sec-t2{color:var(--a2)}
+body.m-sumar .miss,body.m-canjear .miss{color:var(--a1);border-color:rgba(var(--ar),.5)}
+body.m-sumar .step-t,body.m-promo .step-t,body.m-canjear .step-t{color:var(--a1)}
+body.m-promo .tpl{color:var(--a1);border-color:rgba(var(--ar),.4);background:rgba(var(--ar),.07)}
+body.m-promo .seg{border-color:rgba(var(--ar),.35)}
+body.m-promo .wa{color:var(--a1);border-color:rgba(var(--ar),.5);background:rgba(var(--ar),.1)}
+.wrap{padding-bottom:130px}
+.mdock{display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:60;gap:6px;padding:7px;border-radius:999px;background:rgba(18,18,20,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 18px 40px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.14);width:calc(100% - 28px);max-width:420px}
+body.in-panel .mdock{display:flex}
+.mdock button{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;border:none;background:none;color:rgba(255,255,255,.6);font-family:inherit;font-weight:700;font-size:12px;padding:9px 6px;border-radius:999px;cursor:pointer;transition:background .25s,color .25s}
+.mdock button i{width:26px;height:18px;border-radius:5px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.3)}
+.mdock button[data-m=sumar] i{background:linear-gradient(135deg,#f7e7a6,#d4af37 50%,#a6802c)}
+.mdock button[data-m=promo] i{background:linear-gradient(135deg,#fff,#8fd3ff 50%,#3b8fd6)}
+.mdock button[data-m=canjear] i{background:linear-gradient(135deg,#6a6a70,#111 60%,#000);box-shadow:0 0 0 1px rgba(255,255,255,.55)}
+.mdock button.on{background:rgba(255,255,255,.1);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.toast{bottom:calc(112px + env(safe-area-inset-bottom))!important}
+.not-ready{text-align:center;padding:16px;border-radius:14px;border:1px dashed rgba(var(--ar),.4);color:rgba(255,255,255,.7);font-size:14px}
 </style>
 </head>
 <body>
@@ -616,23 +648,14 @@ body{background:radial-gradient(900px 520px at 50% -8%,rgba(255,255,255,.1),tran
   <!-- STAFF: panel -->
   <section class="screen" id="screen-staff-panel">
     <div class="bar-top">
-      <span></span>
+      <span class="who" id="staff-who" style="margin:0"></span>
       <button class="back" onclick="staffLogout()">Cerrar sesión</button>
     </div>
     <div class="eyebrow" id="dDate">Panel del dueño</div>
-    <div class="landing-title" style="text-align:left; margin-bottom:6px;" id="dHello">Hola</div>
-    <p class="who" id="staff-who"></p>
+    <div class="landing-title" style="text-align:left; margin-bottom:4px;" id="mTitle">Sumar sellos</div>
+    <p class="who" id="mSub" style="margin-bottom:20px">Escanea el código del cliente o escribe su celular.</p>
 
-    <div class="dash" id="dash">
-      <div class="d-three">
-        <div class="d-n"><b id="dClients">–</b><span>Clientes</span></div>
-        <div class="d-n hot"><b id="dReady">–</b><span>Para canjear</span></div>
-        <div class="d-n"><b id="dGiven">–</b><span>Camisetas entregadas</span></div>
-      </div>
-      <span id="dClientsSub" style="display:none"></span><b id="dStamps" style="display:none"></b><b id="dNear" style="display:none"></b><div id="dRing" style="display:none"></div>
-    </div>
-
-    <div class="step-t">1. Cuando llega un cliente</div>
+    <div id="v-find">
     <button class="scan-btn" id="scan-toggle-btn" onclick="toggleScanner()">
       <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 012-2h2M16 4h2a2 2 0 012 2v2M20 16v2a2 2 0 01-2 2h-2M8 20H6a2 2 0 01-2-2v-2"/><path d="M8 12h8"/></svg></span>
       <span class="lb">Escanear su código</span>
@@ -656,22 +679,14 @@ body{background:radial-gradient(900px 520px at 50% -8%,rgba(255,255,255,.1),tran
     <div class="err" id="staff-err"></div>
 
     <div id="staff-result"></div>
+      <div id="readyBox" style="display:none">
+        <div class="step-t" style="margin-top:26px">Tarjetas listas para canjear</div>
+        <div id="dNearList"></div>
+      </div>
+    </div>
 
-    <div class="step-t" style="margin-top:26px">2. Ya casi completan su camiseta</div>
-    <div id="dNearList"></div>
-
-    <div class="step-t" style="margin-top:26px">3. Mis clientes</div>
-    <button class="big-act" onclick="openClientesScreen()"><b>Enviar una promoción</b><span>Escoge a quién y manda el mensaje por WhatsApp</span></button>
-    <button class="big-act" onclick="openClientesScreen(true)"><b>Guardar mis clientes</b><span>Descarga la lista en Excel</span></button>
-  </section>
-
-  <!-- STAFF: clientes / promo -->
-  <section class="screen" id="screen-staff-clientes">
-    <button class="back" onclick="goTo('staff-panel')">&#8249; Volver al panel</button>
-    <div class="eyebrow">Promociones y clientes</div>
-    <div class="landing-title" style="text-align:left; margin-bottom:4px;">Enviar promoción</div>
-    <p class="who" id="clientes-count"></p>
-
+    <div id="v-promo" style="display:none">
+      <p class="who" id="clientes-count" style="margin-bottom:14px"></p>
     <div class="sec-t2">1. Elige a quién</div>
     <div class="segs" id="segs">
       <button class="seg on" data-s="todos">Todos</button>
@@ -709,7 +724,14 @@ body{background:radial-gradient(900px 520px at 50% -8%,rgba(255,255,255,.1),tran
       <button class="btn btn-ghost" onclick="exportVCF()">Descargar contactos del celular</button>
       <button class="btn btn-ghost" onclick="exportJSON()">Copia de seguridad completa</button>
     </div>
+    </div>
   </section>
+
+  <nav class="mdock" id="mdock" aria-label="Secciones">
+    <button class="on" data-m="sumar"><i></i><span>Sumar sellos</span></button>
+    <button data-m="promo"><i></i><span>Promociones</span></button>
+    <button data-m="canjear"><i></i><span>Canjear</span></button>
+  </nav>
 
   <footer class="tag">GOLD90 · Naturalmente la manada más gold</footer>
 </div>
@@ -1101,19 +1123,29 @@ async function staffLookup(){
   }
 }
 
+let staffMode = 'sumar', lastStaff = null;
 function renderStaffResult(data, isNew){
+  lastStaff = { data, isNew };
   const stamps = Math.min(TOTAL_STAMPS, data.stamps || 0);
   const ready = stamps >= TOTAL_STAMPS;
   const rewards = data.rewardsClaimed || 0;
   let dots = '';
-  for(let i=1;i<=TOTAL_STAMPS;i++){
-    dots += `<i class="dot${i<=stamps?' on':''}${i===TOTAL_STAMPS?' prize':''}"></i>`;
+  for(let i=1;i<=TOTAL_STAMPS;i++) dots += `<i class="dot${i<=stamps?' on':''}${i===TOTAL_STAMPS?' prize':''}"></i>`;
+  const lvl = rewards>=3?'Black':rewards>=1?'Azul':'Gold';
+  let actions;
+  if(staffMode === 'canjear'){
+    actions = ready
+      ? `<button class="btn btn-gold big pulse" id="redeem-btn">Canjear camiseta gratis</button>`
+      : `<div class="not-ready">Todavía no puede canjear. Le faltan ${TOTAL_STAMPS - stamps} sellos.</div>`;
+  }else{
+    actions = `<button class="btn btn-gold big" id="add-stamp-btn" ${ready?'disabled':''}>${ready ? 'Tarjeta completa: ve a Canjear' : 'Sumar 1 sello'}</button>
+      <button class="link" id="remove-stamp-btn" ${stamps<=0?'disabled':''}>Quitar 1 sello (por error)</button>`;
   }
   document.getElementById('staff-result').innerHTML = `
     <div class="res foil ${ready?'ready':''}">
       <div class="res-top">
         <div>
-          <div class="res-tag">${isNew ? 'Cliente nuevo' : ('Nivel ' + (rewards>=3?'Black':rewards>=1?'Azul':'Gold') + ' · ' + rewards + (rewards===1?' canje':' canjes'))}</div>
+          <div class="res-tag">${isNew ? 'Cliente nuevo' : 'Nivel ' + lvl + ' · ' + rewards + (rewards===1?' canje':' canjes')}</div>
           <div class="res-name">${esc(data.name || 'Sin nombre')}</div>
           <div class="res-ph">${esc(data.phone)}</div>
         </div>
@@ -1121,13 +1153,11 @@ function renderStaffResult(data, isNew){
       </div>
       <div class="dots">${dots}</div>
       <div class="res-line">${ready ? 'Tarjeta completa: lista para canjear' : 'Faltan ' + (TOTAL_STAMPS - stamps) + ' sellos para la camiseta gratis'}</div>
-      <button class="btn btn-gold big" id="add-stamp-btn" ${ready?'disabled':''}>Sumar 1 sello</button>
-      <button class="btn ${ready ? 'btn-gold pulse' : 'btn-ghost'}" id="redeem-btn" ${!ready?'disabled':''} style="margin-top:10px;">Canjear camiseta gratis</button>
-      <button class="link" id="remove-stamp-btn" ${stamps<=0?'disabled':''}>Quitar 1 sello (por error)</button>
+      ${actions}
     </div>`;
-  document.getElementById('add-stamp-btn').onclick = () => changeStamps(+1);
-  document.getElementById('remove-stamp-btn').onclick = () => changeStamps(-1);
-  document.getElementById('redeem-btn').onclick = redeemReward;
+  const add = document.getElementById('add-stamp-btn'); if(add) add.onclick = () => changeStamps(+1);
+  const rem = document.getElementById('remove-stamp-btn'); if(rem) rem.onclick = () => changeStamps(-1);
+  const red = document.getElementById('redeem-btn'); if(red) red.onclick = redeemReward;
 }
 
 function setStaffButtons(disabled){
@@ -1150,6 +1180,7 @@ async function changeStamps(delta){
       return out;
     });
     renderStaffResult(data, false);
+    loadClients();
     showToast(delta > 0 ? 'Sello agregado · ' + data.stamps + '/' + TOTAL_STAMPS : 'Sello quitado · ' + data.stamps + '/' + TOTAL_STAMPS);
     if(navigator.vibrate) navigator.vibrate(40);
   }catch(e){
@@ -1176,6 +1207,7 @@ async function redeemReward(){
     });
     renderStaffResult(data, false);
     showToast('Camiseta canjeada. Tarjeta reiniciada.');
+    loadClients();
   }catch(e){
     console.error(e);
     showToast(e.message === 'not-ready' ? 'Todavía no tiene 10 sellos.' : 'No se guardó. ' + friendlyError(e));
@@ -1185,21 +1217,6 @@ async function redeemReward(){
 
 /* ---------- Staff: clientes y promociones ---------- */
 let allClientes = [];
-async function openClientesScreen(toBackup){
-  if(!staffUser){ goTo('staff-login'); return; }
-  goTo('staff-clientes');
-  const holder = document.getElementById('clientes-list');
-  holder.innerHTML = '<p class="hint"><span class="spinner"></span>Cargando clientes…</p>';
-  try{
-    const snap = await db.collection(COL).get();
-    allClientes = snap.docs.map(d => d.data()).sort((a,b) => (b.stamps||0) - (a.stamps||0));
-    document.getElementById('clientes-count').textContent = allClientes.length + (allClientes.length===1?' cliente registrado':' clientes registrados'); segActive = 'todos'; document.querySelectorAll('.seg').forEach(b => b.classList.toggle('on', b.getAttribute('data-s')==='todos'));
-    renderClientesList();
-    if(toBackup === true) setTimeout(() => { const bk = document.querySelector('.bk'); if(bk) bk.scrollIntoView({ behavior:'smooth', block:'center' }); }, 250);
-  }catch(e){
-    holder.innerHTML = '<p class="hint">No pudimos cargar la lista. ' + esc(friendlyError(e)) + '</p>';
-  }
-}
 function waNumber(phone){ return phone.length === 10 ? '57' + phone : phone; }
 let segActive = 'todos';
 function tierName(c){ const r = c.rewardsClaimed||0; return r >= 3 ? 'Black' : (r >= 1 ? 'Azul' : 'Gold'); }
@@ -1301,43 +1318,42 @@ document.addEventListener('input', e => { if(e.target && (e.target.id === 'promo
 });
 
 
-/* ---------- Tablero del dueño ---------- */
-function ownerHello(){
-  const h = new Date().getHours();
-  const g = h < 12 ? 'Buenos días' : (h < 19 ? 'Buenas tardes' : 'Buenas noches');
-  document.getElementById('dHello').textContent = g + ', jefe';
-  document.getElementById('dDate').textContent = new Date().toLocaleDateString('es-CO', { weekday:'long', day:'numeric', month:'long' });
+/* ---------- Las 3 secciones ---------- */
+const MODES = {
+  sumar:   { title: 'Sumar sellos', sub: 'Escanea el código del cliente o escribe su celular.' },
+  promo:   { title: 'Promociones', sub: 'Elige a quién, el mensaje, y envíalo por WhatsApp.' },
+  canjear: { title: 'Canjear camiseta', sub: 'Busca al cliente con la tarjeta completa y entrégale su camiseta.' }
+};
+function setMode(m){
+  staffMode = m;
+  stopScanner();
+  ['sumar','promo','canjear'].forEach(k => document.body.classList.toggle('m-' + k, k === m));
+  document.querySelectorAll('#mdock button').forEach(b => b.classList.toggle('on', b.getAttribute('data-m') === m));
+  document.getElementById('mTitle').textContent = MODES[m].title;
+  document.getElementById('mSub').textContent = MODES[m].sub;
+  const promo = m === 'promo';
+  document.getElementById('v-find').style.display = promo ? 'none' : 'block';
+  document.getElementById('v-promo').style.display = promo ? 'block' : 'none';
+  document.getElementById('readyBox').style.display = m === 'canjear' ? 'block' : 'none';
+  if(!promo && lastStaff) renderStaffResult(lastStaff.data, lastStaff.isNew);
+  if(promo) renderClientesList();
+  window.scrollTo({ top:0, behavior:'smooth' });
 }
-async function loadDash(){
+document.getElementById('mdock').addEventListener('click', e => { const b = e.target.closest('button'); if(b) setMode(b.getAttribute('data-m')); });
+
+async function loadClients(){
   if(!staffUser) return;
-  ownerHello();
+  const h = new Date().getHours();
+  document.getElementById('dDate').textContent = (h < 12 ? 'Buenos días' : (h < 19 ? 'Buenas tardes' : 'Buenas noches')) + ', jefe';
   try{
     const snap = await db.collection(COL).get();
-    const list = snap.docs.map(d => d.data());
-    allClientes = list.slice().sort((a,b) => (b.stamps||0) - (a.stamps||0));
-    const n = list.length;
-    const stamps = list.reduce((t,c) => t + Math.min(TOTAL_STAMPS, c.stamps||0), 0);
-    const ready = list.filter(c => (c.stamps||0) >= TOTAL_STAMPS).length;
-    const near = list.filter(c => { const s = c.stamps||0; return s >= TOTAL_STAMPS-2 && s < TOTAL_STAMPS; });
-    const given = list.reduce((t,c) => t + (c.rewardsClaimed||0), 0);
-    const active = list.filter(c => (c.stamps||0) > 0).length;
-    document.getElementById('dClients').textContent = n;
-    
-    
-    document.getElementById('dReady').textContent = ready;
-    
-    document.getElementById('dGiven').textContent = given;
-    const pct = n ? Math.round(active / n * 100) : 0, C = 2 * Math.PI * 38;
-    document.getElementById('dRing').innerHTML = '<svg viewBox="0 0 92 92"><circle class="bg" cx="46" cy="46" r="38"/><circle class="fg" cx="46" cy="46" r="38" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'"/></svg><i>'+pct+'%</i>';
-    requestAnimationFrame(() => requestAnimationFrame(() => { const fg = document.querySelector('#dRing .fg'); if(fg) fg.style.strokeDashoffset = C * (1 - pct/100); }));
-    const nl = document.getElementById('dNearList');
-    const top = list.filter(c => (c.stamps||0) >= TOTAL_STAMPS-2).sort((a,b) => (b.stamps||0) - (a.stamps||0)).slice(0,6);
-    nl.innerHTML = top.length ? top.map(c => {
-      const st = Math.min(TOTAL_STAMPS, c.stamps||0), miss = TOTAL_STAMPS - st;
-      return `<button class="n-row" data-p="${esc(c.phone)}"><div class="av">${esc((c.name||'?').trim().charAt(0).toUpperCase()||'?')}</div><div class="ci"><div class="cn">${esc(c.name||'Sin nombre')}</div><div class="cp">${esc(c.phone)} · ${st}/${TOTAL_STAMPS}</div></div><div class="miss">${miss ? 'Falta'+(miss>1?'n ':' ')+miss : 'Lista'}</div></button>`;
-    }).join('') : '<div class="n-empty">Nadie está cerca todavía. Cuando alguien llegue a 8 sellos aparecerá aquí.</div>';
+    allClientes = snap.docs.map(d => d.data()).sort((a,b) => (b.stamps||0) - (a.stamps||0));
+    document.getElementById('clientes-count').textContent = allClientes.length + (allClientes.length===1?' cliente registrado':' clientes registrados');
+    const ready = allClientes.filter(c => (c.stamps||0) >= TOTAL_STAMPS);
+    document.getElementById('dNearList').innerHTML = ready.length ? ready.map(c => `<button class="n-row" data-p="${esc(c.phone)}"><div class="av">${esc((c.name||'?').trim().charAt(0).toUpperCase()||'?')}</div><div class="ci"><div class="cn">${esc(c.name||'Sin nombre')}</div><div class="cp">${esc(c.phone)}</div></div><div class="miss">Lista</div></button>`).join('') : '<div class="n-empty">Nadie tiene la tarjeta completa todavía.</div>';
+    renderClientesList();
   }catch(e){
-    document.getElementById('dClientsSub').textContent = 'No se pudo cargar. ' + friendlyError(e);
+    document.getElementById('clientes-count').textContent = 'No se pudo cargar. ' + friendlyError(e);
   }
 }
 document.addEventListener('click', e => {
@@ -1347,7 +1363,7 @@ document.addEventListener('click', e => {
   document.getElementById('staff-phone').scrollIntoView({ behavior:'smooth', block:'center' });
 });
 const _goTo = goTo;
-goTo = function(id){ _goTo(id); if(id === 'staff-panel') loadDash(); };
+goTo = function(id){ _goTo(id); document.body.classList.toggle('in-panel', id === 'staff-panel'); if(id === 'staff-panel'){ setMode(staffMode); loadClients(); } else { ['sumar','promo','canjear'].forEach(k => document.body.classList.remove('m-' + k)); } };
 
 renderInstallBanner();
 </script>
