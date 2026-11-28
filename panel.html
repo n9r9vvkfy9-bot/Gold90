@@ -572,6 +572,33 @@ body.in-panel .mdock{display:flex}
 .mdock button.on{background:rgba(255,255,255,.1);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
 .toast{bottom:calc(112px + env(safe-area-inset-bottom))!important}
 .not-ready{text-align:center;padding:16px;border-radius:14px;border:1px dashed rgba(var(--ar),.4);color:rgba(255,255,255,.7);font-size:14px}
+
+/* ---------- PIN y menú ---------- */
+.pin-dots{display:flex;justify-content:center;gap:16px;margin:26px 0 12px}
+.pin-dots i{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.5);transition:.15s}
+.pin-dots i.on{background:#fff;border-color:#fff;box-shadow:0 0 14px rgba(255,255,255,.5)}
+.pin-dots.bad{animation:shake .4s}
+.pin-dots.bad i{border-color:#ff8a80;background:#ff8a80}
+@keyframes shake{20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:300px;margin:6px auto 0}
+.keypad button{aspect-ratio:1;border-radius:50%;border:none;cursor:pointer;color:#fff;font-family:'Oswald',sans-serif;font-weight:500;font-size:30px;background:linear-gradient(160deg,#222224,#0e0e0f);box-shadow:0 8px 18px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.14);transition:transform .12s,background .12s}
+.keypad button:active{transform:scale(.92);background:#fff;color:#000}
+.keypad button.ghost{background:none;box-shadow:none;font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;color:rgba(255,255,255,.6)}
+.hcard{display:flex;align-items:center;gap:16px;width:100%;text-align:left;margin-bottom:14px;padding:22px 20px;border-radius:24px;border:none;cursor:pointer;font-family:inherit;color:#fff;position:relative;overflow:hidden;box-shadow:0 18px 38px rgba(0,0,0,.55)}
+.hcard:active{transform:scale(.985)}
+.hcard i{flex:none;width:54px;height:38px;border-radius:9px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.3),0 4px 10px rgba(0,0,0,.4)}
+.hcard b{display:block;font-family:'Oswald',sans-serif;font-weight:500;font-size:24px;letter-spacing:.04em}
+.hcard span{font-size:13.5px;opacity:.8}
+.hcard em{margin-left:auto;font-style:normal;font-size:34px;line-height:1;opacity:.8}
+.hcard.gold{background:linear-gradient(135deg,#6d4f10,#2a1d05 60%,#120c02);box-shadow:0 18px 38px rgba(0,0,0,.55),0 0 0 1px rgba(212,175,55,.6)}
+.hcard.gold i{background:linear-gradient(135deg,#f7e7a6,#d4af37 50%,#a6802c)}
+.hcard.gold b{color:#f7e7a6}
+.hcard.azul{background:linear-gradient(135deg,#1b5fae,#0c2d52 60%,#07182d);box-shadow:0 18px 38px rgba(0,0,0,.55),0 0 0 1px rgba(143,211,255,.6)}
+.hcard.azul i{background:linear-gradient(135deg,#fff,#8fd3ff 50%,#3b8fd6)}
+.hcard.azul b{color:#e8f6ff}
+.hcard.black{background:linear-gradient(135deg,#2c2c30,#0b0b0c 60%,#000);box-shadow:0 18px 38px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.5)}
+.hcard.black i{background:linear-gradient(135deg,#6a6a70,#111 60%,#000);box-shadow:0 0 0 1px rgba(255,255,255,.55)}
+.hcard.black b{color:#fff}
 </style>
 </head>
 <body>
@@ -642,14 +669,39 @@ body.in-panel .mdock{display:flex}
     <input class="field" id="staff-pass" type="password" placeholder="Tu contraseña" autocomplete="current-password">
     <div class="err" id="login-err"></div>
     <button class="btn btn-gold" id="login-btn" onclick="staffLogin()">Entrar</button>
-    <p class="hint">Solo la cuenta de GOLD90 puede sumar sellos. La sesión queda abierta en este celular.</p>
+    <p class="hint">Esto se pide una sola vez en este celular. Después entrarás solo con tu PIN.</p>
+  </section>
+
+  <!-- PIN -->
+  <section class="screen" id="screen-pin">
+    <div class="eyebrow" style="margin-top:6px">Solo para el dueño</div>
+    <div class="landing-title" style="margin-bottom:6px">Ingresa tu PIN</div>
+    <div class="pin-dots" id="pinDots"><i></i><i></i><i></i><i></i></div>
+    <div class="err" id="pinErr" style="text-align:center;margin:0 0 14px"></div>
+    <div class="keypad" id="keypad">
+      <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
+      <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
+      <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
+      <button class="ghost" data-k="out" aria-label="Cambiar de cuenta">Salir</button><button data-k="0">0</button><button class="ghost" data-k="del" aria-label="Borrar">&#9003;</button>
+    </div>
+  </section>
+
+  <!-- MENÚ -->
+  <section class="screen" id="screen-staff-home">
+    <div class="bar-top"><span class="who" id="staff-who" style="margin:0"></span><button class="back" onclick="lockPanel()">Bloquear</button></div>
+    <div class="eyebrow" id="hDate">Panel del dueño</div>
+    <div class="landing-title" style="text-align:left;margin-bottom:4px" id="hHello">Hola, jefe</div>
+    <p class="who" style="margin-bottom:22px">¿Qué quieres hacer?</p>
+    <button class="hcard gold" onclick="openMode('sumar')"><i></i><div><b>Sumar sellos</b><span>Cuando un cliente compra</span></div><em>&#8250;</em></button>
+    <button class="hcard azul" onclick="openMode('promo')"><i></i><div><b>Promociones</b><span>Escribe un mensaje y envíalo</span></div><em>&#8250;</em></button>
+    <button class="hcard black" onclick="openMode('canjear')"><i></i><div><b>Canjear camiseta</b><span id="hReady">Tarjetas completas</span></div><em>&#8250;</em></button>
   </section>
 
   <!-- STAFF: panel -->
   <section class="screen" id="screen-staff-panel">
     <div class="bar-top">
-      <span class="who" id="staff-who" style="margin:0"></span>
-      <button class="back" onclick="staffLogout()">Cerrar sesión</button>
+      <button class="back" onclick="goTo('staff-home')">&#8249; Menú</button>
+      <button class="back" onclick="lockPanel()">Bloquear</button>
     </div>
     <div class="eyebrow" id="dDate">Panel del dueño</div>
     <div class="landing-title" style="text-align:left; margin-bottom:4px;" id="mTitle">Sumar sellos</div>
@@ -687,32 +739,9 @@ body.in-panel .mdock{display:flex}
 
     <div id="v-promo" style="display:none">
       <p class="who" id="clientes-count" style="margin-bottom:14px"></p>
-    <div class="sec-t2">1. Elige a quién</div>
-    <div class="segs" id="segs">
-      <button class="seg on" data-s="todos">Todos</button>
-      <button class="seg" data-s="gold">Gold</button>
-      <button class="seg" data-s="azul">Azul</button>
-      <button class="seg" data-s="black">Black</button>
-      <button class="seg" data-s="cerca">Cerca de su camiseta</button>
-      <button class="seg" data-s="lista">Para canjear</button>
-      <button class="seg" data-s="cero">Sin sellos</button>
-    </div>
-
-    <div class="sec-t2">2. Escribe o elige el mensaje</div>
-    <div class="tpls" id="tpls">
-      <button class="tpl" data-t="Hola {nombre}, esta semana tenemos una promo especial en GOLD90 para ti. Escríbenos y te contamos.">Promo de la semana</button>
-      <button class="tpl" data-t="Hola {nombre}, solo por ser cliente GOLD90 tienes un descuento exclusivo. Muéstranos este mensaje en tu próxima compra.">Descuento exclusivo</button>
-      <button class="tpl" data-t="Hola {nombre}, ya te falta muy poco para tu camiseta gratis en GOLD90. Pasa por tu próximo sello.">Te falta poco</button>
-      <button class="tpl" data-t="Hola {nombre}, ¡completaste tus 10 sellos! Tu camiseta gratis te está esperando en GOLD90.">Camiseta lista</button>
-      <button class="tpl" data-t="Hola {nombre}, llegaron camisetas nuevas a GOLD90. Mira lo nuevo y aprovecha.">Llegó mercancía nueva</button>
-    </div>
-    <textarea class="field" id="promo-msg" rows="4" style="resize:vertical; font-family:inherit;" placeholder="Escribe tu mensaje. Usa {nombre} para poner el nombre de cada cliente."></textarea>
-    <p class="hint" style="margin:-4px 0 14px;text-align:left;">{nombre} se cambia por el nombre de cada cliente.</p>
-
-    <div class="sec-t2">3. Envía</div>
-    <div class="grp" id="grp"></div>
-    <button class="btn btn-gold" onclick="copyAllPhones()" style="margin-bottom:8px;">Copiar los números de este grupo</button>
-    <p class="hint" style="margin:0 0 20px;">Para un mensaje masivo, pega los números en una lista de difusión de WhatsApp Business. O toca el botón de cada cliente para enviarle el mensaje con su nombre.</p>
+    <label class="field-label">Tu mensaje</label>
+    <textarea class="field" id="promo-msg" rows="5" style="resize:vertical; font-family:inherit;" placeholder="Escribe aquí tu promoción. Si pones {nombre}, se cambia por el nombre de cada cliente."></textarea>
+    <p class="hint" style="margin:-4px 0 16px;text-align:left;">Luego toca el botón de WhatsApp del cliente al que quieras enviárselo.</p>
 
     <input class="field" id="clientes-search" type="search" placeholder="Buscar por nombre o celular" aria-label="Buscar cliente">
     <div id="clientes-list"></div>
@@ -767,7 +796,7 @@ let busy = false;
 let firstAuth = true;
 auth.onAuthStateChanged(u => {
   staffUser = u;
-  if(firstAuth){ firstAuth = false; setTimeout(()=>goTo(u ? 'staff-panel' : 'staff-login'), 0); }
+  if(firstAuth){ firstAuth = false; setTimeout(()=>goTo(u ? (sessionStorage.getItem('g90_ok') === '1' ? 'staff-home' : 'pin') : 'staff-login'), 0); }
   const who = document.getElementById('staff-who');
   if(who) who.innerHTML = u ? `<span class="status-dot"></span>${esc(u.email||'')}` : '';
 });
@@ -1023,12 +1052,13 @@ async function staffLogin(){
   try{
     await auth.signInWithEmailAndPassword(email, pass);
     document.getElementById('staff-pass').value = '';
-    goTo('staff-panel');
+    unlockPanel();
   }catch(e){
     errEl.textContent = friendlyError(e);
   }finally{ btn.disabled = false; }
 }
 async function staffLogout(){
+  try{ sessionStorage.removeItem('g90_ok'); }catch(e){}
   stopScanner();
   await auth.signOut().catch(()=>{});
   document.getElementById('staff-result').innerHTML = '';
@@ -1242,7 +1272,6 @@ function msgFor(c){
 function renderClientesList(){
   const holder = document.getElementById('clientes-list');
   const grp = groupList();
-  document.getElementById('grp').innerHTML = '<b>' + grp.length + '</b> ' + (grp.length === 1 ? 'cliente recibirá' : 'clientes recibirán') + ' este mensaje';
   if(!allClientes.length){ holder.innerHTML = '<p class="hint">Todavía no hay clientes registrados.</p>'; return; }
   const q = (document.getElementById('clientes-search').value || '').trim().toLowerCase();
   const list = grp.filter(c => !q || ((c.name||'') + ' ' + (c.phone||'')).toLowerCase().includes(q));
@@ -1362,8 +1391,49 @@ document.addEventListener('click', e => {
   staffLookup();
   document.getElementById('staff-phone').scrollIntoView({ behavior:'smooth', block:'center' });
 });
+
+/* ---------- PIN y menú ---------- */
+function cyrb53(str,seed=0){let h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(let i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677);}h1=Math.imul(h1^(h1>>>16),2246822507);h1^=Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507);h2^=Math.imul(h1^(h1>>>13),3266489909);return 4294967296*(2097151&h2)+(h1>>>0);}
+const PIN_HASH = 2023010968136785;
+let pinBuf = '', pinFails = 0, pinLockUntil = 0;
+function pinPaint(){ document.querySelectorAll('#pinDots i').forEach((d,i) => d.classList.toggle('on', i < pinBuf.length)); }
+function unlockPanel(){ try{ sessionStorage.setItem('g90_ok','1'); }catch(e){} pinBuf=''; pinFails=0; goTo('staff-home'); }
+function lockPanel(){ try{ sessionStorage.removeItem('g90_ok'); }catch(e){} stopScanner(); pinBuf=''; goTo('pin'); }
+function openMode(m){ staffMode = m; goTo('staff-panel'); }
+document.getElementById('keypad').addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b) return;
+  const k = b.getAttribute('data-k'), err = document.getElementById('pinErr');
+  if(k === 'out'){ staffLogout(); return; }
+  if(Date.now() < pinLockUntil){ err.textContent = 'Espera ' + Math.ceil((pinLockUntil - Date.now())/1000) + ' segundos.'; return; }
+  if(k === 'del'){ pinBuf = pinBuf.slice(0,-1); err.textContent=''; pinPaint(); return; }
+  if(pinBuf.length >= 4) return;
+  pinBuf += k; err.textContent = ''; pinPaint();
+  if(pinBuf.length === 4){
+    if(cyrb53('gold90-owner:' + pinBuf) === PIN_HASH){ setTimeout(unlockPanel, 160); }
+    else{
+      pinFails++; const dots = document.getElementById('pinDots'); dots.classList.add('bad');
+      setTimeout(() => { dots.classList.remove('bad'); pinBuf=''; pinPaint(); }, 450);
+      if(pinFails >= 5){ pinLockUntil = Date.now() + 30000; pinFails = 0; err.textContent = 'Demasiados intentos. Espera 30 segundos.'; }
+      else err.textContent = 'PIN incorrecto';
+    }
+  }
+});
+document.addEventListener('keydown', e => {
+  if(!document.getElementById('screen-pin').classList.contains('active')) return;
+  if(/^[0-9]$/.test(e.key)) document.querySelector('#keypad [data-k="'+e.key+'"]').click();
+  else if(e.key === 'Backspace') document.querySelector('#keypad [data-k="del"]').click();
+});
+async function loadHome(){
+  const h = new Date().getHours();
+  document.getElementById('hHello').textContent = 'Hola, jefe';
+  document.getElementById('hDate').textContent = (h < 12 ? 'Buenos días' : (h < 19 ? 'Buenas tardes' : 'Buenas noches')) + ' · ' + new Date().toLocaleDateString('es-CO', { day:'numeric', month:'long' });
+  await loadClients();
+  const n = allClientes.filter(c => (c.stamps||0) >= TOTAL_STAMPS).length;
+  document.getElementById('hReady').textContent = n ? (n + (n===1?' tarjeta completa':' tarjetas completas')) : 'Ninguna tarjeta completa todavía';
+}
+
 const _goTo = goTo;
-goTo = function(id){ _goTo(id); document.body.classList.toggle('in-panel', id === 'staff-panel'); if(id === 'staff-panel'){ setMode(staffMode); loadClients(); } else { ['sumar','promo','canjear'].forEach(k => document.body.classList.remove('m-' + k)); } };
+goTo = function(id){ _goTo(id); document.body.classList.toggle('in-panel', id === 'staff-panel'); if(id === 'staff-panel'){ setMode(staffMode); loadClients(); } else { ['sumar','promo','canjear'].forEach(k => document.body.classList.remove('m-' + k)); } if(id === 'staff-home') loadHome(); if(id === 'pin'){ pinBuf=''; pinPaint(); } };
 
 renderInstallBanner();
 </script>
