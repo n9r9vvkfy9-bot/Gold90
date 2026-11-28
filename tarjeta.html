@@ -301,6 +301,27 @@ body.tier-black::before{opacity:0}
 .fxp svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6))}
 .fxp b{font-family:Georgia,serif;font-size:22px;color:#fff;text-shadow:0 0 10px rgba(255,255,255,.7),0 2px 4px rgba(0,0,0,.6)}
 @keyframes fxp{0%{transform:translate(var(--x),var(--y)) scale(.3) rotate(0);opacity:0}15%{opacity:1}100%{transform:translate(calc(var(--x) + var(--dx)),calc(var(--y) + var(--dy))) scale(1) rotate(var(--rot));opacity:0}}
+
+/* ---------- Galería de niveles ---------- */
+.lvls{margin-bottom:6px}
+.nv{--a:#f7e7a6;--b:#d4af37;--ring:rgba(212,175,55,.5);--bg:linear-gradient(135deg,#2a1d06,#0a0703);
+  position:relative;display:block;width:100%;text-align:left;border:none;border-radius:22px;padding:18px 20px;margin-bottom:14px;aspect-ratio:1.85;overflow:hidden;cursor:pointer;color:#fff;font-family:inherit;
+  background:var(--bg);box-shadow:0 16px 34px rgba(0,0,0,.55),0 0 0 1px var(--ring);transition:transform .2s}
+.nv:active{transform:scale(.985)}
+.nv.black{--a:#ffffff;--b:#9a9aa0;--ring:rgba(255,255,255,.4);--bg:linear-gradient(135deg,#1c1c1e,#000)}
+.nv.legend{--a:#ffffff;--b:#8fd3ff;--ring:rgba(143,211,255,.6);--bg:linear-gradient(135deg,#143a63,#050b16)}
+.nv::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.12) 50%,transparent 60%);transform:translateX(-100%);animation:nvSheen 6s ease-in-out infinite}
+@keyframes nvSheen{0%,55%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.nv-h{position:absolute;left:20px;top:18px;display:flex;align-items:center;gap:10px}
+.nvchip{width:32px;height:24px;border-radius:5px;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:inset 0 0 0 1px rgba(0,0,0,.28)}
+.nv-h b{font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:.2em;font-size:19px;background:linear-gradient(180deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+.nv-b{position:absolute;left:20px;bottom:16px}
+.nv-b strong{display:block;font-family:'Oswald',sans-serif;font-weight:500;font-size:30px;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(180deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
+.nv-b span{font-size:12.5px;color:rgba(255,255,255,.65)}
+.nv-cur{display:none;position:absolute;right:16px;top:16px;font-style:normal;font-size:11px;letter-spacing:.14em;font-weight:800;text-transform:uppercase;color:#111;background:linear-gradient(180deg,var(--a),var(--b));padding:6px 12px;border-radius:999px}
+.nv.cur .nv-cur{display:block}
+.nv-tip{text-align:center;font-size:12.5px;color:var(--dim);margin:0 0 30px}
+.demo{margin:0 0 14px;padding:9px 14px;border-radius:12px;font-size:12.5px;text-align:center;color:var(--g1);border:1px dashed rgba(var(--gr),.5);background:rgba(var(--gr),.08)}
 </style>
 </head>
 <body>
@@ -356,6 +377,7 @@ body.tier-black::before{opacity:0}
       <button class="ib" id="profBtn" type="button" aria-label="Mi perfil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.2 18.2c1.2-2.2 3.2-3.2 5.8-3.2s4.6 1 5.8 3.2"/></svg></button>
     </div>
   </div>
+  <div class="demo" id="demo" style="display:none">Modo demostración: datos de ejemplo</div>
   <div class="net" id="net">Sin conexión. Revisa tu internet.</div>
 
   <!-- Vista: tarjeta -->
@@ -392,6 +414,13 @@ body.tier-black::before{opacity:0}
       <div class="rule"><div class="n">+1</div><div><b>Recomienda a alguien</b><span>Si un amigo o familiar compra y dice que viene de tu parte, ganas 1 sello.</span></div></div>
       <div class="rule"><div class="n">10</div><div><b>Camiseta gratis</b><span>Con 10 sellos canjeas una camiseta sin costo.</span></div></div>
     </div>
+    <div class="sec-t" style="margin-top:6px">Niveles</div>
+    <div class="lvls" id="lvls">
+      <button class="nv gold" data-t="gold" type="button"><div class="nv-h"><i class="nvchip"></i><b>GOLD90</b></div><div class="nv-b"><strong>Gold</strong><span>Todos empiezan aquí</span></div><em class="nv-cur">Tu nivel</em></button>
+      <button class="nv black" data-t="black" type="button"><div class="nv-h"><i class="nvchip"></i><b>GOLD90</b></div><div class="nv-b"><strong>Black</strong><span>Con tu 1.ª camiseta canjeada</span></div><em class="nv-cur">Tu nivel</em></button>
+      <button class="nv legend" data-t="legend" type="button"><div class="nv-h"><i class="nvchip"></i><b>GOLD90</b></div><div class="nv-b"><strong>Legend</strong><span>Con tu 3.ª camiseta canjeada</span></div><em class="nv-cur">Tu nivel</em></button>
+    </div>
+    <p class="nv-tip">Toca una tarjeta para ver cómo se ve ese nivel.</p>
     <div class="foot">GOLD90 · Naturalmente la manada más gold<br><a href="sellos.html">Soy GOLD90</a></div>
   </section>
 </main>
@@ -446,6 +475,7 @@ body.tier-black::before{opacity:0}
     var t=tierOf(n),nx=nextTier(n);
     document.body.classList.remove('tier-gold','tier-black','tier-legend');document.body.classList.add('tier-'+t.k);
     $('tTier').textContent=t.name;
+    document.querySelectorAll('.nv').forEach(function(el){el.classList.toggle('cur',el.getAttribute('data-t')===t.k)});
     var canj=n+(n===1?' camiseta canjeada':' camisetas canjeadas');
     $('tNext').textContent=nx?(nx.min-n)+(nx.min-n===1?' canje':' canjes')+' para '+nx.name:'Nivel máximo';
     if(prevTierK&&prevTierK!==t.k){say('Subiste a nivel '+t.name);sparks()}
@@ -662,6 +692,14 @@ body.tier-black::before{opacity:0}
     },{passive:true});
   })();
 
+  /* ---- Vista previa de niveles ---- */
+  $('lvls').addEventListener('click',function(e){
+    var b=e.target.closest('.nv');if(!b)return;
+    var k=b.getAttribute('data-t');
+    document.body.classList.remove('tier-gold','tier-black','tier-legend');document.body.classList.add('tier-'+k);
+    say('Vista previa: '+k.charAt(0).toUpperCase()+k.slice(1));window.scrollTo({top:0,behavior:'smooth'});
+  });
+
   /* ---- Pestañas y panel de perfil ---- */
   function view(v){
     document.querySelectorAll('.view').forEach(function(el){el.classList.toggle('on',el.id==='v-'+v)});
@@ -689,6 +727,14 @@ body.tier-black::before{opacity:0}
     }catch(e){}
   })();
 
+  /* Modo demostración: ?demo=gold|black|legend&sellos=7 (no usa Firebase ni guarda nada) */
+  var qs=new URLSearchParams(location.search);
+  if(qs.has('demo')){
+    var dk=qs.get('demo')||'gold',rcs={gold:0,black:1,legend:3},dst=Math.max(0,Math.min(10,parseInt(qs.get('sellos'),10)||7));
+    intro.classList.add('out');$('app').classList.add('show');$('demo').style.display='block';
+    showCard({phone:'3000000000',name:'Cliente Demo',stamps:dst,rewardsClaimed:rcs[dk]!=null?rcs[dk]:0});
+    return;
+  }
   var c=getClient();
   if(c&&c.phone){intro.classList.add('out');$('app').classList.add('show');listen(c.phone,c.name)}
   else{steps=[0,1,3,2];bar();go(0);document.body.classList.add('intro-open');document.body.style.overflow='hidden'}
