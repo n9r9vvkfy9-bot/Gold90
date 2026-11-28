@@ -418,6 +418,7 @@ body.tier-black::before{opacity:0}
 .sp-txt{font-size:14px;color:rgba(243,234,210,.62);letter-spacing:.04em;min-height:20px;transition:opacity .25s}
 .sp-foot{position:absolute;bottom:calc(26px + env(safe-area-inset-bottom));font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(212,175,55,.45)}
 #splash.done .sp-fg{stroke:#f7e7a6;filter:drop-shadow(0 0 14px rgba(247,231,166,.85))}
+.nv{cursor:default}.nv:active{transform:none}
 </style>
 </head>
 <body>
@@ -536,11 +537,11 @@ body.tier-black::before{opacity:0}
     </div>
     <div class="sec-t" style="margin-top:6px">Niveles</div>
     <div class="lvls" id="lvls">
-      <button class="nv gold" data-t="gold" type="button"><div class="nv-h"><i class="nvchip"></i><b>GOLD90</b></div><div class="nv-b"><strong>Gold</strong><span>Todos empiezan aquí</span></div><em class="nv-cur">Tu nivel</em></button>
-      <button class="nv legend" data-t="legend" type="button"><div class="nv-h"><i class="nvchip"></i><b>GOLD90</b></div><div class="nv-b"><strong>Azul</strong><span>Con tu 1.ª camiseta canjeada</span></div><em class="nv-cur">Tu nivel</em></button>
-      <button class="nv black" data-t="black" type="button"><div class="nv-h"><i class="nvchip"></i><b>GOLD90</b></div><div class="nv-b"><strong>Black</strong><span>Con tu 3.ª camiseta canjeada · el mejor</span></div><em class="nv-cur">Tu nivel</em></button>
+      <div class="nv gold" data-t="gold" type="button"><div class="nv-h"><i class="nvchip"></i><b>GOLD90</b></div><div class="nv-b"><strong>Gold</strong><span>Todos empiezan aquí</span></div><em class="nv-cur">Tu nivel</em></div>
+      <div class="nv legend" data-t="legend" type="button"><div class="nv-h"><i class="nvchip"></i><b>GOLD90</b></div><div class="nv-b"><strong>Azul</strong><span>Con tu 1.ª camiseta canjeada</span></div><em class="nv-cur">Tu nivel</em></div>
+      <div class="nv black" data-t="black" type="button"><div class="nv-h"><i class="nvchip"></i><b>GOLD90</b></div><div class="nv-b"><strong>Black</strong><span>Con tu 3.ª camiseta canjeada · el mejor</span></div><em class="nv-cur">Tu nivel</em></div>
     </div>
-    <p class="nv-tip">Toca una tarjeta para ver cómo se ve ese nivel.</p>
+    <p class="nv-tip">Tu nivel sube cuando canjeas tus camisetas.</p>
     <div class="foot">GOLD90 · Naturalmente la manada más gold</div>
   </section>
 </main>
@@ -865,14 +866,6 @@ body.tier-black::before{opacity:0}
       burst(e.clientX,e.clientY);
     },{passive:true});
   })();
-
-  /* ---- Vista previa de niveles ---- */
-  $('lvls').addEventListener('click',function(e){
-    var b=e.target.closest('.nv');if(!b)return;
-    var k=b.getAttribute('data-t');
-    document.body.classList.remove('tier-gold','tier-black','tier-legend');document.body.classList.add('tier-'+k);
-    say('Vista previa: '+({gold:'Gold',legend:'Azul',black:'Black'})[k]);window.scrollTo({top:0,behavior:'smooth'});
-  });
 
   /* ---- Pestañas y panel de perfil ---- */
   function view(v){
