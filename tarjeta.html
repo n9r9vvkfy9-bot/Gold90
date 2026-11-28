@@ -397,6 +397,9 @@ body.tier-black::before{opacity:0}
 .mini.t-legend .m-since{top:auto;bottom:18cqw;right:6cqw}
 .mini.t-legend .m-name{font-size:5.4cqw;bottom:5cqw;right:34cqw}
 .mini.t-legend .m-big{left:-6cqw;top:-8cqw;width:50cqw;height:68cqw}
+.mini.t-black .m-nfc,.mini.t-black .m-last,.mini.t-black .m-since{text-shadow:0 1px 3px #000,0 0 8px #000}
+.mini.t-black .m-tier{text-shadow:0 1px 4px #000,0 0 10px #000}
+.mini.t-black .m-med{z-index:2}
 </style>
 </head>
 <body>
@@ -616,15 +619,30 @@ body.tier-black::before{opacity:0}
       '<path d="M18 112q32 14 64 0" fill="none" stroke="'+fg+'" stroke-width="2" stroke-opacity=".55"/></svg>';
   }
   function foliage(){
-    var r=7,rnd=function(){r=(r*9301+49297)%233280;return r/233280},h='';
-    var gs=['#1f6b2c','#2e8a3a','#14502a','#4aa352','#0f3d22'];
-    for(var i=0;i<46;i++){
-      var x=150+rnd()*130,y=40+rnd()*100,rot=rnd()*360,rx=5+rnd()*8,ry=2.4+rnd()*3.4;
-      h+='<ellipse cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" rx="'+rx.toFixed(1)+'" ry="'+ry.toFixed(1)+'" transform="rotate('+rot.toFixed(0)+' '+x.toFixed(1)+' '+y.toFixed(1)+')" fill="'+gs[i%gs.length]+'" opacity="'+(.7+rnd()*.3).toFixed(2)+'"/>';
+    var r=11,rnd=function(){r=(r*9301+49297)%233280;return r/233280},h='';
+    var gs=['#0d3a1e','#12502a','#1a6a34','#237a3e','#2f8f4a','#0a2b16','#3aa35a'];
+    function leaf(x,y,rot,len,wid,col,op){
+      return '<g transform="translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+rot.toFixed(0)+')" opacity="'+op.toFixed(2)+'"><path d="M0 0C'+(len*.3).toFixed(1)+' '+(-wid).toFixed(1)+' '+(len*.75).toFixed(1)+' '+(-wid*.9).toFixed(1)+' '+len.toFixed(1)+' 0C'+(len*.75).toFixed(1)+' '+(wid*.9).toFixed(1)+' '+(len*.3).toFixed(1)+' '+wid.toFixed(1)+' 0 0z" fill="'+col+'"/><path d="M0 0L'+(len*.92).toFixed(1)+' 0" stroke="rgba(255,255,255,.18)" stroke-width=".7"/></g>';
     }
-    var fl=[['#7fb2ff',262,38],['#ff9bb5',275,112],['#ffd166',178,122],['#ffffff',232,64]];
-    fl.forEach(function(f){h+='<circle cx="'+f[1]+'" cy="'+f[2]+'" r="3.4" fill="'+f[0]+'"/><circle cx="'+f[1]+'" cy="'+f[2]+'" r="1.2" fill="#ffe27a"/>'});
-    return '<svg class="m-fol" viewBox="0 0 300 190" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;pointer-events:none;-webkit-mask:linear-gradient(100deg,transparent 28%,#000 62%);mask:linear-gradient(100deg,transparent 28%,#000 62%)">'+h+'</svg>';
+    /* masa de hojas en la parte baja y derecha */
+    for(var i=0;i<150;i++){
+      var x=40+rnd()*270,y=60+rnd()*140;
+      if(y<110&&x<150)continue;
+      h+=leaf(x,y,rnd()*360,10+rnd()*20,3+rnd()*5,gs[Math.floor(rnd()*gs.length)],.75+rnd()*.25);
+    }
+    /* enredaderas arriba a la derecha */
+    var vines=[[300,8,220,40,-30],[285,2,235,26,-60],[270,30,215,70,-10]];
+    vines.forEach(function(v,vi){
+      h+='<path d="M'+v[0]+' '+v[1]+'Q'+(v[0]-35)+' '+(v[1]+22)+' '+v[2]+' '+v[3]+'" fill="none" stroke="#1d6b34" stroke-width="1.3" stroke-linecap="round"/>';
+      for(var j=0;j<7;j++){var t=j/6,px=v[0]+(v[2]-v[0])*t,py=v[1]+(v[3]-v[1])*t+Math.sin(t*3.14)*10;h+=leaf(px,py,v[4]+(j%2?60:-60)+rnd()*30,7+rnd()*7,2.4+rnd()*2,gs[3+Math.floor(rnd()*3)],.95)}
+    });
+    /* flores con pétalos */
+    var fl=[['#8fb6ff',276,26,5.2],['#ffa3bf',296,60,5.8],['#ffd36b',196,126,5.2],['#ffffff',236,92,4.8],['#ff8fb0',150,150,5],['#9ec5ff',256,150,4.6],['#fff3b0',308,118,4.4],['#ffb199',214,36,4.2]];
+    fl.forEach(function(f){
+      for(var k=0;k<5;k++){var a2=k*72*Math.PI/180;h+='<circle cx="'+(f[1]+Math.cos(a2)*f[3]*.9).toFixed(1)+'" cy="'+(f[2]+Math.sin(a2)*f[3]*.9).toFixed(1)+'" r="'+(f[3]*.62).toFixed(1)+'" fill="'+f[0]+'" opacity=".95"/>'}
+      h+='<circle cx="'+f[1]+'" cy="'+f[2]+'" r="'+(f[3]*.42).toFixed(1)+'" fill="#ffd84d"/>';
+    });
+    return '<svg class="m-fol" viewBox="0 0 320 202" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;pointer-events:none;-webkit-mask:linear-gradient(105deg,transparent 22%,rgba(0,0,0,.55) 40%,#000 60%);mask:linear-gradient(105deg,transparent 22%,rgba(0,0,0,.55) 40%,#000 60%)">'+h+'</svg>';
   }
   function renderMini(c){
     var st=Math.min(TOTAL,c.stamps||0),t=tierOf(c.rewardsClaimed||0),k=t.k,ph=String(c.phone||''),
