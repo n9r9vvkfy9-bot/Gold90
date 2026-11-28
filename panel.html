@@ -485,6 +485,31 @@
   .wa{ flex:none; width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold-bright); border:1px solid rgba(212,175,55,.45); background:rgba(212,175,55,.08); }
   .wa:active{ transform:scale(.94); }
   #clientes-search{ margin-bottom:14px; }
+
+/* ---------- Tablero del dueño ---------- */
+.dash{margin:4px 0 22px}
+.d-hero{position:relative;overflow:hidden;isolation:isolate;border-radius:26px;padding:22px 22px 20px;margin-bottom:12px;color:#3d2a06;
+  background:linear-gradient(135deg,#f6dc8a 0%,#e0b447 28%,#f7e29a 50%,#c99a33 76%,#eccd6a 100%);box-shadow:0 22px 46px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.2)}
+.d-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-radial-gradient(circle at 50% 135%,rgba(90,60,8,.18) 0 .5px,transparent .5px 6px),repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px)}
+.d-hero span{display:block;font-size:12px;letter-spacing:.26em;text-transform:uppercase;font-weight:800;opacity:.75}
+.d-hero b{display:block;font-family:'Oswald',sans-serif;font-weight:600;font-size:64px;line-height:1.05;margin-top:4px;text-shadow:0 1px 0 rgba(255,244,200,.8)}
+.d-hero small{font-size:13px;font-weight:600;opacity:.75}
+.d-ring{position:absolute;right:18px;top:50%;width:92px;height:92px;margin-top:-46px}
+.d-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.d-ring circle{fill:none;stroke-width:9}
+.d-ring .bg{stroke:rgba(61,42,6,.18)}.d-ring .fg{stroke:#3d2a06;stroke-linecap:round;transition:stroke-dashoffset 1.2s cubic-bezier(.2,.8,.2,1)}
+.d-ring i{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-style:normal;font-family:'Oswald',sans-serif;font-weight:600;font-size:20px}
+.d-tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.d-tile{border-radius:20px;padding:16px 16px 14px;background:linear-gradient(160deg,#1c1a17,#0f0e0c);box-shadow:0 12px 26px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.05),0 0 0 1px rgba(212,175,55,.14)}
+.d-tile b{display:block;font-family:'Oswald',sans-serif;font-weight:600;font-size:34px;line-height:1.1;background:linear-gradient(180deg,var(--gold-bright),var(--gold) 60%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+.d-tile span{font-size:12.5px;color:var(--cream-dim)}
+.d-tile.hot{box-shadow:0 12px 26px rgba(0,0,0,.45),0 0 0 1px rgba(212,175,55,.55),0 0 26px rgba(212,175,55,.2)}
+.sec-t2{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 2px 12px}
+.n-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;margin-bottom:9px;border-radius:16px;border:1px solid rgba(212,175,55,.18);background:rgba(212,175,55,.035);color:inherit;font-family:inherit;cursor:pointer}
+.n-row .av{flex:none}
+.n-row .ci{flex:1;min-width:0}
+.n-row .miss{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--gold-bright);border:1px solid rgba(212,175,55,.45);border-radius:999px;padding:6px 10px}
+.n-empty{font-size:13px;color:var(--cream-dim);padding:6px 2px}
 </style>
 </head>
 <body>
@@ -564,9 +589,26 @@
       <span></span>
       <button class="back" onclick="staffLogout()">Cerrar sesión</button>
     </div>
-    <div class="eyebrow">Panel del equipo</div>
-    <div class="landing-title" style="text-align:left; margin-bottom:6px;">Sumar sellos</div>
+    <div class="eyebrow" id="dDate">Panel del dueño</div>
+    <div class="landing-title" style="text-align:left; margin-bottom:6px;" id="dHello">Hola</div>
     <p class="who" id="staff-who"></p>
+
+    <div class="dash" id="dash">
+      <div class="d-hero">
+        <span>Clientes GOLD90</span>
+        <b id="dClients">–</b>
+        <small id="dClientsSub">cargando...</small>
+        <div class="d-ring" id="dRing"></div>
+      </div>
+      <div class="d-tiles">
+        <div class="d-tile"><b id="dStamps">–</b><span>Sellos en circulación</span></div>
+        <div class="d-tile hot"><b id="dReady">–</b><span>Listas para canjear</span></div>
+        <div class="d-tile"><b id="dNear">–</b><span>A 1 o 2 sellos</span></div>
+        <div class="d-tile"><b id="dGiven">–</b><span>Camisetas entregadas</span></div>
+      </div>
+      <div class="sec-t2">Casi completan su camiseta</div>
+      <div id="dNearList"></div>
+    </div>
 
     <button class="scan-btn" id="scan-toggle-btn" onclick="toggleScanner()">
       <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 012-2h2M16 4h2a2 2 0 012 2v2M20 16v2a2 2 0 01-2 2h-2M8 20H6a2 2 0 01-2-2v-2"/><path d="M8 12h8"/></svg></span>
@@ -1138,6 +1180,55 @@ async function copyAllPhones(){
   const el = document.getElementById(id);
   if(el) el.addEventListener('keydown', e => { if(e.key === 'Enter') fn(); });
 });
+
+
+/* ---------- Tablero del dueño ---------- */
+function ownerHello(){
+  const h = new Date().getHours();
+  const g = h < 12 ? 'Buenos días' : (h < 19 ? 'Buenas tardes' : 'Buenas noches');
+  document.getElementById('dHello').textContent = g + ', jefe';
+  document.getElementById('dDate').textContent = new Date().toLocaleDateString('es-CO', { weekday:'long', day:'numeric', month:'long' });
+}
+async function loadDash(){
+  if(!staffUser) return;
+  ownerHello();
+  try{
+    const snap = await db.collection(COL).get();
+    const list = snap.docs.map(d => d.data());
+    allClientes = list.slice().sort((a,b) => (b.stamps||0) - (a.stamps||0));
+    const n = list.length;
+    const stamps = list.reduce((t,c) => t + Math.min(TOTAL_STAMPS, c.stamps||0), 0);
+    const ready = list.filter(c => (c.stamps||0) >= TOTAL_STAMPS).length;
+    const near = list.filter(c => { const s = c.stamps||0; return s >= TOTAL_STAMPS-2 && s < TOTAL_STAMPS; });
+    const given = list.reduce((t,c) => t + (c.rewardsClaimed||0), 0);
+    const active = list.filter(c => (c.stamps||0) > 0).length;
+    document.getElementById('dClients').textContent = n;
+    document.getElementById('dClientsSub').textContent = n ? (active + ' con sellos activos') : 'Aún no hay clientes';
+    document.getElementById('dStamps').textContent = stamps;
+    document.getElementById('dReady').textContent = ready;
+    document.getElementById('dNear').textContent = near.length;
+    document.getElementById('dGiven').textContent = given;
+    const pct = n ? Math.round(active / n * 100) : 0, C = 2 * Math.PI * 38;
+    document.getElementById('dRing').innerHTML = '<svg viewBox="0 0 92 92"><circle class="bg" cx="46" cy="46" r="38"/><circle class="fg" cx="46" cy="46" r="38" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'"/></svg><i>'+pct+'%</i>';
+    requestAnimationFrame(() => requestAnimationFrame(() => { const fg = document.querySelector('#dRing .fg'); if(fg) fg.style.strokeDashoffset = C * (1 - pct/100); }));
+    const nl = document.getElementById('dNearList');
+    const top = list.filter(c => (c.stamps||0) >= TOTAL_STAMPS-2).sort((a,b) => (b.stamps||0) - (a.stamps||0)).slice(0,6);
+    nl.innerHTML = top.length ? top.map(c => {
+      const st = Math.min(TOTAL_STAMPS, c.stamps||0), miss = TOTAL_STAMPS - st;
+      return `<button class="n-row" data-p="${esc(c.phone)}"><div class="av">${esc((c.name||'?').trim().charAt(0).toUpperCase()||'?')}</div><div class="ci"><div class="cn">${esc(c.name||'Sin nombre')}</div><div class="cp">${esc(c.phone)} · ${st}/${TOTAL_STAMPS}</div></div><div class="miss">${miss ? 'Falta'+(miss>1?'n ':' ')+miss : 'Lista'}</div></button>`;
+    }).join('') : '<div class="n-empty">Nadie está cerca todavía. Cuando alguien llegue a 8 sellos aparecerá aquí.</div>';
+  }catch(e){
+    document.getElementById('dClientsSub').textContent = 'No se pudo cargar. ' + friendlyError(e);
+  }
+}
+document.addEventListener('click', e => {
+  const r = e.target.closest('.n-row'); if(!r) return;
+  document.getElementById('staff-phone').value = r.getAttribute('data-p');
+  staffLookup();
+  document.getElementById('staff-phone').scrollIntoView({ behavior:'smooth', block:'center' });
+});
+const _goTo = goTo;
+goTo = function(id){ _goTo(id); if(id === 'staff-panel') loadDash(); };
 
 renderInstallBanner();
 </script>
