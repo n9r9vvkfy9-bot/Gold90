@@ -239,8 +239,27 @@ body.intro-open .dock,body.intro-open .rings{display:none}
 .sh-tip{margin-top:18px;font-size:12.5px;color:var(--dim);line-height:1.55}
 
 /* ---------- Niveles ---------- */
-body.tier-black{--g1:#f4f6fa;--g2:#c7ccd6;--g3:#8b919d;--g4:#474b55;--gr:199,204,214;--gl:244,246,250}
-body.tier-legend{--g1:#fbdccb;--g2:#dc9b7d;--g3:#a8664a;--g4:#5d3322;--gr:220,155,125;--gl:251,220,203}
+/* BLACK: negro puro, monedas de ónix y filo blanco */
+body.tier-black{--g1:#ffffff;--g2:#dcdce0;--g3:#8e8e94;--g4:#2e2e31;--gr:255,255,255;--gl:255,255,255}
+body.tier-black .card{background:repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 1px,transparent 1px 9px),radial-gradient(120% 80% at 100% 0%,rgba(255,255,255,.1),transparent 55%),linear-gradient(160deg,#121212 0%,#000 60%,#0b0b0b 100%)}
+body.tier-black .coin.on{background:radial-gradient(circle at 34% 28%,#5a5a5e,#1a1a1c 55%,#000);box-shadow:0 5px 14px rgba(0,0,0,.8),0 0 0 1.5px rgba(255,255,255,.55),inset 0 1px 0 rgba(255,255,255,.35)}
+body.tier-black .coin.on::after{border-color:rgba(255,255,255,.22)}
+body.tier-black .coin.on svg{stroke:#fff}
+body.tier-black .coin.prize.on{color:#fff;background:radial-gradient(circle at 34% 28%,#5a5a5e,#1a1a1c 55%,#000)}
+body.tier-black .chip{background:linear-gradient(135deg,#fff,#9a9aa0 55%,#4a4a4e)}
+body.tier-black .rule .n,body.tier-black .sh-av,body.tier-black .medal{background:radial-gradient(circle at 34% 28%,#fff,#cfcfd4 45%,#7d7d83);color:#111}
+/* LEGEND: cielo, luz celestial */
+body.tier-legend{--g1:#ffffff;--g2:#8fd3ff;--g3:#3b8fd6;--g4:#1b4a7a;--gr:143,211,255;--gl:230,246,255}
+body.tier-legend .card{background:repeating-linear-gradient(135deg,rgba(190,230,255,.045) 0 2px,transparent 2px 9px),radial-gradient(120% 80% at 100% 0%,rgba(143,211,255,.3),transparent 55%),radial-gradient(90% 70% at 0% 100%,rgba(143,211,255,.12),transparent 60%),linear-gradient(160deg,#0f2036 0%,#050b16 58%,#0b1a2e 100%);box-shadow:0 34px 70px rgba(0,0,0,.8),0 0 50px rgba(143,211,255,.22),0 0 0 1px rgba(190,230,255,.25)}
+body.tier-legend .coin.on{background:radial-gradient(circle at 34% 28%,#fff,#bfe6ff 30%,#6cb8f0 62%,#2f7fc4);box-shadow:0 5px 18px rgba(143,211,255,.55),inset 0 -3px 7px rgba(27,74,122,.45),inset 0 1px 0 #fff}
+body.tier-legend .coin.on svg{stroke:#0d3a68}
+body.tier-legend .coin.prize.on{color:#0d3a68}
+body.tier-legend .chip{background:linear-gradient(135deg,#fff,#8fd3ff 50%,#3b8fd6)}
+body.tier-legend .rule .n,body.tier-legend .sh-av,body.tier-legend .medal{color:#0b2e55}
+body.tier-legend .btn-gold,body.tier-legend .toast{color:#06223f}
+body.tier-legend::after{content:"";position:fixed;left:50%;top:-34vh;width:170vmax;height:170vmax;margin-left:-85vmax;z-index:0;pointer-events:none;background:repeating-conic-gradient(from 0deg,rgba(190,230,255,.085) 0 5deg,transparent 5deg 15deg);-webkit-mask:radial-gradient(circle,#000 0,transparent 42%);mask:radial-gradient(circle,#000 0,transparent 42%);animation:rays 120s linear infinite}
+@keyframes rays{to{transform:rotate(360deg)}}
+
 .hs.lvl b{font-size:26px;letter-spacing:.06em;text-transform:uppercase;background:var(--goldtx);-webkit-background-clip:text;background-clip:text;color:transparent}
 body{--foil:linear-gradient(135deg,var(--g1),var(--g3) 28%,var(--g4) 50%,var(--g2) 72%,var(--g1));--goldtx:linear-gradient(180deg,var(--g1),var(--g2) 55%,var(--g3))}
 </style>
