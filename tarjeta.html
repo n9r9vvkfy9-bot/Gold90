@@ -323,19 +323,53 @@ body.tier-black::before{opacity:0}
 .nv-tip{text-align:center;font-size:12.5px;color:var(--dim);margin:0 0 30px}
 .demo{margin:0 0 14px;padding:9px 14px;border-radius:12px;font-size:12.5px;text-align:center;color:var(--g1);border:1px dashed rgba(var(--gr),.5);background:rgba(var(--gr),.08)}
 
-/* ---------- Mini tarjeta resumen ---------- */
-.mini{position:relative;display:block;width:78%;max-width:300px;margin-left:auto!important;margin-right:auto!important;aspect-ratio:1.9;border-radius:18px;padding:0;margin:0 0 16px;overflow:hidden;container-type:inline-size;
-  background:linear-gradient(135deg,#f7de8f 0%,#dcae3e 26%,#f4d97f 47%,#b98a26 72%,#ecc968 100%);color:#4a3408;box-shadow:0 18px 38px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.18)}
-.mini::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px);mix-blend-mode:overlay}
-body.tier-legend .mini{background:linear-gradient(135deg,#f2faff 0%,#a5d8ff 28%,#e6f4ff 50%,#4aa3ee 76%,#c4e6ff 100%);color:#0d3a68}
-body.tier-black .mini{background:linear-gradient(135deg,#34343a 0%,#0c0c0d 38%,#232327 66%,#050505 100%);color:#e6e7ec}
-.m-logo{position:absolute;left:6cqw;top:6cqw;font-family:'Oswald',sans-serif;font-weight:700;font-size:7cqw;letter-spacing:.22em;line-height:1}
-.m-chip{position:absolute;left:6cqw;top:22cqw;width:12cqw;height:9cqw;border-radius:1.8cqw;background:linear-gradient(135deg,#f6e3a0,#c9a042 45%,#8a6a1c);box-shadow:inset 0 0 0 .3cqw rgba(0,0,0,.3)}
-.m-nfc{position:absolute;right:6cqw;top:5.5cqw;width:8cqw;height:8cqw}
-.m-name{position:absolute;left:6cqw;right:40cqw;bottom:6cqw;font-family:'Oswald',sans-serif;font-weight:500;font-size:5cqw;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.m-tier{position:absolute;right:6cqw;bottom:5cqw;text-align:right;line-height:1}
-.m-tier b{display:block;font-family:'Oswald',sans-serif;font-weight:600;font-size:7.4cqw;letter-spacing:.06em}
-.m-tier span{display:block;margin-top:1cqw;font-size:2.6cqw;letter-spacing:.18em;font-weight:700;opacity:.8}
+/* ---------- Mini tarjeta (Wallet) ---------- */
+.mini{position:relative;display:block;width:100%;aspect-ratio:1.586;border-radius:4.2cqw;padding:0;overflow:hidden;container-type:inline-size;box-shadow:0 22px 46px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.14);color:#3d2a06}
+.mini>*{position:absolute}
+.mini .m-bg,.mini .m-guil,.mini .m-frame,.mini .m-fol{inset:0;width:100%;height:100%;pointer-events:none}
+.m-logo{left:0;right:0;top:6.4cqw;text-align:center;font-family:'Oswald',sans-serif;font-weight:700;font-size:7.6cqw;letter-spacing:.2em;line-height:1;text-shadow:0 1px 0 rgba(255,244,200,.7)}
+.m-sub{left:0;right:0;top:15.6cqw;text-align:center;font-family:'Oswald',sans-serif;font-weight:600;font-size:4.6cqw;letter-spacing:.34em;line-height:1}
+.m-chip{left:6.4cqw;top:30cqw;width:13.4cqw;height:10.4cqw;border-radius:2cqw;background:linear-gradient(135deg,#f4f4f6,#b9bcc4 45%,#7d808a);box-shadow:inset 0 0 0 .3cqw rgba(0,0,0,.28),0 .3cqw .6cqw rgba(0,0,0,.3)}
+.m-chip::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,transparent 31%,rgba(40,40,50,.4) 31% 32%,transparent 32% 68%,rgba(40,40,50,.4) 68% 69%,transparent 69%),linear-gradient(0deg,transparent 31%,rgba(40,40,50,.4) 31% 32%,transparent 32% 68%,rgba(40,40,50,.4) 68% 69%,transparent 69%)}
+.m-nfc{right:16.6cqw;top:32cqw;width:6cqw;height:6cqw}
+.m-last{right:6.4cqw;top:32.4cqw;font-family:'Oswald',sans-serif;font-weight:500;font-size:5cqw;letter-spacing:.06em;line-height:1}
+.m-num{left:6.4cqw;right:6.4cqw;top:47.4cqw;font-family:'Oswald',sans-serif;font-weight:500;font-size:8cqw;letter-spacing:.1em;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums;text-shadow:0 1px 0 rgba(255,255,255,.55),0 -1px 0 rgba(0,0,0,.3)}
+.m-med{left:50%;top:21cqw;width:25cqw;height:33cqw;margin-left:-12.5cqw;border-radius:50%;overflow:hidden;box-shadow:0 0 0 .9cqw var(--mc,#2a1c05),0 0 0 1.5cqw var(--mr,#f7e7a6),0 .6cqw 1.6cqw 1.4cqw rgba(0,0,0,.35)}
+.m-med svg{width:100%;height:100%;display:block}
+.m-since{left:50%;margin-left:-10cqw;width:20cqw;bottom:13.2cqw;text-align:center;font-size:2.2cqw;letter-spacing:.14em;font-weight:800;line-height:1}
+.m-since b{display:block;font-family:'Oswald',sans-serif;font-weight:500;font-size:4.2cqw;letter-spacing:.1em;margin-top:.6cqw}
+.m-name{left:6.4cqw;right:44cqw;bottom:6.6cqw;font-family:'Oswald',sans-serif;font-weight:500;font-size:5cqw;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m-tier{right:6.4cqw;bottom:6cqw;text-align:right;line-height:1}
+.m-tier b{display:block;font-family:'Oswald',sans-serif;font-weight:600;font-size:6.6cqw;letter-spacing:.08em}
+.m-tier span{display:block;margin-top:1cqw;font-size:2.4cqw;letter-spacing:.18em;font-weight:700;opacity:.85}
+/* GOLD: lámina de oro con guilloché y marco ornamental */
+.mini.t-gold{--mc:#3a2808;--mr:#fff0b0;background:linear-gradient(135deg,#f6dc8a 0%,#e0b447 28%,#f7e29a 50%,#c99a33 76%,#eccd6a 100%)}
+.mini.t-gold .m-guil{background:repeating-radial-gradient(circle at 50% 135%,rgba(90,60,8,.2) 0 .25cqw,transparent .25cqw 1.5cqw),repeating-radial-gradient(circle at 50% -35%,rgba(255,244,190,.35) 0 .2cqw,transparent .2cqw 1.7cqw)}
+.mini.t-gold .m-frame{border-radius:4.2cqw;box-shadow:inset 0 0 0 1.6cqw #2c1d05,inset 0 0 0 1.9cqw #e9c765,inset 0 0 0 2.5cqw #2c1d05}
+.mini.t-gold .m-frame::after{content:"";position:absolute;inset:.8cqw;border-radius:3.6cqw;border:.5cqw dotted rgba(245,215,120,.75)}
+.mini.t-gold .m-since{color:#3a2808}
+.mini.t-gold .m-sub{color:#3a2808}
+/* AZUL: figura grande, azul vivo */
+.mini.t-legend{--mc:#06308a;--mr:#ffffff;color:#fff;background:linear-gradient(135deg,#7cc0ff 0%,#2d86ee 34%,#1a63d6 62%,#0a43aa 100%)}
+.mini.t-legend .m-bg{background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.35),transparent 55%),radial-gradient(circle at 90% 100%,rgba(0,40,120,.55),transparent 60%)}
+.mini.t-legend .m-big{left:-8cqw;top:-10cqw;width:62cqw;height:84cqw;border-radius:50%;opacity:.35;overflow:hidden;filter:blur(.2px)}
+.mini.t-legend .m-big svg{width:100%;height:100%;display:block}
+.mini.t-legend .m-logo{left:auto;right:6.4cqw;text-align:right;top:6cqw;text-shadow:0 1px 0 rgba(0,40,120,.4)}
+.mini.t-legend .m-sub{left:auto;right:6.4cqw;text-align:right;top:15cqw;letter-spacing:.4em;font-size:4cqw}
+.mini.t-legend .m-med,.mini.t-legend .m-guil,.mini.t-legend .m-frame{display:none}
+.mini.t-legend .m-num{display:none}
+.mini.t-legend .m-since{left:auto;right:6.4cqw;margin-left:0;bottom:22cqw;text-align:right;color:#fff}
+.mini.t-legend .m-chip{top:38cqw}.mini.t-legend .m-nfc{right:auto;left:22cqw;top:40cqw;color:#fff}
+.mini.t-legend .m-last{right:auto;left:30.4cqw;top:40.4cqw}
+.mini.t-legend .m-name{color:#fff;font-size:5.6cqw}
+/* BLACK: negro con follaje y flores */
+.mini.t-black{--mc:#0a0a0a;--mr:#d9d9de;color:#e8e8ed;background:linear-gradient(135deg,#2b2b30 0%,#0b0b0c 40%,#171719 70%,#050505 100%)}
+.mini.t-black .m-guil{background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 .3cqw,transparent .3cqw 1.6cqw)}
+.mini.t-black .m-frame{border-radius:4.2cqw;box-shadow:inset 0 0 0 1.3cqw #000,inset 0 0 0 1.6cqw rgba(190,190,200,.55),inset 0 0 0 2.2cqw #000}
+.mini.t-black .m-logo{text-shadow:0 1px 0 rgba(0,0,0,.9),0 -1px 0 rgba(255,255,255,.3);color:#d9d9de}
+.mini.t-black .m-num{text-shadow:0 1px 0 #000,0 -1px 0 rgba(255,255,255,.3)}
+.mini.t-black .m-chip{background:linear-gradient(135deg,#e8c9bd,#b98f80 45%,#6f4e43)}
+.mini.t-black .m-med{box-shadow:0 0 0 .9cqw #000,0 0 0 1.5cqw rgba(210,210,220,.8),0 .6cqw 1.6cqw 1.4cqw rgba(0,0,0,.6)}
 
 .mini{width:100%;max-width:340px;margin:0 auto 20px!important}
 .dock button{min-width:68px;padding:9px 10px}
@@ -343,6 +377,26 @@ body.tier-black .mini{background:linear-gradient(135deg,#34343a 0%,#0c0c0d 38%,#
 .w-box b{display:block;font-family:'Oswald',sans-serif;font-weight:500;font-size:19px;letter-spacing:.04em;color:var(--g1)}
 .w-box p{margin-top:8px;font-size:14px;line-height:1.6;color:var(--dim)}
 .w-soon{display:inline-block;margin-top:14px;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--g1);border:1px solid rgba(var(--gr),.45);background:rgba(var(--gr),.08)}
+/* ajuste de posiciones (alto de tarjeta = 63cqw) */
+.m-logo{top:4.8cqw;font-size:6.6cqw}
+.m-sub{top:12.6cqw;font-size:3.6cqw}
+.m-med{top:17cqw;width:20cqw;height:26cqw;margin-left:-10cqw}
+.m-chip{top:21cqw;width:12cqw;height:9.4cqw;left:6cqw}
+.m-nfc{top:21.2cqw;right:19cqw;width:5.4cqw;height:5.4cqw}
+.m-last{top:21.4cqw;right:6cqw;font-size:4.6cqw}
+.m-since{left:auto;right:6cqw;margin-left:0;width:auto;bottom:auto;top:31cqw;text-align:right;font-size:2.3cqw;white-space:nowrap}
+.m-since b{display:inline;font-size:3.2cqw;margin:0 0 0 1.2cqw}
+.m-num{top:46cqw;font-size:6.2cqw;left:6cqw;right:6cqw}
+.m-name{bottom:4.4cqw;font-size:4.2cqw;left:6cqw;right:42cqw}
+.m-tier{bottom:4cqw;right:6cqw}
+.m-tier b{font-size:5.8cqw}.m-tier span{font-size:2.2cqw}
+.mini.t-legend .m-logo{top:5cqw}.mini.t-legend .m-sub{top:13cqw}
+.mini.t-legend .m-chip{top:25cqw}
+.mini.t-legend .m-nfc{left:21cqw;top:26.6cqw;right:auto}
+.mini.t-legend .m-last{left:28.6cqw;top:26.8cqw;right:auto}
+.mini.t-legend .m-since{top:auto;bottom:18cqw;right:6cqw}
+.mini.t-legend .m-name{font-size:5.4cqw;bottom:5cqw;right:34cqw}
+.mini.t-legend .m-big{left:-6cqw;top:-8cqw;width:50cqw;height:68cqw}
 </style>
 </head>
 <body>
@@ -550,12 +604,43 @@ body.tier-black .mini{background:linear-gradient(135deg,#34343a 0%,#0c0c0d 38%,#
       '<div class="c-line">'+(done?'<b>Tarjeta completa</b>':'Faltan <b>'+(TOTAL-st)+'</b> para tu camiseta gratis')+'</div>'+
       (done?'<div class="win"><b>Camiseta gratis desbloqueada</b><span>Muestra esta pantalla en GOLD90 para canjearla.</span></div>':'');
   }
-  var NFC='<svg class="m-nfc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 8.5c1.6 2.2 1.6 4.8 0 7"/><path d="M10 6c2.7 3.4 2.7 8.6 0 12"/><path d="M14 3.5c3.8 4.6 3.8 12.4 0 17"/></svg>';
+  var NFC='<svg class="m-nfc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 8.5c1.6 2.2 1.6 4.8 0 7"/><path d="M10 6c2.7 3.4 2.7 8.6 0 12"/><path d="M14 3.5c3.8 4.6 3.8 12.4 0 17"/></svg>';
+  /* Emblema propio de GOLD90: camiseta dentro de un óvalo (no usa marcas de terceros) */
+  function emblem(k){
+    var bg={gold:['#fff3bf','#d9ad3c'],legend:['#cfe9ff','#2f7fd6'],black:['#3a3a40','#0a0a0b']}[k],fg=k==='black'?'#e9e9ee':(k==='legend'?'#0b3a7a':'#3a2808');
+    return '<svg viewBox="0 0 100 132"><defs><radialGradient id="eg'+k+'" cx=".35" cy=".25" r="1"><stop offset="0" stop-color="'+bg[0]+'"/><stop offset="1" stop-color="'+bg[1]+'"/></radialGradient></defs>'+
+      '<rect width="100" height="132" fill="url(#eg'+k+')"/>'+
+      '<g fill="none" stroke="'+fg+'" stroke-opacity=".28" stroke-width="1.2"><ellipse cx="50" cy="66" rx="44" ry="60"/><ellipse cx="50" cy="66" rx="38" ry="54"/></g>'+
+      '<path d="M32 30L12 41l7 20 12-4v48h38V57l12 4 7-20-20-11c-2.4 6.8-9 10.4-18 10.4S34.4 36.8 32 30z" fill="'+fg+'"/>'+
+      '<text x="50" y="92" text-anchor="middle" font-family="Oswald,sans-serif" font-weight="700" font-size="17" fill="'+bg[0]+'">90</text>'+
+      '<path d="M18 112q32 14 64 0" fill="none" stroke="'+fg+'" stroke-width="2" stroke-opacity=".55"/></svg>';
+  }
+  function foliage(){
+    var r=7,rnd=function(){r=(r*9301+49297)%233280;return r/233280},h='';
+    var gs=['#1f6b2c','#2e8a3a','#14502a','#4aa352','#0f3d22'];
+    for(var i=0;i<46;i++){
+      var x=150+rnd()*130,y=40+rnd()*100,rot=rnd()*360,rx=5+rnd()*8,ry=2.4+rnd()*3.4;
+      h+='<ellipse cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" rx="'+rx.toFixed(1)+'" ry="'+ry.toFixed(1)+'" transform="rotate('+rot.toFixed(0)+' '+x.toFixed(1)+' '+y.toFixed(1)+')" fill="'+gs[i%gs.length]+'" opacity="'+(.7+rnd()*.3).toFixed(2)+'"/>';
+    }
+    var fl=[['#7fb2ff',262,38],['#ff9bb5',275,112],['#ffd166',178,122],['#ffffff',232,64]];
+    fl.forEach(function(f){h+='<circle cx="'+f[1]+'" cy="'+f[2]+'" r="3.4" fill="'+f[0]+'"/><circle cx="'+f[1]+'" cy="'+f[2]+'" r="1.2" fill="#ffe27a"/>'});
+    return '<svg class="m-fol" viewBox="0 0 300 190" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;pointer-events:none;-webkit-mask:linear-gradient(100deg,transparent 28%,#000 62%);mask:linear-gradient(100deg,transparent 28%,#000 62%)">'+h+'</svg>';
+  }
   function renderMini(c){
-    var st=Math.min(TOTAL,c.stamps||0),t=tierOf(c.rewardsClaimed||0);
-    $('mini').innerHTML='<div class="m-logo">GOLD90</div>'+NFC+'<div class="m-chip"></div>'+
-      '<div class="m-name">'+esc(c.name||'Cliente GOLD90')+'</div>'+
-      '<div class="m-tier"><b>'+t.name.toUpperCase()+'</b><span>'+st+'/'+TOTAL+' SELLOS</span></div>';
+    var st=Math.min(TOTAL,c.stamps||0),t=tierOf(c.rewardsClaimed||0),k=t.k,ph=String(c.phone||''),
+        last=ph.slice(-4),num=ph.length===10?ph.slice(0,3)+' '+ph.slice(3,6)+' '+ph.slice(6):ph,
+        y=String(new Date().getFullYear()).slice(2),sub={gold:'MEMBER',legend:'MEMBER',black:'MEMBER'}[k];
+    var h='<div class="m-bg"></div><div class="m-guil"></div>';
+    if(k==='legend')h+='<div class="m-big">'+emblem('legend')+'</div>';
+    if(k==='black')h+=foliage();
+    h+='<div class="m-frame"></div><div class="m-logo">GOLD90</div><div class="m-sub">'+({gold:'CLIENTE',legend:'CLIENTE',black:'CLIENTE'})[k]+'</div>'+
+       '<div class="m-med">'+emblem(k)+'</div>'+
+       '<div class="m-chip"></div>'+NFC+'<div class="m-last">'+esc(last)+'</div>'+
+       '<div class="m-num">'+esc(num)+'</div>'+
+       '<div class="m-since">MIEMBRO DESDE<b>'+y+'</b></div>'+
+       '<div class="m-name">'+esc(c.name||'Cliente GOLD90')+'</div>'+
+       '<div class="m-tier"><b>'+t.name.toUpperCase()+'</b><span>'+st+'/'+TOTAL+' SELLOS</span></div>';
+    var m=$('mini');m.className='mini t-'+k;m.innerHTML=h;
   }
   function sparks(){
     var card=$('card').getBoundingClientRect(),x=card.left+card.width/2,y=card.top+card.height/2;
