@@ -1010,7 +1010,7 @@ function renderStaffResult(data, isNew){
     <div class="res foil ${ready?'ready':''}">
       <div class="res-top">
         <div>
-          <div class="res-tag">${isNew ? 'Cliente nuevo' : ('Nivel ' + (rewards>=3?'Legend':rewards>=1?'Black':'Gold') + ' · ' + rewards + (rewards===1?' canje':' canjes'))}</div>
+          <div class="res-tag">${isNew ? 'Cliente nuevo' : ('Nivel ' + (rewards>=3?'Black':rewards>=1?'Azul':'Gold') + ' · ' + rewards + (rewards===1?' canje':' canjes'))}</div>
           <div class="res-name">${esc(data.name || 'Sin nombre')}</div>
           <div class="res-ph">${esc(data.phone)}</div>
         </div>
