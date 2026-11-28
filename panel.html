@@ -510,6 +510,17 @@
 .n-row .ci{flex:1;min-width:0}
 .n-row .miss{flex:none;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--gold-bright);border:1px solid rgba(212,175,55,.45);border-radius:999px;padding:6px 10px}
 .n-empty{font-size:13px;color:var(--cream-dim);padding:6px 2px}
+
+.segs,.tpls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.seg,.tpl{font-family:inherit;font-weight:700;font-size:12.5px;color:var(--cream-dim);background:transparent;border:1px solid rgba(212,175,55,.3);border-radius:999px;padding:9px 14px;cursor:pointer;transition:.18s}
+.seg.on{color:#1a1204;background:linear-gradient(180deg,var(--gold-bright),var(--gold));border-color:transparent}
+.tpl{color:var(--gold-bright);background:rgba(212,175,55,.06)}
+.tpl:active{transform:scale(.97)}
+.grp{margin:2px 0 14px;font-size:14px;color:var(--cream-dim)}
+.grp b{font-family:'Oswald',sans-serif;font-size:22px;color:var(--gold-bright)}
+.bk{border-radius:20px;padding:18px;background:linear-gradient(160deg,#1c1a17,#0f0e0c);box-shadow:0 0 0 1px rgba(212,175,55,.16)}
+.bk p{font-size:13.5px;line-height:1.55;color:var(--cream-dim);margin-bottom:14px}
+.bk .btn{margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -640,17 +651,47 @@
   <!-- STAFF: clientes / promo -->
   <section class="screen" id="screen-staff-clientes">
     <button class="back" onclick="goTo('staff-panel')">&#8249; Volver al panel</button>
-    <div class="eyebrow">Comunidad GOLD90</div>
-    <div class="landing-title" style="text-align:left; margin-bottom:4px;">Clientes</div>
+    <div class="eyebrow">Promociones y clientes</div>
+    <div class="landing-title" style="text-align:left; margin-bottom:4px;">Enviar promoción</div>
     <p class="who" id="clientes-count"></p>
 
-    <label class="field-label">Mensaje de la promoción</label>
-    <textarea class="field" id="promo-msg" rows="3" style="resize:vertical; font-family:inherit;" placeholder="Ej. Descuento del 15% esta semana en GOLD90, aprovecha."></textarea>
-    <button class="btn btn-gold" onclick="copyAllPhones()" style="margin-bottom:6px;">Copiar todos los números</button>
-    <p class="hint" style="margin:0 0 18px;">Pega la lista en una lista de difusión de WhatsApp Business o donde la necesites.</p>
+    <div class="sec-t2">1. Elige a quién</div>
+    <div class="segs" id="segs">
+      <button class="seg on" data-s="todos">Todos</button>
+      <button class="seg" data-s="gold">Gold</button>
+      <button class="seg" data-s="azul">Azul</button>
+      <button class="seg" data-s="black">Black</button>
+      <button class="seg" data-s="cerca">Cerca de su camiseta</button>
+      <button class="seg" data-s="lista">Para canjear</button>
+      <button class="seg" data-s="cero">Sin sellos</button>
+    </div>
+
+    <div class="sec-t2">2. Escribe o elige el mensaje</div>
+    <div class="tpls" id="tpls">
+      <button class="tpl" data-t="Hola {nombre}, esta semana tenemos una promo especial en GOLD90 para ti. Escríbenos y te contamos.">Promo de la semana</button>
+      <button class="tpl" data-t="Hola {nombre}, solo por ser cliente GOLD90 tienes un descuento exclusivo. Muéstranos este mensaje en tu próxima compra.">Descuento exclusivo</button>
+      <button class="tpl" data-t="Hola {nombre}, ya te falta muy poco para tu camiseta gratis en GOLD90. Pasa por tu próximo sello.">Te falta poco</button>
+      <button class="tpl" data-t="Hola {nombre}, ¡completaste tus 10 sellos! Tu camiseta gratis te está esperando en GOLD90.">Camiseta lista</button>
+      <button class="tpl" data-t="Hola {nombre}, llegaron camisetas nuevas a GOLD90. Mira lo nuevo y aprovecha.">Llegó mercancía nueva</button>
+    </div>
+    <textarea class="field" id="promo-msg" rows="4" style="resize:vertical; font-family:inherit;" placeholder="Escribe tu mensaje. Usa {nombre} para poner el nombre de cada cliente."></textarea>
+    <p class="hint" style="margin:-4px 0 14px;text-align:left;">{nombre} se cambia por el nombre de cada cliente.</p>
+
+    <div class="sec-t2">3. Envía</div>
+    <div class="grp" id="grp"></div>
+    <button class="btn btn-gold" onclick="copyAllPhones()" style="margin-bottom:8px;">Copiar los números de este grupo</button>
+    <p class="hint" style="margin:0 0 20px;">Para un mensaje masivo, pega los números en una lista de difusión de WhatsApp Business. O toca el botón de cada cliente para enviarle el mensaje con su nombre.</p>
 
     <input class="field" id="clientes-search" type="search" placeholder="Buscar por nombre o celular" aria-label="Buscar cliente">
     <div id="clientes-list"></div>
+
+    <div class="sec-t2" style="margin-top:26px">Guardar tus datos</div>
+    <div class="bk">
+      <p>Tus clientes ya están guardados en la nube (Firebase). Aun así, descarga una copia de vez en cuando para tenerla en tu celular o computador.</p>
+      <button class="btn btn-ghost" onclick="exportCSV()">Descargar Excel (clientes)</button>
+      <button class="btn btn-ghost" onclick="exportVCF()">Descargar contactos del celular</button>
+      <button class="btn btn-ghost" onclick="exportJSON()">Copia de seguridad completa</button>
+    </div>
   </section>
 
   <footer class="tag">GOLD90 · Naturalmente la manada más gold</footer>
@@ -1135,23 +1176,44 @@ async function openClientesScreen(){
   try{
     const snap = await db.collection(COL).get();
     allClientes = snap.docs.map(d => d.data()).sort((a,b) => (b.stamps||0) - (a.stamps||0));
-    document.getElementById('clientes-count').textContent = allClientes.length + (allClientes.length===1?' cliente registrado':' clientes registrados');
+    document.getElementById('clientes-count').textContent = allClientes.length + (allClientes.length===1?' cliente registrado':' clientes registrados'); segActive = 'todos'; document.querySelectorAll('.seg').forEach(b => b.classList.toggle('on', b.getAttribute('data-s')==='todos'));
     renderClientesList();
   }catch(e){
     holder.innerHTML = '<p class="hint">No pudimos cargar la lista. ' + esc(friendlyError(e)) + '</p>';
   }
 }
 function waNumber(phone){ return phone.length === 10 ? '57' + phone : phone; }
+let segActive = 'todos';
+function tierName(c){ const r = c.rewardsClaimed||0; return r >= 3 ? 'Black' : (r >= 1 ? 'Azul' : 'Gold'); }
+function inSeg(c){
+  const st = c.stamps||0, t = tierName(c);
+  switch(segActive){
+    case 'gold': return t === 'Gold';
+    case 'azul': return t === 'Azul';
+    case 'black': return t === 'Black';
+    case 'cerca': return st >= TOTAL_STAMPS-2 && st < TOTAL_STAMPS;
+    case 'lista': return st >= TOTAL_STAMPS;
+    case 'cero': return st === 0;
+    default: return true;
+  }
+}
+function groupList(){ return allClientes.filter(inSeg); }
+function msgFor(c){
+  const first = c.name ? c.name.split(' ')[0] : '';
+  const custom = document.getElementById('promo-msg').value.trim();
+  const base = custom || 'Hola {nombre}, tenemos una promo especial en GOLD90 para ti.';
+  return base.replace(/\{nombre\}/gi, first || 'amigo');
+}
 function renderClientesList(){
   const holder = document.getElementById('clientes-list');
+  const grp = groupList();
+  document.getElementById('grp').innerHTML = '<b>' + grp.length + '</b> ' + (grp.length === 1 ? 'cliente recibirá' : 'clientes recibirán') + ' este mensaje';
   if(!allClientes.length){ holder.innerHTML = '<p class="hint">Todavía no hay clientes registrados.</p>'; return; }
-  const custom = document.getElementById('promo-msg').value.trim();
   const q = (document.getElementById('clientes-search').value || '').trim().toLowerCase();
-  const list = allClientes.filter(c => !q || ((c.name||'') + ' ' + (c.phone||'')).toLowerCase().includes(q));
-  if(!list.length){ holder.innerHTML = '<p class="hint">Ningún cliente coincide con la búsqueda.</p>'; return; }
+  const list = grp.filter(c => !q || ((c.name||'') + ' ' + (c.phone||'')).toLowerCase().includes(q));
+  if(!list.length){ holder.innerHTML = '<p class="hint">Ningún cliente en este grupo.</p>'; return; }
   holder.innerHTML = list.map(c => {
-    const first = c.name ? c.name.split(' ')[0] : '';
-    const msg = custom || `¡Hola ${first}! Tenemos una promo especial en GOLD90.`;
+    const msg = msgFor(c);
     const st = Math.min(TOTAL_STAMPS, c.stamps||0);
     const ini = esc((c.name||'?').trim().charAt(0).toUpperCase() || '?');
     return `
@@ -1159,21 +1221,60 @@ function renderClientesList(){
         <div class="av">${ini}</div>
         <div class="ci">
           <div class="cn">${esc(c.name || 'Sin nombre')}</div>
-          <div class="cp">${esc(c.phone)}</div>
+          <div class="cp">${esc(c.phone)} · ${tierName(c)}</div>
           <div class="cbar"><i style="width:${st*10}%"></i></div>
         </div>
         <div class="cs"><b>${st}</b>/${TOTAL_STAMPS}</div>
-        <a class="wa" aria-label="WhatsApp" target="_blank" rel="noopener" href="https://wa.me/${encodeURIComponent(waNumber(c.phone))}?text=${encodeURIComponent(msg)}"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.2-4A8 8 0 1 1 8 18.8z"/></svg></a>
+        <a class="wa" aria-label="Enviar por WhatsApp" target="_blank" rel="noopener" href="https://wa.me/${encodeURIComponent(waNumber(c.phone))}?text=${encodeURIComponent(msg)}"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.2-4A8 8 0 1 1 8 18.8z"/></svg></a>
       </div>`;
   }).join('');
 }
-document.addEventListener('input', e => { if(e.target && (e.target.id === 'promo-msg' || e.target.id === 'clientes-search')) renderClientesList(); });
+document.addEventListener('click', e => {
+  const sg = e.target.closest('.seg');
+  if(sg){ segActive = sg.getAttribute('data-s'); document.querySelectorAll('.seg').forEach(b => b.classList.toggle('on', b === sg)); renderClientesList(); return; }
+  const tp = e.target.closest('.tpl');
+  if(tp){ document.getElementById('promo-msg').value = tp.getAttribute('data-t'); renderClientesList(); }
+});
 async function copyAllPhones(){
-  if(!allClientes.length){ showToast('No hay clientes registrados todavía.'); return; }
-  const list = allClientes.map(c => c.phone).join(', ');
-  try{ await navigator.clipboard.writeText(list); showToast('Números copiados · ' + allClientes.length + ' clientes'); }
+  const g = groupList();
+  if(!g.length){ showToast('No hay clientes en este grupo.'); return; }
+  const list = g.map(c => c.phone).join(', ');
+  try{ await navigator.clipboard.writeText(list); showToast('Números copiados · ' + g.length + ' clientes'); }
   catch(e){ prompt('Copia la lista:', list); }
 }
+
+/* ---------- Guardar tus datos ---------- */
+function dateOf(v){ try{ const d = v && v.toDate ? v.toDate() : (v ? new Date(v) : null); return d && !isNaN(d) ? d : null; }catch(e){ return null; } }
+function iso(v){ const d = dateOf(v); return d ? d.toISOString().slice(0,10) : ''; }
+function download(name, text, type){
+  const url = URL.createObjectURL(new Blob([text], { type }));
+  const a = document.createElement('a'); a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+function stamp(){ return new Date().toISOString().slice(0,10); }
+function needClients(){ if(!allClientes.length){ showToast('Aún no hay clientes para guardar.'); return false; } return true; }
+function exportCSV(){
+  if(!needClients()) return;
+  const q = v => '"' + String(v==null?'':v).replace(/"/g,'""') + '"';
+  const rows = [['Nombre','Celular','WhatsApp','Sellos','Camisetas canjeadas','Nivel','Registrado','Último canje']];
+  allClientes.forEach(c => rows.push([c.name||'', c.phone||'', 'https://wa.me/' + waNumber(c.phone||''), Math.min(TOTAL_STAMPS,c.stamps||0), c.rewardsClaimed||0, tierName(c), iso(c.createdAt), iso(c.lastRedeemAt)]));
+  download('clientes-gold90-' + stamp() + '.csv', '﻿' + rows.map(r => r.map(q).join(';')).join('\r\n'), 'text/csv;charset=utf-8');
+  showToast('Excel descargado · ' + allClientes.length + ' clientes');
+}
+function exportVCF(){
+  if(!needClients()) return;
+  const v = allClientes.map(c => 'BEGIN:VCARD\r\nVERSION:3.0\r\nFN:GOLD90 ' + (c.name||c.phone) + '\r\nN:;GOLD90 ' + (c.name||c.phone) + ';;;\r\nTEL;TYPE=CELL:+' + waNumber(c.phone||'') + '\r\nEND:VCARD').join('\r\n');
+  download('contactos-gold90-' + stamp() + '.vcf', v, 'text/vcard;charset=utf-8');
+  showToast('Contactos descargados · ' + allClientes.length);
+}
+function exportJSON(){
+  if(!needClients()) return;
+  const data = allClientes.map(c => ({ ...c, createdAt: iso(c.createdAt), updatedAt: iso(c.updatedAt), lastRedeemAt: iso(c.lastRedeemAt) }));
+  download('copia-gold90-' + stamp() + '.json', JSON.stringify({ exportado: new Date().toISOString(), total: data.length, clientes: data }, null, 2), 'application/json');
+  showToast('Copia de seguridad descargada');
+}
+document.addEventListener('input', e => { if(e.target && (e.target.id === 'promo-msg' || e.target.id === 'clientes-search')) renderClientesList(); });
 
 /* Enter para enviar */
 [['cli-phone', lookupClient], ['staff-pass', staffLogin], ['staff-phone', staffLookup]].forEach(([id, fn]) => {
