@@ -367,6 +367,20 @@ body.tier-legend .card{--cf-bg:linear-gradient(135deg,#f2faff 0%,#a5d8ff 28%,#e6
 .f-name{bottom:6cqw;font-size:4.6cqw;right:36cqw}
 .f-tier{bottom:5.4cqw}
 .f-sub{top:14.4cqw}
+
+/* ---------- Colores de tarjeta ---------- */
+body.cc-esmeralda .card{--cf-bg:linear-gradient(135deg,#3fe0a0 0%,#0fa968 30%,#46d99b 50%,#06774a 76%,#2fc88a 100%);--cf-tx:#04361f;--cf-em:0 1px 0 rgba(210,255,235,.8),0 -1px 0 rgba(0,50,25,.3)}
+body.cc-zafiro .card{--cf-bg:linear-gradient(135deg,#6aa2ff 0%,#2a6df4 30%,#5d95ff 50%,#1740b8 76%,#4d86f7 100%);--cf-tx:#06185a;--cf-em:0 1px 0 rgba(220,232,255,.8),0 -1px 0 rgba(5,20,90,.3)}
+body.cc-rubi .card{--cf-bg:linear-gradient(135deg,#ff6f82 0%,#e0243c 30%,#ff5a70 50%,#a1102a 76%,#ee3d55 100%);--cf-tx:#4a0310;--cf-em:0 1px 0 rgba(255,225,230,.8),0 -1px 0 rgba(80,0,15,.3)}
+body.cc-amatista .card{--cf-bg:linear-gradient(135deg,#b78bff 0%,#8a3ffc 30%,#ae7dff 50%,#5a1fc0 76%,#9f5cff 100%);--cf-tx:#230a55;--cf-em:0 1px 0 rgba(240,230,255,.8),0 -1px 0 rgba(35,10,85,.3)}
+body.cc-coral .card{--cf-bg:linear-gradient(135deg,#ffa07a 0%,#ff6a3d 30%,#ff9068 50%,#d6401a 76%,#ff7a50 100%);--cf-tx:#4f1500;--cf-em:0 1px 0 rgba(255,235,225,.8),0 -1px 0 rgba(90,25,0,.3)}
+body.cc-rosa .card{--cf-bg:linear-gradient(135deg,#ff8cc6 0%,#ff3d9a 30%,#ff6db2 50%,#c91a73 76%,#ff55a8 100%);--cf-tx:#520230;--cf-em:0 1px 0 rgba(255,230,242,.8),0 -1px 0 rgba(85,0,45,.3)}
+.swatches{display:flex;justify-content:center;gap:12px;margin:0 0 26px}
+.sw{width:34px;height:34px;border-radius:50%;border:none;padding:0;cursor:pointer;background:none;position:relative}
+.sw i{position:absolute;inset:4px;border-radius:50%;background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.6),var(--c) 55%);box-shadow:0 3px 8px rgba(0,0,0,.5)}
+.sw-auto i{background:conic-gradient(#f7de8f,#2a6df4,#e0243c,#8a3ffc,#0fa968,#f7de8f)}
+.sw.on{box-shadow:0 0 0 2px #fff,0 0 14px rgba(255,255,255,.4)}
+.sw:active{transform:scale(.92)}
 </style>
 </head>
 <body>
@@ -438,6 +452,15 @@ body.tier-legend .card{--cf-bg:linear-gradient(135deg,#f2faff 0%,#a5d8ff 28%,#e6
     <div class="stage"><div class="card" id="card"></div></div>
     <div class="c-under" id="cUnder"></div>
     <p class="flip-tip">Toca la tarjeta para girarla</p>
+    <div class="swatches" id="swatches" aria-label="Color de la tarjeta">
+      <button type="button" data-c="" class="sw sw-auto on" aria-label="Color de mi nivel"><i></i></button>
+      <button type="button" data-c="esmeralda" class="sw" aria-label="Esmeralda" style="--c:#0fa968"><i></i></button>
+      <button type="button" data-c="zafiro" class="sw" aria-label="Zafiro" style="--c:#2a6df4"><i></i></button>
+      <button type="button" data-c="rubi" class="sw" aria-label="Rubí" style="--c:#e0243c"><i></i></button>
+      <button type="button" data-c="amatista" class="sw" aria-label="Amatista" style="--c:#8a3ffc"><i></i></button>
+      <button type="button" data-c="coral" class="sw" aria-label="Coral" style="--c:#ff6a3d"><i></i></button>
+      <button type="button" data-c="rosa" class="sw" aria-label="Rosa" style="--c:#ff3d9a"><i></i></button>
+    </div>
     <button class="tile act" id="goCode" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 012-2h2M16 4h2a2 2 0 012 2v2M20 16v2a2 2 0 01-2 2h-2M8 20H6a2 2 0 01-2-2v-2"/><path d="M8 12h8"/></svg>
       <span>Mostrar mi código en la compra</span><i>&#8250;</i>
@@ -756,6 +779,18 @@ body.tier-legend .card{--cf-bg:linear-gradient(135deg,#f2faff 0%,#a5d8ff 28%,#e6
     document.body.classList.remove('tier-gold','tier-black','tier-legend');document.body.classList.add('tier-'+k);
     say('Vista previa: '+k.charAt(0).toUpperCase()+k.slice(1));window.scrollTo({top:0,behavior:'smooth'});
   });
+
+  /* ---- Color de la tarjeta (se guarda en este celular) ---- */
+  var CCS=['esmeralda','zafiro','rubi','amatista','coral','rosa'];
+  function setColor(c,save){
+    CCS.forEach(function(k){document.body.classList.remove('cc-'+k)});
+    if(CCS.indexOf(c)<0)c='';
+    if(c)document.body.classList.add('cc-'+c);
+    document.querySelectorAll('.sw').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-c')===c)});
+    if(save)ls('gold90_color',c);
+  }
+  $('swatches').addEventListener('click',function(e){var b=e.target.closest('.sw');if(b)setColor(b.getAttribute('data-c'),true)});
+  setColor(ls('gold90_color')||'',false);
 
   /* ---- Pestañas y panel de perfil ---- */
   function view(v){
