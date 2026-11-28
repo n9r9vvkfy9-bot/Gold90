@@ -32,7 +32,7 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
 .g-top{display:flex;align-items:center;gap:14px;max-width:460px;width:100%;margin:0 auto}
 #gBack{width:36px;height:36px;border:none;background:none;color:var(--g1);font-size:30px;line-height:1;cursor:pointer;visibility:hidden}
 #gBack.show{visibility:visible}
-.g-bar{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.g-bar{flex:1;display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
 .g-bar i{height:4px;border-radius:4px;background:rgba(212,175,55,.2);overflow:hidden;position:relative}
 .g-bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--g1),var(--g2));transform:scaleX(0);transform-origin:left;transition:transform .4s}
 .g-bar i.on::after{transform:scaleX(1)}
@@ -172,35 +172,23 @@ footer{text-align:center;padding:24px 16px 40px;font-size:11px;letter-spacing:.1
 <div id="gate" role="dialog" aria-modal="true" aria-label="Cómo ganar tu camiseta gratis">
   <div class="g-top">
     <button id="gBack" type="button" aria-label="Atrás">&#8249;</button>
-    <div class="g-bar"><i class="on"></i><i></i><i></i></div>
+    <div class="g-bar"><i class="on"></i><i></i></div>
     <span class="g-skip"></span>
   </div>
   <div class="g-main">
     <section class="g-slide on" data-s="0">
-      <div class="g-eb">Paso 1 de 3</div>
-      <h1 class="gold-text">Crea tu<br>tarjeta de sellos</h1>
-      <p>Con tu nombre y tu celular. Es gratis y toma 20 segundos.</p>
-      <div class="g-art"><div class="g-big">🏅</div></div>
-      <span class="g-chip">📱 Solo necesitas tu celular</span>
+      <div class="g-eb">Forma 1 de 2</div>
+      <h1 class="gold-text">Compra una camisa,<br>ganas un sello</h1>
+      <p>Cada camisa que compres en GOLD90 te suma 1 sello en tu tarjeta.</p>
+      <div class="g-art"><div class="g-big">👕</div></div>
+      <span class="g-chip">1 camisa = 1 sello</span>
     </section>
     <section class="g-slide" data-s="1">
-      <div class="g-eb">Paso 2 de 3</div>
-      <h1 class="gold-text">Compra y<br>suma sellos</h1>
-      <p>Muestra tu código QR en cada compra y te sumamos 1 sello.</p>
-      <div class="g-art"><div class="g-qr"><svg viewBox="0 0 9 9" fill="#0b0b0c" shape-rendering="crispEdges"><path d="M0 0h3v3H0zM6 0h3v3H6zM0 6h3v3H0z"/><path fill="#fff" d="M1 1h1v1H1zM7 1h1v1H7zM1 7h1v1H1z"/><rect x="0" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="5" y="8" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="6" y="7" width="1" height="1"/><rect x="6" y="8" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="7" y="8" width="1" height="1"/><rect x="8" y="5" width="1" height="1"/><rect x="8" y="8" width="1" height="1"/></svg></div></div>
-      <span class="g-chip">1 compra = 1 sello</span>
-    </section>
-    <section class="g-slide" data-s="2">
-      <div class="g-eb">Paso 3 de 3</div>
-      <h1 class="gold-text">Completa 10 y<br>llévate una gratis</h1>
-      <p>Con el sello 10 canjeas una camiseta GRATIS de nuestro catálogo.</p>
-      <div class="g-art"><div class="mini-card foil" aria-hidden="true">
-        <div class="row">
-          <div class="coin">1</div><div class="coin">2</div><div class="coin">3</div><div class="coin off">4</div><div class="coin off">5</div>
-          <div class="coin off">6</div><div class="coin off">7</div><div class="coin off">8</div><div class="coin off">9</div><div class="coin prize"><i>👕</i>GRATIS</div>
-        </div>
-        <div class="cap">Llevas <b>3 de 10</b> sellos · ejemplo</div>
-      </div></div>
+      <div class="g-eb">Forma 2 de 2</div>
+      <h1 class="gold-text">Recomienda y<br>gana otro sello</h1>
+      <p>Si un amigo o familiar compra una camisa y dice que viene recomendado por ti, tú también ganas un sello.</p>
+      <div class="g-art"><div class="g-big">🤝</div></div>
+      <span class="g-chip">10 sellos = 1 camiseta gratis 🏆</span>
     </section>
   </div>
   <div class="g-foot">
@@ -303,7 +291,7 @@ var PRODUCTS=[{"id": "CaboVerde_Local_2026", "name": "🌎 Cabo Verde Local 2026
   var byId={};PRODUCTS.forEach(function(p){byId[p.id]=p});
 
   /* ---- onboarding: una sola vez ---- */
-  var gate=$('gate'),gi=0,GN=3,slides=gate.querySelectorAll('.g-slide'),bars=gate.querySelectorAll('.g-bar i');
+  var gate=$('gate'),gi=0,GN=2,slides=gate.querySelectorAll('.g-slide'),bars=gate.querySelectorAll('.g-bar i');
   function gShow(n){
     gi=n;
     slides.forEach(function(el,i){el.classList.toggle('on',i===n)});
