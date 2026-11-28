@@ -236,6 +236,8 @@ body.intro-open .dock,body.intro-open .rings{display:none}
 .hs small{font-size:13px;color:var(--dim)}
 .hs.sm b{font-size:24px}
 @media(max-width:360px){.ring{width:150px;height:150px}.ring-c b{font-size:42px}}
+.i-sub{margin-top:-4px}
+.sh-tip{margin-top:18px;font-size:12.5px;color:var(--dim);line-height:1.55}
 </style>
 </head>
 <body>
@@ -260,20 +262,22 @@ body.intro-open .dock,body.intro-open .rings{display:none}
       <span class="i-chip">10 sellos = 1 camiseta gratis</span>
     </section>
     <section class="i-slide" data-s="2">
-      <div class="i-eb">Pregunta 1 de 2</div>
+      <div class="i-eb">Pregunta 2 de 2</div>
       <h1>¿Cómo te llamas?</h1>
       <input class="i-in" id="iName" type="text" maxlength="40" autocomplete="name" placeholder="Tu nombre" aria-label="Tu nombre">
       <div class="i-err" id="iErr1" role="alert"></div>
     </section>
     <section class="i-slide" data-s="3">
-      <div class="i-eb">Pregunta 2 de 2</div>
+      <div class="i-eb">Pregunta 1 de 2</div>
       <h1>¿Cuál es tu celular?</h1>
+      <p class="i-sub">Si ya tienes tarjeta, entras directo.</p>
       <input class="i-in" id="iPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="300 123 4567" aria-label="Tu celular">
       <div class="i-err" id="iErr2" role="alert"></div>
     </section>
   </div>
   <div class="i-foot">
     <button class="btn btn-gold" id="iNext" type="button">Continuar</button>
+    <button class="link" id="iHave" type="button">Ya tengo tarjeta</button>
     <p class="i-note" id="iNote">Esto te lo explicamos solo una vez.</p>
   </div>
 </div>
@@ -341,7 +345,8 @@ body.intro-open .dock,body.intro-open .rings{display:none}
   <div class="sh-av" id="shAv">G</div>
   <div class="sh-name" id="shName"></div>
   <div class="sh-ph" id="shPh"></div>
-  <button class="btn btn-gold" id="shClose" type="button" style="margin-top:22px">Listo</button>
+  <p class="sh-tip">Para entrar más rápido: en Safari toca Compartir y luego Agregar a pantalla de inicio. En Android, el menú y Instalar app.</p>
+  <button class="btn btn-gold" id="shClose" type="button" style="margin-top:18px">Listo</button>
   <button class="link" id="meBtn" type="button">No soy yo, cambiar de cliente</button>
 </div>
 <div class="toast" id="toast"></div>
@@ -458,14 +463,15 @@ body.intro-open .dock,body.intro-open .rings{display:none}
   window.addEventListener('online',net);window.addEventListener('offline',net);net();
 
   /* ---- Introducción (una sola vez) ---- */
-  var intro=$('intro'),steps=[0,1,2,3],gi=0,slides=intro.querySelectorAll('.i-slide');
+  var intro=$('intro'),steps=[0,1,3,2],gi=0,pendingPhone='',slides=intro.querySelectorAll('.i-slide');
   function bar(){$('iBar').innerHTML=steps.map(function(){return '<i></i>'}).join('')}
   function go(n){
     gi=n;var cur=steps[n],b=$('iBar').children;
     slides.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-s')===cur)});
     for(var i=0;i<b.length;i++)b[i].classList.toggle('on',i<=n);
     $('iBack').classList.toggle('show',n>0);
-    $('iNext').textContent=cur===3?'Crear mi tarjeta':'Continuar';
+    $('iNext').textContent=cur===2?'Crear mi tarjeta':'Continuar';
+    $('iHave').style.display=cur<2?'block':'none';
     $('iNote').style.visibility=cur<2?'visible':'hidden';
     if(cur===2)setTimeout(function(){try{$('iName').focus()}catch(e){}},400);
     if(cur===3)setTimeout(function(){try{$('iPhone').focus()}catch(e){}},400);
@@ -474,31 +480,52 @@ body.intro-open .dock,body.intro-open .rings{display:none}
     intro.classList.add('out');document.body.classList.remove('intro-open');document.body.style.overflow='';
     $('app').classList.add('show');listen(c.phone,c.name);window.scrollTo(0,0);
   }
-  async function create(){
-    var name=$('iName').value.trim().slice(0,40),phone=normPhone($('iPhone').value),err=$('iErr2'),btn=$('iNext');
+  function done(phone,name){
+    ls('gold90_client',JSON.stringify({phone:phone,name:name}));
+    try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+    openApp({phone:phone,name:name});
+  }
+  function fail(el,btn,label,e){
+    console.error(e);
+    el.textContent=navigator.onLine?'No pudimos guardar tus datos. Intenta de nuevo.'+(e&&e.code?' ('+e.code+')':''):'Sin conexión a internet. Intenta de nuevo.';
+    btn.textContent=label;
+  }
+  /* Paso del celular: si la tarjeta ya existe, entra directo sin pedir el nombre */
+  async function lookup(){
+    var phone=normPhone($('iPhone').value),err=$('iErr2'),btn=$('iNext');
     err.textContent='';
     if(phone.length<7||phone.length>15){err.textContent='Escribe un número de celular válido.';return}
+    btn.disabled=true;btn.textContent='Buscando...';
+    try{
+      if(!db)throw new Error('sin firebase');
+      var snap=await ref(phone).get();
+      if(snap.exists&&snap.data().name){done(phone,snap.data().name);btn.disabled=false;return}
+      pendingPhone=phone;btn.textContent='Continuar';go(gi+1);
+    }catch(e){fail(err,btn,'Continuar',e)}
+    btn.disabled=false;
+  }
+  /* Paso del nombre: crea la tarjeta (solo clientes nuevos) */
+  async function create(){
+    var name=$('iName').value.trim().slice(0,40),err=$('iErr1'),btn=$('iNext'),phone=pendingPhone||normPhone($('iPhone').value);
+    err.textContent='';
+    if(!name){err.textContent='Escribe tu nombre.';return}
     btn.disabled=true;btn.textContent='Creando tu tarjeta...';
     try{
       if(!db)throw new Error('sin firebase');
       var r=ref(phone),snap=await r.get();
       if(!snap.exists)await r.set({phone:phone,name:name,stamps:0,rewardsClaimed:0,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
       else if(snap.data().name!==name)await r.update({name:name});
-      ls('gold90_client',JSON.stringify({phone:phone,name:name}));
-      openApp({phone:phone,name:name});
-    }catch(e){
-      console.error(e);
-      err.textContent=navigator.onLine?'No pudimos guardar tus datos. Intenta de nuevo.'+(e&&e.code?' ('+e.code+')':''):'Sin conexión a internet. Intenta de nuevo.';
-      btn.textContent='Crear mi tarjeta';
-    }
+      done(phone,name);
+    }catch(e){fail(err,btn,'Crear mi tarjeta',e)}
     btn.disabled=false;
   }
   $('iNext').addEventListener('click',function(){
     var cur=steps[gi];
-    if(cur===2){if(!$('iName').value.trim()){$('iErr1').textContent='Escribe tu nombre.';return}$('iErr1').textContent=''}
-    if(cur===3){create();return}
+    if(cur===3){lookup();return}
+    if(cur===2){create();return}
     go(gi+1);
   });
+  $('iHave').addEventListener('click',function(){steps=[3,2];bar();go(0)});
   $('iBack').addEventListener('click',function(){if(gi>0)go(gi-1)});
   intro.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.tagName==='INPUT')$('iNext').click()});
   $('meBtn').addEventListener('click',function(){
@@ -506,7 +533,7 @@ body.intro-open .dock,body.intro-open .rings{display:none}
     closeSheet();
     ls('gold90_client',null);if(unsub)unsub();unsub=null;shown=null;prev=null;ringN=null;
     $('app').classList.remove('show');$('iName').value='';$('iPhone').value='';
-    bar();go(2);intro.classList.remove('out');document.body.classList.add('intro-open');document.body.style.overflow='hidden';
+    steps=[3,2];bar();go(0);intro.classList.remove('out');document.body.classList.add('intro-open');document.body.style.overflow='hidden';
   });
 
 
@@ -528,9 +555,18 @@ body.intro-open .dock,body.intro-open .rings{display:none}
   $('profBtn').addEventListener('click',openSheet);$('scrim').addEventListener('click',closeSheet);$('shClose').addEventListener('click',closeSheet);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSheet()});
 
+  /* ---- Instalar como app (guarda la sesión y abre directo) ---- */
+  (function(){
+    try{
+      var base=location.href.split('#')[0].split('?')[0],icon=document.querySelector('link[rel=icon]').href;
+      var m={name:'GOLD90 · Tarjeta de sellos',short_name:'GOLD90',start_url:base,scope:base.replace(/[^\/]*$/,''),display:'standalone',background_color:'#050505',theme_color:'#050505',icons:[{src:icon,sizes:'512x512',type:'image/png',purpose:'any'}]};
+      var l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/manifest+json'}));document.head.appendChild(l);
+    }catch(e){}
+  })();
+
   var c=getClient();
   if(c&&c.phone){intro.classList.add('out');$('app').classList.add('show');listen(c.phone,c.name)}
-  else{bar();go(0);document.body.classList.add('intro-open');document.body.style.overflow='hidden'}
+  else{steps=[0,1,3,2];bar();go(0);document.body.classList.add('intro-open');document.body.style.overflow='hidden'}
 })();
 </script>
 </body>
