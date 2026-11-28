@@ -262,6 +262,38 @@ body.tier-legend::after{content:"";position:fixed;left:50%;top:-34vh;width:170vm
 
 .hs.lvl b{font-size:26px;letter-spacing:.06em;text-transform:uppercase;background:var(--goldtx);-webkit-background-clip:text;background-clip:text;color:transparent}
 body{--foil:linear-gradient(135deg,var(--g1),var(--g3) 28%,var(--g4) 50%,var(--g2) 72%,var(--g1));--goldtx:linear-gradient(180deg,var(--g1),var(--g2) 55%,var(--g3))}
+
+/* ---------- Fondos por nivel ---------- */
+/* GOLD: oro líquido con brillo que recorre la pantalla */
+body.tier-gold{
+  background:
+    radial-gradient(900px 620px at 50% -12%,rgba(255,214,102,.42),transparent 64%),
+    radial-gradient(700px 520px at 105% 55%,rgba(212,175,55,.24),transparent 62%),
+    radial-gradient(600px 460px at -10% 92%,rgba(166,128,44,.3),transparent 62%),
+    repeating-linear-gradient(115deg,rgba(247,231,166,.05) 0 2px,transparent 2px 14px),
+    linear-gradient(180deg,#2a1e07 0%,#150f04 48%,#080602 100%);
+  background-attachment:fixed;
+}
+body.tier-gold::before{opacity:.35}
+body.tier-gold::after{content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 40%,rgba(255,236,170,.13) 48%,rgba(255,255,255,.08) 50%,rgba(255,236,170,.13) 52%,transparent 60%);
+  transform:translateX(-60%);animation:goldSweep 9s ease-in-out infinite}
+@keyframes goldSweep{0%,35%{transform:translateX(-70%)}100%{transform:translateX(70%)}}
+/* BLACK: ejecutivo, fibra de carbono con viñeta */
+body.tier-black{
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.14),transparent 55%),
+    radial-gradient(ellipse at 50% 55%,transparent 38%,rgba(0,0,0,.72) 100%),
+    linear-gradient(27deg,#151515 5px,transparent 5px) 0 5px,
+    linear-gradient(207deg,#151515 5px,transparent 5px) 10px 0,
+    linear-gradient(27deg,#222 5px,transparent 5px) 0 10px,
+    linear-gradient(207deg,#222 5px,transparent 5px) 10px 5px,
+    linear-gradient(90deg,#1b1b1b 10px,transparent 10px),
+    linear-gradient(#1d1d1d 25%,#1a1a1a 25%,#1a1a1a 50%,transparent 50%,transparent 75%,#242424 75%,#242424);
+  background-color:#131313;background-size:auto,auto,20px 20px,20px 20px,20px 20px,20px 20px,20px 20px,20px 20px;
+  background-attachment:fixed;
+}
+body.tier-black::before{opacity:0}
 </style>
 </head>
 <body>
