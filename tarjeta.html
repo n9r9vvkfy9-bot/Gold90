@@ -216,6 +216,26 @@ body.intro-open .dock,body.intro-open .rings{display:none}
 .pass{margin-bottom:26px}
 .rules{margin-bottom:34px}
 .toast{bottom:calc(104px + env(safe-area-inset-bottom));z-index:90}
+
+/* ---------- Aro de progreso ---------- */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin:0 0 22px}
+.ring{position:relative;width:178px;height:178px;flex:none}
+.ring svg{width:100%;height:100%;overflow:visible;transform:rotate(-90deg)}
+.ring .seg{fill:none;stroke-width:11;stroke-linecap:round;stroke:rgba(212,175,55,.14)}
+.ring .seg.on{stroke:url(#rg);filter:drop-shadow(0 0 6px rgba(212,175,55,.55));opacity:0;animation:segIn .5s ease forwards;animation-delay:calc(var(--i)*90ms)}
+@keyframes segIn{from{opacity:0}to{opacity:1}}
+.ring.full svg{animation:ringGlow 2.6s ease-in-out infinite}
+@keyframes ringGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(212,175,55,.3))}50%{filter:drop-shadow(0 0 20px rgba(247,231,166,.75))}}
+.ring-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ring-c span{font-size:14px;font-weight:700;color:var(--tx)}
+.ring-c b{font-family:'Oswald',sans-serif;font-weight:600;font-size:46px;line-height:1.05;background:var(--goldtx);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ring-c small{font-size:12px;color:var(--dim);letter-spacing:.08em}
+.hero-r{display:grid;gap:22px}
+.hs span{display:block;font-size:14px;color:var(--dim)}
+.hs b{display:block;font-family:'Oswald',sans-serif;font-weight:600;font-size:34px;line-height:1.15;margin-top:2px;color:#f3ead2}
+.hs small{font-size:13px;color:var(--dim)}
+.hs.sm b{font-size:24px}
+@media(max-width:360px){.ring{width:150px;height:150px}.ring-c b{font-size:42px}}
 </style>
 </head>
 <body>
@@ -273,12 +293,14 @@ body.intro-open .dock,body.intro-open .rings{display:none}
   <!-- Vista: tarjeta -->
   <section class="view on" id="v-card">
     <div class="hello"><h2 id="hello">Hola</h2></div>
-    <div class="stage"><div class="card" id="card"></div></div>
-    <div class="tiles">
-      <div class="tile"><span>Sellos</span><b id="tStamps">0</b><small>de 10</small></div>
-      <div class="tile"><span>Para tu camiseta</span><b id="tLeft">10</b><small>sellos</small></div>
-      <div class="tile wide"><span>Camisetas canjeadas</span><b id="tClaimed">0</b></div>
+    <div class="hero">
+      <div class="ring" id="ring" role="img" aria-label="Progreso de sellos"></div>
+      <div class="hero-r">
+        <div class="hs"><span>Para tu camiseta</span><b id="tLeft">10</b><small id="tLeftU">sellos</small></div>
+        <div class="hs sm"><span>Camisetas canjeadas</span><b id="tClaimed">0</b></div>
+      </div>
     </div>
+    <div class="stage"><div class="card" id="card"></div></div>
     <button class="tile act" id="goCode" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 012-2h2M16 4h2a2 2 0 012 2v2M20 16v2a2 2 0 01-2 2h-2M8 20H6a2 2 0 01-2-2v-2"/><path d="M8 12h8"/></svg>
       <span>Mostrar mi código en la compra</span><i>&#8250;</i>
@@ -346,6 +368,20 @@ body.intro-open .dock,body.intro-open .rings{display:none}
   var STAMP='<svg viewBox="0 0 24 24" fill="none" stroke="#5e4515" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
   var JERSEY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 3L2 6l2 5 3-1v11h10V10l3 1 2-5-6-3c-.6 1.7-2 2.6-4 2.6S8.6 4.7 8 3z"/></svg>';
 
+  /* ---- Aro de progreso: 10 segmentos, uno por sello ---- */
+  var SVGNS='http://www.w3.org/2000/svg', ringN=null;
+  function drawRing(st){
+    if(ringN===st)return;ringN=st;
+    var r=74,cx=90,cy=90,gap=7,n=TOTAL,step=360/n,html='<svg viewBox="0 0 180 180"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7e7a6"/><stop offset=".55" stop-color="#d4af37"/><stop offset="1" stop-color="#a6802c"/></linearGradient></defs>';
+    function pt(a){var t=a*Math.PI/180;return [cx+r*Math.cos(t),cy+r*Math.sin(t)]}
+    for(var i=0;i<n;i++){
+      var a0=i*step+gap/2,a1=(i+1)*step-gap/2,p0=pt(a0),p1=pt(a1);
+      html+='<path class="seg'+(i<st?' on':'')+'" style="--i:'+i+'" d="M'+p0[0].toFixed(2)+' '+p0[1].toFixed(2)+' A'+r+' '+r+' 0 0 1 '+p1[0].toFixed(2)+' '+p1[1].toFixed(2)+'"/>';
+    }
+    html+='</svg><div class="ring-c"><span>Sellos</span><b>'+st+'/'+n+'</b><small>'+(st>=n?'COMPLETA':Math.round(st/n*100)+'%')+'</small></div>';
+    $('ring').className='ring'+(st>=n?' full':'');$('ring').innerHTML=html;
+  }
+
   /* ---- Tarjeta ---- */
   var shown=null, prev=null, me={name:'',phone:''};
   function renderCard(c,justIdx){
@@ -383,7 +419,9 @@ body.intro-open .dock,body.intro-open .rings{display:none}
     var fresh=prev!==null&&st>prev;
     renderCard(c,fresh?st:null);
     $('hello').textContent='Hola, '+String(c.name||'').split(' ')[0];
-    $('tStamps').textContent=st;$('tLeft').textContent=Math.max(0,TOTAL-st);$('tClaimed').textContent=c.rewardsClaimed||0;
+    drawRing(st);
+    $('tLeft').textContent=st>=TOTAL?'Lista':Math.max(0,TOTAL-st);$('tLeftU').textContent=st>=TOTAL?'canjéala en tienda':(TOTAL-st===1?'sello':'sellos');
+    $('tClaimed').textContent=c.rewardsClaimed||0;
     me={name:c.name||'',phone:c.phone||''};
     if(fresh){say('Nuevo sello  ·  '+st+' de '+TOTAL);sparks()}
     if(shown!==c.phone){
@@ -466,7 +504,7 @@ body.intro-open .dock,body.intro-open .rings{display:none}
   $('meBtn').addEventListener('click',function(){
     if(!confirm('¿Cambiar de cliente en este celular?'))return;
     closeSheet();
-    ls('gold90_client',null);if(unsub)unsub();unsub=null;shown=null;prev=null;
+    ls('gold90_client',null);if(unsub)unsub();unsub=null;shown=null;prev=null;ringN=null;
     $('app').classList.remove('show');$('iName').value='';$('iPhone').value='';
     bar();go(2);intro.classList.remove('out');document.body.classList.add('intro-open');document.body.style.overflow='hidden';
   });
