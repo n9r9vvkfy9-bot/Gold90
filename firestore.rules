@@ -8,7 +8,7 @@ service cloud.firestore {
 
     function isStaff() {
       return request.auth != null
-        && request.auth.token.email in ['REEMPLAZA_CON_TU_CORREO@gmail.com'];
+        && request.auth.token.email in ['gold90empresa@gmail.com'];
     }
 
     match /clientes/{phone} {
