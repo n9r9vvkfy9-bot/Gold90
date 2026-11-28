@@ -487,7 +487,6 @@ body.tier-black::before{opacity:0}
       <button class="ib" id="profBtn" type="button" aria-label="Mi perfil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.2 18.2c1.2-2.2 3.2-3.2 5.8-3.2s4.6 1 5.8 3.2"/></svg></button>
     </div>
   </div>
-  <div class="demo" id="demo" style="display:none">Modo demostración: datos de ejemplo</div>
   <div class="net" id="net">Sin conexión. Revisa tu internet.</div>
 
   <!-- Vista: tarjeta -->
@@ -902,14 +901,6 @@ body.tier-black::before{opacity:0}
     }catch(e){}
   })();
 
-  /* Modo demostración: ?demo=gold|azul|black&sellos=7 (no usa Firebase ni guarda nada) */
-  var qs=new URLSearchParams(location.search);
-  if(qs.has('demo')){
-    var dk=(qs.get('demo')||'gold')==='azul'?'legend':(qs.get('demo')||'gold'),rcs={gold:0,azul:1,legend:1,black:3},dst=Math.max(0,Math.min(10,parseInt(qs.get('sellos'),10)||7));
-    intro.classList.add('out');$('app').classList.add('show');$('demo').style.display='block';
-    showCard({phone:'3000000000',name:'Cliente Demo',stamps:dst,rewardsClaimed:rcs[dk]!=null?rcs[dk]:0});
-    return;
-  }
   var c=getClient();
   if(c&&c.phone){intro.classList.add('out');$('app').classList.add('show');listen(c.phone,c.name)}
   else{steps=[0,1,3,2];bar();go(0);document.body.classList.add('intro-open');document.body.style.overflow='hidden'}
